@@ -15,6 +15,14 @@
 
 package exercicios;
 
+
+import org.json.JSONObject;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -37,7 +45,7 @@ public class ForcaMain {
         // define palavra
         palavra_secreta = create_segredo();
 
-        setDificuldade(3);
+        setDificuldade(5);
 
         // inicializa variáveis
         num_tentativas = 0;
@@ -54,13 +62,54 @@ public class ForcaMain {
 
         input = new Scanner(System.in);
     }
+    String create_segredo(){
+
+        System.out.println("CONECTANDO AO SERVIDOR DE PALAVRAS");
+        System.out.println("......");
+
+        try (HttpClient client = HttpClient.newHttpClient()) {
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://api.dicionario-aberto.net/random"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+
+
+            JSONObject json = new JSONObject(response.body());
+            System.out.println("PALAVRA SECRETA SELECIONADA DO SERVIDOR COM SUCESSO");
+
+            return json.getString("word").toUpperCase();
+
+
+        }catch (Exception e) {
+
+            System.out.println("Servidor de palavras inacessível, utilizando dicionário interno");
+
+        }
+
+        String[] lista_palavras = {"CASA",
+                "PALAVRA",
+                "CORREDOR",
+                "TELHADO",
+                "COMPUTADOR",
+                "INTELIGENCIA"};
+
+        return lista_palavras[new Random().nextInt(lista_palavras.length)].toUpperCase();
+
+
+
+    }
+
 
     public void setDificuldade(int dificuldade){
         rodadas_max = dificuldade;
     }
 
 
-    private boolean check_acerto(char letra , String palavra)
+    private boolean check_acerto(char letra)
     {
 
         boolean acerto = false;
@@ -100,31 +149,17 @@ public class ForcaMain {
             System.out.print("Digite uma letra: ");
             input_string = input.nextLine().toUpperCase();
 
-
             if(!input_string.isEmpty()) {
                 return input_string.charAt(0);
             }
 
         }
     }
-    String create_segredo(){
 
-        String[] lista_palavras = {"CASA",
-                "PALAVRA",
-                "CORREDOR",
-                "TELHADO",
-                "COMPUTADOR",
-                "INTELIGENCIA"};
-
-        return lista_palavras[new Random().nextInt(lista_palavras.length)].toUpperCase();
-
-
-
-    }
 
     public void game_loop()
     {
-        char tentativa = '0';
+        char tentativa;
         int rodada = 0;
 
         while(running) {
@@ -140,7 +175,7 @@ public class ForcaMain {
 
             tentativa = input_handle();
 
-            if (check_acerto(tentativa, palavra_secreta)) {
+            if (check_acerto(tentativa)) {
                 System.out.println("[ encontrou uma letra ] ");
             } else {
                 System.out.println("[ errou a letra, tente novamente ]");
