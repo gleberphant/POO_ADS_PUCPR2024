@@ -16,35 +16,107 @@ package appjogoforca;
 //└────────────────────────────────────────────────────────────────────────┘
 
 
-public class app_jogo_forca {
+import java.util.Scanner;
 
-    // apresentação e loading
+public class AppForcaMain {
 
-    // definir palavra secreta
+    boolean running = true;
+    int rodadas_max, num_rodada, tamanho_palavra, num_acertos;
+    char[] array_acertos;
+    String palavra_secreta;
+    Scanner input;
 
-    // inicializar variáveis:
-    // rodadas_max, num_rodada, tamanho_palavra, array_acertos, num_acertos
-    // preenche array_acertos com *
+    public static void main(String[] args)
+    {
 
-    // loop principal
-    // input da  letra_chute
+        AppForcaMain app = new AppForcaMain();
 
-    // loop FOR para encontrar a palavra_secreta possui a letra_chute
+        app.loading_app();
 
-    // check_acerto():
-        // se encontrar então registra as letras em array_acertos[_] e aumenta num_acertos
+        while(app.running)
+        {
+           app.running = app.game_loop();
+        }
 
-    // check_condição_vitoria():
-        // for elemento in array_acertos:
-            // if elemento == vazio :
-                // return False
-        //  return VITORIA e break loop
 
-    // check_condição_derrota():
+
+
+
+    }
+
+    private int check_acerto(char letra , String palavra)
+    {
+        //  loop FOR para verificar se a letra existe na palavra
+        // retorna o numero de vezes que a letra eh encontrada
+        int acertos=0;
+
+        for(int i = 0; i < tamanho_palavra ; i++)
+        {
+            if(palavra.charAt(i) == letra)
+            {
+                System.out.println(("[" + letra + "] LETRA CERTA "));
+                array_acertos[i] = letra;
+                acertos++;
+            }
+        }
+        return acertos;
+
+
+
+    }
+
+    private boolean game_loop()
+    {
+        char tentativa;
+
+        //  input da  letra_chute
+        while (true) {
+            System.out.println("Digite uma letra");
+            String input_string = input.nextLine();
+
+            if(!input_string.isEmpty()) {
+                tentativa = input_string.charAt(0);
+                break;
+            }
+
+        }
+
+        num_acertos += check_acerto(tentativa, palavra_secreta) ;
+
+
+
+        // TODO check_condição_derrota():
         // se num_rodada > rodadas_max então DERROTA e break loop principal
 
-    //  num_rodada++;
+        //  num_rodada++;
+        return true;
+    }
 
+    private
 
+    private void loading_app()
+    {
+
+        // mensagem de abertura
+        System.out.println("Seja bem vindo ao Jogo da Forca por gravatinha");
+
+        // define palavra
+        palavra_secreta = "palavra";
+
+        // inicializa variáveis
+        rodadas_max = 5;
+        num_rodada = 0;
+        tamanho_palavra = palavra_secreta.length();
+        array_acertos = new char[tamanho_palavra];
+        num_acertos = 0;
+
+        // zera array de acertos
+        for(int i = 0; i < tamanho_palavra; i++)
+        {
+            array_acertos[i] = '0';
+        }
+
+        input = new Scanner(System.in);
+    }
 
 }
