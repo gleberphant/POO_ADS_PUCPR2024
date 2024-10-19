@@ -37,11 +37,6 @@ public class AppForcaMain {
         {
            app.running = app.game_loop();
         }
-
-
-
-
-
     }
 
     private int check_acerto(char letra , String palavra)
@@ -60,9 +55,6 @@ public class AppForcaMain {
             }
         }
         return acertos;
-
-
-
     }
 
     private boolean game_loop()
@@ -83,16 +75,26 @@ public class AppForcaMain {
 
         num_acertos += check_acerto(tentativa, palavra_secreta) ;
 
+        System.out.println(array_acertos);
+
+        // condição de vitória
+        if(num_acertos == tamanho_palavra)
+        {
+            System.out.println("Você venceu");
+        }
+
+        //condição de derrota
+        if(num_rodada > rodadas_max){
+            System.out.println("Você perdeu");
+            return false;
+        }
 
 
-        // TODO check_condição_derrota():
-        // se num_rodada > rodadas_max então DERROTA e break loop principal
 
         //  num_rodada++;
         return true;
     }
 
-    private
 
     private void loading_app()
     {
