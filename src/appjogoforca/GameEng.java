@@ -5,10 +5,13 @@ import java.util.Scanner;
 
 public class GameEng {
 
+    final int RODADAS_MAX = 0;
+
     boolean running = true;
-    int rodadas_max, num_rodada, tamanho_palavra, num_acertos;
+    int num_rodada, num_acertos, tamanho_palavra;
     char[] array_acertos;
     String palavra_secreta;
+
     Scanner input;
 
     private int check_acerto(char letra , String palavra)
@@ -29,7 +32,7 @@ public class GameEng {
         }
         return acertos;
     }
-    boolean check_vitoria(){
+    private boolean check_vitoria(){
         for(int i = 0 ; i < tamanho_palavra; i++){
             if(array_acertos[i] != palavra_secreta.charAt(i)){
                 return false;
@@ -39,29 +42,36 @@ public class GameEng {
         return true;
     }
 
-    boolean check_derrota(int rodada){
-        if(rodada > rodadas_max){
+    private boolean check_derrota(int rodada){
+        if(rodada > RODADAS_MAX){
             return true;
         }
         return false;
     }
-
-
-    public boolean game_loop()
-    {
-        char tentativa;
-
-        //  input da  letra_chute
+    public void run(){
+        while(running)
+        {
+            input_handle();
+            running = game_logic();
+        }
+    }
+    private char input_handle (){
+        String input_string;
         while (true) {
             System.out.println("Digite uma letra");
-            String input_string = input.nextLine();
+            input_string = input.nextLine();
 
             if(!input_string.isEmpty()) {
-                tentativa = input_string.charAt(0);
-                break;
+                return input_string.charAt(0);
             }
 
         }
+    }
+
+    public boolean game_logic()
+    {
+        char tentativa = input_handle();
+
 
         num_acertos += check_acerto(tentativa, palavra_secreta);
 
@@ -97,7 +107,6 @@ public class GameEng {
         palavra_secreta = "palavra";
 
         // inicializa variáveis
-        rodadas_max = 5;
         num_rodada = 0;
         tamanho_palavra = palavra_secreta.length();
         array_acertos = new char[tamanho_palavra];

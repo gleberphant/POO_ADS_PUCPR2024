@@ -25,10 +25,8 @@ public class ForcaMain {
 
         game.loading_game();
 
-        while(game.running)
-        {
-           game.running = game.game_loop();
-        }
+        game.run();
+
     }
 
 
