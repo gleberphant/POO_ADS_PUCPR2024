@@ -39,6 +39,7 @@ public class financiamento {
     int prazoFinanciamento;
     float valorImovel;
     float taxaJurosAnual;
+    float parcelaMensal;
 
 
     private float converterPrazoAnos()
@@ -51,7 +52,9 @@ public class financiamento {
         return (valorImovel / (prazo_em_anos() * 12)) * (1 + (taxaJurosAnual / 12));
 
     }
-
+    private int prazo_em_anos(){
+        return 0;
+    }
     private double getPagamentoTotal()
     {
         return parcelaMensal * prazo_em_anos() * 12;
