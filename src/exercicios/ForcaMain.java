@@ -15,14 +15,6 @@
 
 package exercicios;
 
-
-import org.json.JSONObject;
-
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -64,33 +56,7 @@ public class ForcaMain {
     }
     String create_segredo(){
 
-        System.out.println("CONECTANDO AO SERVIDOR DE PALAVRAS");
-        System.out.println("......");
-
-        try (HttpClient client = HttpClient.newHttpClient()) {
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.dicionario-aberto.net/random"))
-                    .GET()
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-
-
-            JSONObject json = new JSONObject(response.body());
-            System.out.println("PALAVRA SECRETA SELECIONADA DO SERVIDOR COM SUCESSO");
-
-            return json.getString("word").toUpperCase();
-
-
-        }catch (Exception e) {
-
-            System.out.println("Servidor de palavras inacessível, utilizando dicionário interno");
-
-        }
-
-        String[] lista_palavras = {"CASA",
+         String[] lista_palavras = {"CASA",
                 "PALAVRA",
                 "CORREDOR",
                 "TELHADO",
@@ -98,8 +64,6 @@ public class ForcaMain {
                 "INTELIGENCIA"};
 
         return lista_palavras[new Random().nextInt(lista_palavras.length)].toUpperCase();
-
-
 
     }
 
