@@ -23,9 +23,33 @@ i. Esta é a classe principal do programa.
 
 ii. Ela deve conter o metodo main(), onde o fluxo principal do programa será implementado.
 
-1. Dentro do metodo main() você deve usar os métodos da classe InterfaceUsuario para ler os dados do financiamento.
+1. Dentro do metodo main() você deve usar os métodos da classe InterfaceUsuário para ler os dados do financiamento.
 
 2. Após ler os dados do financiamento, instancie um objeto do tipo Financiamento para criar este financiamento.*/
 
-public class app_main {
+public class Main {
+
+
+    public static void main(String[] args)
+    {
+        System.out.println("Sistema de financiamento puc");
+
+        InterfaceUsuario opcoes = new InterfaceUsuario();
+
+        // invocar o metodo interface usuário para ler os dados
+        double juros = opcoes.inputTaxaJuros();
+        double valor = opcoes.inputValorImovel();
+        int prazo =  opcoes.inputPrazoFinanciamento();
+
+
+        //cria rum objeto financiamento com os dados passados pelo usuário
+        Financiamento finan = new Financiamento(prazo, valor, juros);
+
+
+        System.out.println(finan.getString());
+        System.out.println(">> Pagamento total R$" + finan.getPagamentoTotal());
+    }
+
+
+
 }

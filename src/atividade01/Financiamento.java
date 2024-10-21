@@ -15,9 +15,7 @@ package atividade01;
 ┌────────────────────────────────────────────────────────────────────────┐
 │   atividade formativa nº 01                                            │
 └────────────────────────────────────────────────────────────────────────┘
-*/
 
-/*
 
 //Classe Financiamento:
 //i. Esta classe representará um financiamento.
@@ -34,30 +32,53 @@ package atividade01;
 */
 
 
-public class financiamento {
+public class Financiamento {
 
-    int prazoFinanciamento;
-    float valorImovel;
-    float taxaJurosAnual;
-    float parcelaMensal;
+    private int prazoMeses;
+    private double valorImovel;
+    private double taxaJurosAno;
 
 
-    private float converterPrazoAnos()
+    public Financiamento(){
+        this.setFinanciamento( 12, 10.000, 0.1);
+    }
+
+
+    public Financiamento(int prazoMeses, double valorImovel, double taxaJurosAno){
+        this.setFinanciamento(prazoMeses, valorImovel, taxaJurosAno);
+    }
+
+
+    public void setFinanciamento(int prazoMeses, double valorImovel, double taxaJurosAno)
     {
-        return (float) prazoFinanciamento/12;
+        this.prazoMeses = prazoMeses;
+        this.valorImovel = valorImovel;
+        this.taxaJurosAno = taxaJurosAno;
     }
 
-    private double getParcelaMensal()
+
+    private int getPrazoAnos(){
+        return prazoMeses /12;
+    }
+
+
+    public double getParcelaMensal()
     {
-        return (valorImovel / (prazo_em_anos() * 12)) * (1 + (taxaJurosAnual / 12));
+        return (valorImovel / (getPrazoAnos() * 12)) * (1 + (taxaJurosAno / 12));
+    }
 
-    }
-    private int prazo_em_anos(){
-        return 0;
-    }
-    private double getPagamentoTotal()
+
+    public double getPagamentoTotal()
     {
-        return parcelaMensal * prazo_em_anos() * 12;
+        return getParcelaMensal() * getPrazoAnos() * 12;
     }
 
+
+    public String getString() {
+        return "Financiamento{" +
+                "prazoMeses=" + prazoMeses +
+                ", valorImovel=" + valorImovel +
+                ", taxaJurosAno=" + taxaJurosAno +
+                '}';
+    }
 }

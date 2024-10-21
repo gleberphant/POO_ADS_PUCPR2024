@@ -15,7 +15,7 @@ package atividade01;
 //│   atividade formativa nº 01                                            │
 //└────────────────────────────────────────────────────────────────────────┘
 
-/*b. Classe InterfaceUsuario:
+/*b. Classe InterfaceUsuário:
 
 i. Esta classe é responsável por lidar com a entrada de dados do usuário. Estes dados podem ser recebidos via entrada do usuário usando o Scanner.
 
@@ -27,22 +27,33 @@ ii. Métodos:
 
 3. Pedir ao usuário a taxa de juros: Ela deve conter um metodo o qual pede ao usuário para que digite a taxa de juros anual, e retorne o valor digitado pelo usuário.*/
 
-public class interfaceUsuario {
+import java.util.Scanner;
+
+public class InterfaceUsuario {
+    Scanner input;
 
 
-    public void inputValorImovel()
+    public InterfaceUsuario()
     {
-
+        this.input = new Scanner(System.in);
     }
 
-    public void inputPrazoFinanciamento()
+    public double inputValorImovel()
     {
-
+        System.out.println("Digite o VALOR do financiamento");
+        return input.nextDouble();
     }
 
-    public void inputTaxaJuros()
+    public int inputPrazoFinanciamento()
     {
+        System.out.println("Digite o PRAZO do financiamento");
+        return input.nextInt();
+    }
 
+    public double inputTaxaJuros()
+    {
+        System.out.println("Digite o valor da TAXA DE JUROS ANUAL");
+        return input.nextDouble();
     }
 
 }
