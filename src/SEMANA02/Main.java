@@ -1,4 +1,4 @@
-package AF_SEMANA2;
+package SEMANA02;
 
 /*
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -36,23 +36,28 @@ public class Main {
     {
 
 
-        InterfaceUsuario opcoes = new InterfaceUsuario();
+        InterfaceUsuario interface_usuario = new InterfaceUsuario();
 
-        // invocar o metodo interface usuário para ler os dados
-        double valor = opcoes.inputValorImovel();
-        int prazo =  opcoes.inputPrazoFinanciamento();
-        double juros = opcoes.inputTaxaJuros();
+        // mensagem de abertura da aplicação
+        System.out.println(interface_usuario.getStringAbertura());
 
 
-        //cria rum objeto financiamento com os dados passados pelo usuário
-        Financiamento finan = new Financiamento(valor, prazo, juros);
+        // receber dados do financiamento
+        double valor = interface_usuario.inputValorImovel();
+        int prazo =  interface_usuario.inputPrazoFinanciamento();
+        double juros = interface_usuario.inputTaxaJuros();
 
 
-        System.out.println(finan.getString());
+        // criar objeto financiamento com os dados recebidos
+        Financiamento financiamento1 = new Financiamento(valor, prazo, juros);
 
+
+        System.out.println(financiamento1.getString());
+
+        // mensagem de encerramento da aplicacao
+        System.out.println(interface_usuario.getStringEncerramento());
 
     }
-
 }
 
 class InterfaceUsuario {
@@ -62,19 +67,28 @@ class InterfaceUsuario {
     public InterfaceUsuario()
     {
         this.input = new Scanner(System.in);
-        System.out.println(getStringAbertura());
+        
     }
 
     public String getStringAbertura(){
         return
         """                
-        ┌──────────────────────────────────────────────┐
-        │         SISTEMA DE FINANCIAMENTO POO         │
-        │      por: HANDERSON GLEBER (gravatinha)      │
-        └──────────────────────────────────────────────┘
+        ╔══════════════════════════════════════════════╗
+        ║         SISTEMA DE FINANCIAMENTO POO         ║
+        ║      por: HANDERSON GLEBER (gravatinha)      ║
+        ╚══════════════════════════════════════════════╝
         """;
     }
 
+    public String getStringEncerramento(){
+        return
+        """                
+        ╔══════════════════════════════════════════════╗
+        ║      Dúvidas e sugestões?                    ║
+        ║      handerson.gleber@gmail.com              ║
+        ╚══════════════════════════════════════════════╝
+        """;
+    }
 
     public double inputValorImovel()
     {
@@ -139,11 +153,11 @@ class Financiamento {
                 
                 ┌──────────────────────────────────────────────┐
                 │                FINANCIAMENTO                 │
-                │  Prazo : %33d   │
-                │  Valor do Financiamento : %16f   │
-                │  Taxa Juros Ano: %25f   │
+                │  Prazo: %33d    │
+                │  Valor do Financiamento: R$%14.2f    │
+                │  Taxa Juros Ano: %24.4f    │
                 │                                              │
-                │  PAGAMENTO TOTAL R$ %-23f  │
+                │  PAGAMENTO TOTAL: R$%21.2f    │
                 └──────────────────────────────────────────────┘
                 """, prazoMeses, valorImovel, taxaJurosAno, getPagamentoTotal());
     }
