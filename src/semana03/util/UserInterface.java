@@ -49,7 +49,6 @@ public class UserInterface {
 
     /**
      * Inicializa a interface da aplicação
-     * todo: inicializar interface gráfica
      */
     public UserInterface initialize() {
 
