@@ -13,7 +13,7 @@
  * @version af_semana_002
  */
 
-package SEMANA02;
+package semana02;
 
 
 import java.util.Scanner;
