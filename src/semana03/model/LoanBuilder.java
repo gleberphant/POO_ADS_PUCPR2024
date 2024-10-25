@@ -16,7 +16,7 @@ package semana03.model;
 
 
 /**
- * Classe 'Builder' . Responsável pela construção dos financiamentos
+ * Classe 'Builder'. Responsável pela construção dos financiamentos
  * @author HANDERSON GLEBER
  */
 public class LoanBuilder {

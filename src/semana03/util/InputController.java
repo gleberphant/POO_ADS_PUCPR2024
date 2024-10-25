@@ -14,6 +14,7 @@
 
 package semana03.util;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -21,7 +22,7 @@ import java.util.Scanner;
  * Classe 'INPUT'
  * responsável pela entrada de dados pelo usuário
  * Gerencia a entrada de dados do sistema.
- * (validação de dados nessa classe ficaria melhor ? violaria o SRP ?)
+ * (validação de dados nessa classe ficaria melhor? Violaria o SRP?)
  *
  * @author HANDERSON GLEBER
  */
@@ -31,13 +32,13 @@ public class InputController {
     private Scanner inputScanner;
 
     /**
-     * contrutor private. padrão singleton
+     * construtor private. padrão singleton
      */
     private InputController() {}
 
 
     /**
-     * cria instancia unica da classe
+     * cria instancia única da classe
      * @return InputController
      */
     protected static InputController getInstance()
@@ -67,7 +68,15 @@ public class InputController {
     public double price() {
 
         System.out.print("\n > Digite o VALOR do financiamento: ");
-        return this.inputScanner.nextDouble();
+
+        if(this.inputScanner.hasNextDouble()) {
+
+            return this.inputScanner.nextDouble();
+        }else{
+
+            this.inputScanner.next();
+            throw new InputMismatchException("Valor inválido. Digite um número decimal");
+        }
     }
 
     /**
@@ -77,7 +86,15 @@ public class InputController {
     public int term() {
 
         System.out.print("\n > Digite o PRAZO do financiamento: ");
-        return this.inputScanner.nextInt();
+
+        if(this.inputScanner.hasNextInt()) {
+
+            return this.inputScanner.nextInt();
+        }else{
+
+            this.inputScanner.next();
+            throw new InputMismatchException("Valor inválido. Digite um número inteiro");
+        }
     }
 
     /**
@@ -87,11 +104,19 @@ public class InputController {
     public double fee() {
 
         System.out.print("\n > Digite o valor da TAXA DE JUROS ANUAL: ");
-        return this.inputScanner.nextDouble();
+
+        if(this.inputScanner.hasNextDouble()) {
+
+            return this.inputScanner.nextDouble();
+        }else{
+
+            this.inputScanner.next();
+            throw new InputMismatchException("Valor inválido. Digite um número decimal");
+        }
     }
 
     /**
-     * Pergunta ao usuario se ele quer fechar a aplicação
+     * Pergunta ao usuário se ele quer fechar a aplicação
      * @return Taxa de juros anual.
      */
     public boolean closeApp() {
@@ -100,18 +125,23 @@ public class InputController {
 
         do {
 
-            System.out.print("\n > Deseja realizar um novo financiamento?");
-            System.out.print("\n ( Digite S para sim N para não) ");
+            System.out.println("Deseja realizar um novo financiamento? ( Digite S para sim N para não)");
 
             choice = this.inputScanner.next().trim().toUpperCase();
 
-            if ( choice.equals("S") ) {
+            if ( choice.equals("S") || choice.equals("1")) {
                 return true;
-            } else if ( choice.equals("N") ) {
+            } else if ( choice.equals("N") || choice.equals("2")) {
                 return false;
             }
 
         } while (true);
     }
 
+    public void waitEnterToContinue() {
+
+        System.out.println("Pressione qualquer tecla para continuar...");
+        this.inputScanner.nextLine();
+
+    }
 }

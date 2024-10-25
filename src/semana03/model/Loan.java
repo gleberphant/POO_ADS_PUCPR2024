@@ -15,7 +15,7 @@
 package semana03.model;
 
 /**
- * Classe financiamento. contem metodos para validar atributos
+ * Classe de financiamento. Contem métodos para validar atributos
  * @author HANDERSON GLEBER
  */
 public class Loan {
@@ -25,7 +25,7 @@ public class Loan {
     private int term;
     private double fee;
 
-    /** constantes para validação dos atributos. evita uso de magic numbers */
+    /** Constantes para validação dos atributos. Evita uso de magic numbers */
     private final float MIN_PRICE;
     private final int MAX_TERM;
     private final int MIN_TERM;
@@ -58,7 +58,7 @@ public class Loan {
 
     /**
      * Setter de atributo
-     * preco do imóvel do financiamento
+     * Preço do imóvel do financiamento
      */
     public void setPrice(double price) {
 

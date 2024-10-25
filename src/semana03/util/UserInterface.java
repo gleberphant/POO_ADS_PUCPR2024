@@ -19,8 +19,8 @@ import semana03.model.Loan;
 
 
 /**
- * Classe responsável pela interface do usuário.Gerencia a entrada e saída de dados do sistema.
- * segue padrão singleton para evitar multiplas instâncias
+ * Classe responsável pela interface do usuário. Gerencia a entrada e saída de dados do sistema.
+ * Segue padrão singleton para evitar múltiplas instâncias
  * @author HANDERSON GLEBER
  */
 public class UserInterface {
@@ -34,7 +34,7 @@ public class UserInterface {
     private UserInterface() {}
 
     /**
-     * criação da instancia unica da classe e do controlador de entrada
+     * Criação da instância única da classe e do controlador de entrada
      * (será que isso viola o Princípio da Responsabilidade Única?)
      * @return UserInterface
      */
@@ -62,16 +62,19 @@ public class UserInterface {
      */
     public void closure() {
 
-        System.out.println("""                
+        System.out.println("""
+        
         ╔══════════════════════════════════════════════╗
         ║      Dúvidas e sugestões?                    ║
         ║      handerson.gleber@gmail.com              ║
         ╚══════════════════════════════════════════════╝
+        
         """);
+        this.getInput().waitEnterToContinue();
     }
 
     /**
-     * @return controlador de entradas do usuario
+     * @return controlador de entradas do usuário
      */
     public InputController getInput() {
 
@@ -92,7 +95,9 @@ public class UserInterface {
         │                                              │
         │  PAGAMENTO TOTAL: R$%21.2f    │
         └──────────────────────────────────────────────┘
+        
         """, targetLoan.getTerm(), targetLoan.getPrice(), targetLoan.getFee(), targetLoan.getTotalPayment());
+        this.getInput().waitEnterToContinue();
     }
 
     /**
@@ -101,24 +106,32 @@ public class UserInterface {
     public void viewException(Exception e) {
 
         System.out.printf("""
+        
         ╔══════════════════════════════════════════════╗
         ║  FINANCIAMENTO INVÁLIDO                      ║
         ║  >> %-40s ║
         ╚══════════════════════════════════════════════╝
+        
         """, e.getMessage());
+
+        this.getInput().waitEnterToContinue(); // Aguardando o usuário pressionar Enter
     }
+
 
     /**
      * Exibe menu da interface
      */
     public void viewMenu() {
 
-        System.out.println("""                
+        System.out.println("""
+        
         ╔══════════════════════════════════════════════╗
         ║         SISTEMA DE FINANCIAMENTO POO         ║
         ║      por: HANDERSON GLEBER (gravatinha)      ║
         ╚══════════════════════════════════════════════╝
+        
         """);
+        this.getInput().waitEnterToContinue();
     }
 
 }

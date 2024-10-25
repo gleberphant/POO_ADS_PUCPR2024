@@ -14,23 +14,23 @@
  *
  * REQUISITOS
 
- * 1 Reorganize as classes em pacotes (packages):
- *     i. modelo 1. Classe: a. Financiamento
- *     ii. util 1. Classe: a. InterfaceUsuario
- *     iii. main 1. Classe: a. Main
+ * 1 Reorganize as classes em pacotes:
+ *     i. Model 1. Classe: a. Financiamento
+ *     ii. Util 1. Classe: a. InterfaceUsuário
+ *     iii. Main 1. Classe: a. Main
  * 2 Classe Financiamento (no pacote modelo):
  *     i. Todos os atributos devem ser privados.
  *     ii. Todos os métodos devem ser públicos.
  *     iii. Inclua um getter para cada um dos atributos privados.
- * 3 Classe InterfaceUsuario (no pacote util):
- *     i. Ajuste os métodos de entrada de dados (valor do imóvel, prazo de financiamento e taxa de juros) para que usem estruturas condicionais (como if/else ou switch) dentro dos seus métodos para verificar se as entradas fornecidas pelo usuário são válidas.
+ * 3 Classe InterfaceUsuário (no pacote util):
+ *     i. Ajuste os métodos de entrada de dados (valor do imóvel, prazo de financiamento e taxa de juros) para usarem estruturas condicionais (como if/else ou switch) dentro dos seus métodos para verificar se as entradas fornecidas pelo usuário são válidas.
  *     ii. Aceite somente valores positivos para o valor do imóvel, prazo do financiamento e taxa de juros anual.
  *     iii. Use estruturas de repetição (como do, do-while ou for). Se algum dos valores for inválido, o programa deve informar ao usuário sobre o erro e solicitar que ele insira novamente os dados.
  * 4 Mostrar na tela uma mensagem contendo os dados do financiamento
- * 5 Testar  valores inválidos:
- *     i. valor do imóvel negativo,
- *     ii. taxa de juros muito alta (como 100.000.000% por ano)
- *     iii. prazo de financiamento negativo?
+ * 5 Testar valores inválidos:
+ *     i. Valor do imóvel negativo,
+ *     ii. Taxa de juros muito alta (como 100.000.000% por ano)
+ *     iii. Prazo de financiamento negativo?
  */
 
 package semana03.main;
@@ -39,6 +39,9 @@ package semana03.main;
 import semana03.model.Loan;
 import semana03.model.LoanBuilder;
 import semana03.util.UserInterface;
+
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 
 /**
@@ -52,42 +55,53 @@ public class Main {
         // instancia e inicializa a interface
         UserInterface appInterface = UserInterface.getInstance().initialize();
 
-        // instancia as variaveis
+        // instancia as variáveis
         double propertyPrice ;
         int loanTerm ;
         double loanFee ;
-        boolean running;
+        boolean running = true;
 
-        // loop principal da apliacação. termina somente quando usuario pede para sair
+        ArrayList<Loan> listLoans = new ArrayList<>();
+
+        appInterface.viewMenu();
+
+        // Loop principal da aplicação. termina somente quando usuário pede para sair
         do {
 
-            appInterface.viewMenu();
 
-            // recebe dados do financiamento
-            propertyPrice   = appInterface.getInput().price();
-            loanTerm        = appInterface.getInput().term();
-            loanFee         = appInterface.getInput().fee();
+
+            // leitura dos dados do financiamento
+            try {
+
+                propertyPrice = appInterface.getInput().price();
+                loanTerm = appInterface.getInput().term();
+                loanFee = appInterface.getInput().fee();
+
+            }catch(InputMismatchException e){
+
+                appInterface.viewException(e);
+                continue;
+            }
 
             // criar objeto financiamento e mostra seus dados
             try {
-
-                Loan model = new LoanBuilder()
+                listLoans.add( new LoanBuilder()
                         .Price(propertyPrice)
                         .Term(loanTerm)
                         .Fee(loanFee)
-                        .build();
-
-                appInterface.viewLoan(model);
+                        .build());
 
             } catch (IllegalArgumentException e) {
                 appInterface.viewException(e);
             }
 
+            for(Loan item : listLoans) {
+                appInterface.viewLoan(item);
+            }
+            
             running = appInterface.getInput().closeApp();
 
         }while(running);
-
-
 
         // encerramento da aplicação
         appInterface.closure();
