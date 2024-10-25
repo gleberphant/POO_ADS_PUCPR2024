@@ -56,7 +56,7 @@ public class Main {
         double propertyPrice ;
         int loanTerm ;
         double loanFee ;
-        boolean running = true;
+        boolean running;
 
         // loop principal da apliacação. termina somente quando usuario pede para sair
         do {
