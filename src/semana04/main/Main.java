@@ -47,17 +47,18 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // instancia e inicializa a interface
-        UserInterface appInterface = UserInterface.getInstance().initialize();
-
-        // instancia as variáveis
+        // declaração de variáveis
         double propertyPrice;
         int loanTerm, countLoan = 1;
         double loanFee;
         boolean running = true;
         double totalPriceProperty = 0f, totalPriceLoan = 0f;
 
+        // declaração de array de financiamentos
         ArrayList<Loan> listLoans = new ArrayList<>();
+
+        // instancia e inicializa a interface
+        UserInterface appInterface = UserInterface.getInstance().initialize();
 
         appInterface.viewTop();
 
