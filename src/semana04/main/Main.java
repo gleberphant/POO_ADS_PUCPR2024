@@ -11,15 +11,14 @@
  *
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
  * @version af_semana_003
- * <p>
+ * <br>
  * REQUISITOS
- * <p>
+ * <br>
  * 1. Todos os requisitos das semanas anteriores.
- * <p>
+ * <br>
  * 2. No metodo main(), adicione quatro financiamentos em um ArrayList. Cada financiamento será um objeto instanciado da classe financiamento.
- * <p>
+ * <br>
  * 3. Após adicionar todos os financiamentos, mostre na tela o valor total de todos os imóveis e o valor total de todos os financiamentos.
- * <p>
  * a. Exemplo:
  * i. Financiamento 1 – valor do imóvel: R$ 200000, valor do financiamento: R$ 220000.
  * ii. Financiamento 2 – valor do imóvel: R$ 300000, valor do financiamento: R$ 380000.
@@ -53,7 +52,7 @@ public class Main {
 
         // instancia as variáveis
         double propertyPrice;
-        int loanTerm;
+        int loanTerm, countLoan = 1;
         double loanFee;
         boolean running = true;
         double totalPriceProperty = 0f, totalPriceLoan = 0f;
@@ -75,10 +74,13 @@ public class Main {
                 // criar objeto financiamento e mostra seus dados
 
                 listLoans.add(new LoanBuilder()
+                        .Id(countLoan)
                         .Price(propertyPrice)
                         .Term(loanTerm)
                         .Fee(loanFee)
                         .build());
+
+                countLoan++;
 
             } catch (IllegalArgumentException e) {
                 appInterface.viewException(e);

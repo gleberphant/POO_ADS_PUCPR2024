@@ -21,9 +21,15 @@ package semana04.model;
  * @author HANDERSON GLEBER
  */
 public class LoanBuilder {
-    int term;
-    double price;
-    double fee;
+    private int term, id;
+    private double price;
+    private double fee;
+
+    public LoanBuilder Id(int id) {
+
+        this.id = id;
+        return this;
+    }
 
     public LoanBuilder Term(int term) {
 
@@ -45,6 +51,6 @@ public class LoanBuilder {
 
     public Loan build() throws IllegalArgumentException {
 
-        return new Loan(this.price, this.term, this.fee);
+        return new Loan(this.id, this.price, this.term, this.fee);
     }
 }

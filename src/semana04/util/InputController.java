@@ -69,7 +69,7 @@ public class InputController {
      */
     public double price() {
 
-        System.out.print("\n > Digite o VALOR do financiamento: ");
+        System.out.print(" > Digite o VALOR do financiamento: ");
 
         if (this.inputScanner.hasNextDouble()) {
 
@@ -88,7 +88,7 @@ public class InputController {
      */
     public int term() {
 
-        System.out.print("\n > Digite o PRAZO do financiamento: ");
+        System.out.print(" > Digite o PRAZO do financiamento: ");
 
         if (this.inputScanner.hasNextInt()) {
 
@@ -107,7 +107,7 @@ public class InputController {
      */
     public double fee() {
 
-        System.out.print("\n > Digite o valor da TAXA DE JUROS ANUAL: ");
+        System.out.print(" > Digite o valor da TAXA DE JUROS ANUAL: ");
 
         if (this.inputScanner.hasNextDouble()) {
 

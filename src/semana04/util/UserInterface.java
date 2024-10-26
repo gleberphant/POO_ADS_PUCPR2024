@@ -86,12 +86,12 @@ public class UserInterface {
 
         System.out.printf("""
                 ┌──────────────────────────────────────────────┐
-                │                FINANCIAMENTO                 │
-                │  Prazo: %4d      Tx Juros: %11.4f/ano  │
+                │              FINANCIAMENTO nº%04d            │
+                │  Prazo: %-4d      Tx Juros: %4.2f/ano       │
                 │  Valor do Imovel: R$%-23.2f  │
                 │  Valor do Financiamento: R$%-16.2f  │
                 └──────────────────────────────────────────────┘
-                """, targetLoan.getTerm(), targetLoan.getFee(), targetLoan.getPrice(), targetLoan.getPaymentValueTotal());
+                """, targetLoan.getId(), targetLoan.getTerm(), targetLoan.getFee(), targetLoan.getPrice(), targetLoan.getPaymentValueTotal());
 
     }
 
@@ -102,8 +102,8 @@ public class UserInterface {
 
         System.out.printf("""
                 
-                ╔══════════════════════════════════════════════╗
-                ║            FINANCIAMENTO INVÁLIDO            ║
+                ╔══════════[ FINANCIAMENTO INVÁLIDO ]══════════╗
+                ║                                              ║
                 ║  >> %-40s ║
                 ╚══════════════════════════════════════════════╝
                 
@@ -118,7 +118,7 @@ public class UserInterface {
     public void viewTotals(double totalProperty, double totalLoan) {
 
         System.out.printf("""
-                ╔══════════════════════════════════════════════╗
+                ╔═════════════════[ TOTAIS ]═══════════════════╗
                 ║ Total imóveis: R$%-26.2f  ║
                 ║ Total financiamentos: R$%-19.2f  ║
                 ╚══════════════════════════════════════════════╝
@@ -134,8 +134,8 @@ public class UserInterface {
         System.out.println("""
                 
                 ╔══════════════════════════════════════════════╗
-                ║         SISTEMA DE FINANCIAMENTO POO   v4    ║
-                ║      por: HANDERSON GLEBER (gravatinha)      ║
+                ║       SISTEMA DE FINANCIAMENTO POO v4        ║
+                ║      by: HANDERSON GLEBER (Gr4v4t1nh4)       ║
                 ╚══════════════════════════════════════════════╝
                 """);
         this.waitEnterToContinue();
@@ -148,9 +148,9 @@ public class UserInterface {
 
         System.out.println("""
                 
-                ╔══════════════════════════════════════════════╗
-                ║      Dúvidas e sugestões?                    ║
-                ║      handerson.gleber@gmail.com              ║
+                ╔═══════════[ Dúvidas e sugestões? ]═══════════╗
+                ║  Email: handerson.gleber@gmail.com           ║
+                ║  Instragram: @handersongleber                ║
                 ╚══════════════════════════════════════════════╝
                 """);
         this.waitEnterToContinue();

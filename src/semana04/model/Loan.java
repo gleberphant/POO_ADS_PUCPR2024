@@ -27,6 +27,7 @@ public class Loan {
     private double price;
     private int term;
     private double fee;
+    private int id;
 
     /**
      * Constantes para validação dos atributos. Evita uso de magic numbers
@@ -46,7 +47,7 @@ public class Loan {
      * @param fee   A taxa de juros do financiamento.
      * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
      */
-    protected Loan(final double price, final int term, final double fee) throws IllegalArgumentException {
+    protected Loan(final int id, final double price, final int term, final double fee) throws IllegalArgumentException {
 
         //INICIALIZA AS CONSTANTES DE VALIDAÇÃO PARA EVITAR O USO DE MAGIC NUMBERS
         MIN_PRICE = 0f;
@@ -56,9 +57,23 @@ public class Loan {
         MIN_FEE = 0f;
 
         //SETA OS ATRIBUTOS
+        this.setId(id);
         this.setPrice(price);
         this.setTerm(term);
         this.setFee(fee);
+    }
+
+    /**
+     * Setter de atributo
+     * id do financiamento
+     */
+    public void setId(int id) {
+
+        if (id < 0) {
+            throw new IllegalArgumentException("ID não pode ser negativo");
+        }
+
+        this.id = id;
     }
 
     /**
@@ -111,11 +126,21 @@ public class Loan {
     /**
      * Getter de atributo
      *
+     * @return id
+     */
+    public int getId() {
+
+        return this.id;
+    }
+
+    /**
+     * Getter de atributo
+     *
      * @return preço da propriedade
      */
     public double getPrice() {
 
-        return price;
+        return this.price;
     }
 
     /**
@@ -125,7 +150,7 @@ public class Loan {
      */
     public int getTerm() {
 
-        return term;
+        return this.term;
     }
 
     /**
@@ -135,15 +160,7 @@ public class Loan {
      */
     public double getFee() {
 
-        return fee;
-    }
-
-    /**
-     * @return Prazo do financiamento em anos.
-     */
-    private int getTermAnnual() {
-
-        return this.getTerm() / 12;
+        return this.fee;
     }
 
     /**
