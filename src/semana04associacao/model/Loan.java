@@ -15,7 +15,7 @@
 package semana04associacao.model;
 
 /**
- * Classe de financiamento. Contem métodos para validar atributos
+ * Classe de financiamento. Contem métodos para validar atributos.
  *
  * @author HANDERSON GLEBER
  */
@@ -30,7 +30,7 @@ public class Loan {
     private int id;
 
     /**
-     * Constantes para validação dos atributos. Evita uso de magic numbers
+     * Constantes para validação dos atributos. Evita uso de magic numbers.
      */
     private final float MIN_PRICE;
     private final int MAX_TERM;
@@ -108,7 +108,7 @@ public class Loan {
 
     /**
      * Setter de atributo
-     * taxa de juros por ano
+     * taxa de juros por ano.
      */
     public void setFee(double fee) {
 

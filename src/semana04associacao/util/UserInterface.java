@@ -20,7 +20,7 @@ import semana04associacao.model.Loan;
 
 /**
  * Classe responsável pela interface do usuário. Gerencia a entrada e saída de dados do sistema.
- * Segue padrão singleton para evitar múltiplas instâncias
+ * Segue padrão singleton para evitar múltiplas instâncias.
  *
  * @author HANDERSON GLEBER
  */
@@ -30,7 +30,7 @@ public class UserInterface {
     private InputController inputInstance;
 
     /**
-     * Construtor private para atender o padrão singleton e evitar duas interfaces simultaneamente
+     * Construtor private para atender o padrão singleton e evitar duas interfaces simultaneamente.
      */
     private UserInterface() {
     }
@@ -50,7 +50,7 @@ public class UserInterface {
     }
 
     /**
-     * Inicializa a interface da aplicação
+     * Inicializa a interface da aplicação.
      *
      * @return inputInstance
      */
@@ -62,7 +62,7 @@ public class UserInterface {
     }
 
     /**
-     * pergunta se é para encerrar aplicação
+     * Pergunta se é para encerrar aplicação.
      *
      * @return a resposta em boolean
      */
@@ -87,8 +87,8 @@ public class UserInterface {
         System.out.printf("""
                 ┌──────────────────────────────────────────────┐
                 │              FINANCIAMENTO nº%04d            │
-                │  Prazo: %-4d      Tx Juros: %4.2f/ano       │
-                │  Valor do Imovel: R$%-23.2f  │
+                │  Prazo: %-5d      Tx Juros: %5.2f /ano      │
+                │  Valor do Imóvel: R$%-23.2f  │
                 │  Valor do Financiamento: R$%-16.2f  │
                 └──────────────────────────────────────────────┘
                 """, targetLoan.getId(), targetLoan.getTerm(), targetLoan.getFee(), targetLoan.getPrice(), targetLoan.getPaymentValueTotal());
@@ -96,7 +96,7 @@ public class UserInterface {
     }
 
     /**
-     * Exibe os dados de um erro
+     * Exibe um erro.
      */
     public void viewException(Exception e) {
 
@@ -142,7 +142,7 @@ public class UserInterface {
     }
 
     /**
-     * Encerra a interface da aplicação
+     * Encerra a interface da aplicação.
      */
     public void closure() {
 
@@ -150,7 +150,7 @@ public class UserInterface {
                 
                 ╔═══════════[ Dúvidas e sugestões? ]═══════════╗
                 ║  Email: handerson.gleber@gmail.com           ║
-                ║  Instragram: @handersongleber                ║
+                ║  Instagram: @handersongleber                 ║
                 ╚══════════════════════════════════════════════╝
                 """);
         this.waitEnterToContinue();

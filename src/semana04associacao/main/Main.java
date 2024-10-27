@@ -16,7 +16,7 @@
  * <br>
  * 1. Todos os requisitos das semanas anteriores.
  * <br>
- * 2. No metodo main(), adicione quatro financiamentos em um ArrayList. Cada financiamento será um objeto instanciado da classe financiamento.
+ * 2. No main(), adicione quatro financiamentos em um ArrayList. Cada financiamento será um objeto instanciado da classe financiamento.
  * <br>
  * 3. Após adicionar todos os financiamentos, mostre na tela o valor total de todos os imóveis e o valor total de todos os financiamentos.
  * a. Exemplo:
@@ -39,7 +39,7 @@ import java.util.InputMismatchException;
 
 
 /**
- * Classe PRINCIPAL. Contem o loop central da aplicação.
+ * Classe PRINCIPAL. Contêm o loop central da aplicação.
  *
  * @author HANDERSON GLEBER
  */

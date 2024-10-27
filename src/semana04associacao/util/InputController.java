@@ -20,7 +20,7 @@ import java.util.Scanner;
 
 /**
  * Classe 'INPUT'
- * responsável pela entrada de dados pelo usuário
+ * responsável pela entrada de dados pelo usuário.
  * Gerencia a entrada de dados do sistema.
  * (validação de dados nessa classe ficaria melhor? Violaria o SRP?)
  *
@@ -77,7 +77,7 @@ public class InputController {
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("Preço inválido. Digite um número decimal");
+            throw new InputMismatchException("Preço inválido. Digite um número decimal.");
         }
     }
 
@@ -96,7 +96,7 @@ public class InputController {
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("Prazo inválido. Digite um número inteiro");
+            throw new InputMismatchException("Prazo inválido. Digite um número inteiro.");
         }
     }
 
@@ -115,12 +115,12 @@ public class InputController {
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("Taxa inválida. Digite um número decimal");
+            throw new InputMismatchException("Taxa inválida. Digite um número decimal.");
         }
     }
 
     /**
-     * Pergunta ao usuário se ele quer fechar a aplicação
+     * Pergunta ao usuário se ele quer fechar a aplicação.
      *
      * @return Taxa de juros anual.
      */
