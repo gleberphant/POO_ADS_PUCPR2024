@@ -36,9 +36,7 @@ public class UserInterface {
     }
 
     /**
-     * Criação da instância única da classe e do controlador de entrada
-     * (será que isso viola o Princípio da Responsabilidade Única?)
-     *
+     * Criação da instância única da classe e do controlador de entrada.
      * @return UserInterface
      */
     public static UserInterface getInstance() {
@@ -51,7 +49,6 @@ public class UserInterface {
 
     /**
      * Inicializa a interface da aplicação.
-     *
      * @return inputInstance
      */
     public UserInterface initialize() {
@@ -63,7 +60,6 @@ public class UserInterface {
 
     /**
      * Pergunta se é para encerrar aplicação.
-     *
      * @return a resposta em boolean
      */
     public boolean promptExit() {
@@ -80,7 +76,7 @@ public class UserInterface {
     }
 
     /**
-     * Exibe os dados do o financiamento
+     * Exibe os dados do financiamento
      */
     public void viewLoan(Loan targetLoan) {
 
@@ -113,11 +109,12 @@ public class UserInterface {
     }
 
     /**
-     * Exibe menu da interface
+     * Exibe valor total dos financiamentos.
      */
     public void viewTotals(double totalProperty, double totalLoan) {
 
         System.out.printf("""
+                
                 ╔═════════════════[ TOTAIS ]═══════════════════╗
                 ║ Total imóveis: R$%-26.2f  ║
                 ║ Total financiamentos: R$%-19.2f  ║
@@ -127,36 +124,38 @@ public class UserInterface {
     }
 
     /**
-     * Exibe menu da interface
+     * Exibe mensagem abertura
      */
-    public void viewTop() {
+    public void viewOpening() {
 
         System.out.println("""
-                
+                \033[32m
                 ╔══════════════════════════════════════════════╗
                 ║       SISTEMA DE FINANCIAMENTO POO v4        ║
                 ║      by: HANDERSON GLEBER (Gr4v4t1nh4)       ║
                 ╚══════════════════════════════════════════════╝
-                """);
+                \033[0m""");
         this.waitEnterToContinue();
     }
 
     /**
      * Encerra a interface da aplicação.
      */
-    public void closure() {
+    public void viewClosure() {
 
         System.out.println("""
-                
+                \033[32m
                 ╔═══════════[ Dúvidas e sugestões? ]═══════════╗
                 ║  Email: handerson.gleber@gmail.com           ║
                 ║  Instagram: @handersongleber                 ║
                 ╚══════════════════════════════════════════════╝
+                \033[0m
                 """);
         this.waitEnterToContinue();
     }
 
     public void waitEnterToContinue() {
+
         this.getInput().waitEnterToContinue();
     }
 

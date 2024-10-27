@@ -15,8 +15,8 @@
 package semana04associacao.model;
 
 /**
- * Classe de financiamento. Contem métodos para validar atributos.
- *
+ * Classe que representa o objeto financiamento(model).
+ * Contêm a validação dos seus atributos.
  * @author HANDERSON GLEBER
  */
 public class Loan {
@@ -40,7 +40,6 @@ public class Loan {
 
     /**
      * Construtor
-     * inicializa constantes de validação de dados, para evitar uso de MAGIC NUMBERS
      *
      * @param price O preço do bem a ser financiado.
      * @param term  O prazo do financiamento em meses.
@@ -125,7 +124,6 @@ public class Loan {
 
     /**
      * Getter de atributo
-     *
      * @return id
      */
     public int getId() {
@@ -135,7 +133,6 @@ public class Loan {
 
     /**
      * Getter de atributo
-     *
      * @return preço da propriedade
      */
     public double getPrice() {
@@ -145,7 +142,6 @@ public class Loan {
 
     /**
      * Getter de atributo
-     *
      * @return quantidade de parcelas
      */
     public int getTerm() {
@@ -155,7 +151,6 @@ public class Loan {
 
     /**
      * Getter de atributo
-     *
      * @return taxa de juros
      */
     public double getFee() {
@@ -164,6 +159,7 @@ public class Loan {
     }
 
     /**
+     * Calcula pagamento mensal
      * @return Valor da parcela mensal.
      */
     public double getPaymentValueMonthly() {
@@ -172,6 +168,7 @@ public class Loan {
     }
 
     /**
+     * Calcula pagamento total
      * @return Valor total do pagamento.
      */
     public double getPaymentValueTotal() {

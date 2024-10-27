@@ -19,11 +19,8 @@ import java.util.Scanner;
 
 
 /**
- * Classe 'INPUT'
- * responsável pela entrada de dados pelo usuário.
- * Gerencia a entrada de dados do sistema.
- * (validação de dados nessa classe ficaria melhor? Violaria o SRP?)
- *
+ * Classe responsável pela entrada de dados fornecidos pelo usuário.
+ * Realiza validação quanto ao tipo de dado apenas.
  * @author HANDERSON GLEBER
  */
 public class InputController {
@@ -32,15 +29,14 @@ public class InputController {
     private Scanner inputScanner;
 
     /**
-     * construtor private. padrão singleton
+     * Construtor encapsulado como private para atender padrão singleton.
      */
     private InputController() {
     }
 
 
     /**
-     * cria instancia única da classe
-     *
+     * Inicializa a instância única da classe.
      * @return InputController
      */
     protected static InputController getInstance() {
@@ -52,7 +48,8 @@ public class InputController {
     }
 
     /**
-     * inicializa a instancia. cria objeto input
+     * inicializa a instancia do objeto Scanner.
+     * @return InputController
      */
     public InputController initialize() {
 
@@ -64,12 +61,11 @@ public class InputController {
 
     /**
      * Solicita ao usuário o valor do imóvel a ser financiado.
-     *
      * @return Valor do imóvel.
      */
     public double price() {
 
-        System.out.print(" > Digite o VALOR do financiamento: ");
+        System.out.print(" < Digite o VALOR do financiamento >>  ");
 
         if (this.inputScanner.hasNextDouble()) {
 
@@ -83,12 +79,11 @@ public class InputController {
 
     /**
      * Solicita ao usuário o prazo do financiamento em meses.
-     *
      * @return Prazo do financiamento em meses.
      */
     public int term() {
 
-        System.out.print(" > Digite o PRAZO do financiamento: ");
+        System.out.print(" < Digite o PRAZO do financiamento >> ");
 
         if (this.inputScanner.hasNextInt()) {
 
@@ -102,12 +97,11 @@ public class InputController {
 
     /**
      * Solicita ao usuário a taxa de juros anual do financiamento.
-     *
      * @return Taxa de juros anual.
      */
     public double fee() {
 
-        System.out.print(" > Digite o valor da TAXA DE JUROS ANUAL: ");
+        System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL >> ");
 
         if (this.inputScanner.hasNextDouble()) {
 
@@ -121,8 +115,7 @@ public class InputController {
 
     /**
      * Pergunta ao usuário se ele quer fechar a aplicação.
-     *
-     * @return Taxa de juros anual.
+     * @return boolean
      */
     public boolean promptExit() {
 
@@ -130,7 +123,7 @@ public class InputController {
 
         do {
 
-            System.out.println("Deseja realizar um novo financiamento? ( Digite S para sim N para não)");
+            System.out.println("Deseja realizar um novo financiamento? ( [S] para continuar ou [N] para sair) ");
 
             choice = this.inputScanner.next().trim().toUpperCase();
 
@@ -143,9 +136,12 @@ public class InputController {
         } while (true);
     }
 
+    /**
+     * Aguardar usuário pressionar tecla Enter.
+     */
     public void waitEnterToContinue() {
 
-        System.out.println("\n Pressione <ENTER> para continuar...");
+        System.out.println("[ Pressione <ENTER> para continuar... ]");
         this.inputScanner.nextLine();
 
     }

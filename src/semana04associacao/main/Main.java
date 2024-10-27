@@ -34,13 +34,14 @@ import semana04associacao.model.Loan;
 import semana04associacao.model.LoanBuilder;
 import semana04associacao.util.UserInterface;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 
 /**
- * Classe PRINCIPAL. Contêm o loop central da aplicação.
- *
+ * Classe PRINCIPAL.
+ * Contêm o loop central da aplicação.
  * @author HANDERSON GLEBER
  */
 public class Main {
@@ -55,14 +56,14 @@ public class Main {
         double totalPriceProperty = 0f, totalPriceLoan = 0f;
 
         // declaração de array de financiamentos
-        ArrayList<Loan> listLoans = new ArrayList<>();
+        List<Loan> listLoans = new ArrayList<>();
 
-        // instancia e inicializa a interface
+        // inicialização da interface
         UserInterface appInterface = UserInterface.getInstance().initialize();
 
-        appInterface.viewTop();
+        appInterface.viewOpening();
 
-        // Loop principal da aplicação. termina somente quando usuário pede para sair
+        // Loop principal da aplicação. termina somente quando usuário pedir para sair
         do {
 
             // leitura dos dados do financiamento
@@ -100,13 +101,13 @@ public class Main {
 
             appInterface.viewTotals(totalPriceProperty, totalPriceLoan);
 
-
+            // pergunta se o usuário deseja sair
             running = appInterface.promptExit();
 
         } while (running);
 
         // encerramento da aplicação
-        appInterface.closure();
+        appInterface.viewClosure();
 
     }
 }

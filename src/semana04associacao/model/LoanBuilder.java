@@ -25,30 +25,51 @@ public class LoanBuilder {
     private double price;
     private double fee;
 
+    /**
+     * "Método_Construtor" de atributo
+     *
+     * @return LoanBuilder
+     */
     public LoanBuilder Id(int id) {
 
         this.id = id;
         return this;
     }
 
+    /**
+     * "Método_Construtor" de atributo
+     * @return LoanBuilder
+     */
     public LoanBuilder Term(int term) {
 
         this.term = term;
         return this;
     }
 
+    /**
+     * "Método_Construtor" de atributo
+     * @return LoanBuilder
+     */
     public LoanBuilder Price(double price) {
 
         this.price = price;
         return this;
     }
 
+    /**
+     * "Método_Construtor" de atributo
+     * @return LoanBuilder
+     */
     public LoanBuilder Fee(double fee) {
 
         this.fee = fee;
         return this;
     }
 
+    /**
+     * Instancia o objeto Loan
+     * @return Loan
+     */
     public Loan build() throws IllegalArgumentException {
 
         return new Loan(this.id, this.price, this.term, this.fee);
