@@ -13,7 +13,7 @@
  * @version af_semana_002
  */
 
-package semana02;
+package semana02introducao;
 
 
 import java.util.Scanner;
@@ -23,7 +23,7 @@ import java.util.Scanner;
  * Clase PRINCIPAL que executa o programa.
  */
 
-public class Main {
+public class AppFinanciamento {
 
 
     public static void main(String[] args) {

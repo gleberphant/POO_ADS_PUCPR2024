@@ -33,12 +33,12 @@
  *     iii. Prazo de financiamento negativo?
  */
 
-package semana03.main;
+package semana03encapsulamento.main;
 
 
-import semana03.model.Loan;
-import semana03.model.LoanBuilder;
-import semana03.util.UserInterface;
+import semana03encapsulamento.model.Loan;
+import semana03encapsulamento.model.LoanBuilder;
+import semana03encapsulamento.util.UserInterface;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

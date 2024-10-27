@@ -27,12 +27,12 @@
  * Total de todos os imóveis: R$ 900000, total de todos os financiamentos: R$ 1030000.
  */
 
-package semana04.main;
+package semana04associacao.main;
 
 
-import semana04.model.Loan;
-import semana04.model.LoanBuilder;
-import semana04.util.UserInterface;
+import semana04associacao.model.Loan;
+import semana04associacao.model.LoanBuilder;
+import semana04associacao.util.UserInterface;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

@@ -12,7 +12,7 @@
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
  */
 
-package semana03.util;
+package semana03encapsulamento.util;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

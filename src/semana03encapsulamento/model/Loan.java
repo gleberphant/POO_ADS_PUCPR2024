@@ -12,7 +12,7 @@
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
  */
 
-package semana03.model;
+package semana03encapsulamento.model;
 
 /**
  * Classe de financiamento. Contem métodos para validar atributos

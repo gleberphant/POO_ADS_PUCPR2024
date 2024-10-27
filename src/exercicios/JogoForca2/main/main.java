@@ -13,12 +13,12 @@
 //│   IMPLEMENTAÇÃO DE JOGO DA FORCA EM JAVA                               │
 //└────────────────────────────────────────────────────────────────────────┘
 
-package semana01;
+package exercicios.JogoForca2.main;
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class JogoForca {
+public class main {
 
     private int rodadas_max = 5;
     private boolean running = true;
@@ -174,7 +174,7 @@ public class JogoForca {
 
     public static void main(String[] args)
     {
-        JogoForca app = new JogoForca();
+        main app = new main();
 
         app.loading_game();
 

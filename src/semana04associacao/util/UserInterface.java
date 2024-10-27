@@ -12,10 +12,10 @@
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
  */
 
-package semana04.util;
+package semana04associacao.util;
 
 
-import semana04.model.Loan;
+import semana04associacao.model.Loan;
 
 
 /**
