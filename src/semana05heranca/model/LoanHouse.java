@@ -1,6 +1,6 @@
 package semana05heranca.model;
 
-public class LoanApartment extends Loan{
+public class LoanHouse extends Loan {
     private final double INSURANCE_VALUE;
 
     /**
@@ -12,7 +12,7 @@ public class LoanApartment extends Loan{
      * @param fee   A taxa de juros do financiamento.
      * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
      */
-    protected LoanApartment(int id, double price, int term, double fee) throws IllegalArgumentException {
+    public LoanHouse(int id, double price, int term, double fee) throws IllegalArgumentException {
         super(id, price, term, fee);
         INSURANCE_VALUE = 80;
     }

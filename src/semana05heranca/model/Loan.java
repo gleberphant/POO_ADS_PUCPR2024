@@ -46,8 +46,7 @@ public class Loan {
      * @param fee   A taxa de juros do financiamento.
      * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
      */
-    protected Loan(final int id, final double price, final int term, final double fee) throws IllegalArgumentException {
-
+    public Loan(int id, double price,  int term, final double fee) throws IllegalArgumentException {
         //INICIALIZA AS CONSTANTES DE VALIDAÇÃO PARA EVITAR O USO DE MAGIC NUMBERS
         MIN_PRICE = 0f;
         MAX_TERM = 1000;
@@ -55,13 +54,20 @@ public class Loan {
         MAX_FEE = 200f;
         MIN_FEE = 0f;
 
+        setLoan(id,  price, term, fee);
+    }
+
+    /**
+     * init loan
+     */
+    public void setLoan(int id, double price, int term, double fee) throws IllegalArgumentException{
+
         //SETA OS ATRIBUTOS
         this.setId(id);
         this.setPrice(price);
         this.setTerm(term);
         this.setFee(fee);
     }
-
     /**
      * Getter de atributo
      *

@@ -27,7 +27,7 @@ import semana04associacao.model.Loan;
 public class UserInterface {
 
     private static UserInterface instance;
-    private InputController inputInstance;
+    private UserInput inputInstance;
 
     /**
      * Construtor private para atender o padrão singleton e evitar duas interfaces simultaneamente.
@@ -53,7 +53,7 @@ public class UserInterface {
      */
     public UserInterface initialize() {
 
-        inputInstance = InputController.getInstance().initialize();
+        inputInstance = UserInput.getInstance().initialize();
 
         return this;
     }
@@ -63,14 +63,14 @@ public class UserInterface {
      * @return a resposta em boolean
      */
     public boolean promptExit() {
-        return this.getInput().promptExit();
-    }
 
+        return this.Input().promptExit();
+    }
 
     /**
      * @return controlador de entradas do usuário
      */
-    public InputController getInput() {
+    public UserInput Input() {
 
         return inputInstance;
     }
@@ -81,13 +81,13 @@ public class UserInterface {
     public void viewLoan(Loan targetLoan) {
 
         System.out.printf("""
-                ┌──────────────────────────────────────────────┐
-                │              FINANCIAMENTO nº%04d            │
-                │  Prazo: %-5d      Tx Juros: %5.2f /ano      │
-                │  Valor do Imóvel: R$%-23.2f  │
-                │  Valor do Financiamento: R$%-16.2f  │
-                └──────────────────────────────────────────────┘
-                """, targetLoan.getId(), targetLoan.getTerm(), targetLoan.getFee(), targetLoan.getPrice(), targetLoan.getPaymentValueTotal());
+        ┌──────────────────────────────────────────────┐
+        │            FINANCIAMENTO nº%4s              │
+        │  Prazo: %-5d      Tx Juros: %5.2f /ano      │
+        │  Valor do Imóvel: R$%-23.2f  │
+        │  Valor do Financiamento: R$%-16.2f  │
+        └──────────────────────────────────────────────┘
+        """, targetLoan.getId(), targetLoan.getTerm(), targetLoan.getFee(), targetLoan.getPrice(), targetLoan.getPaymentValueTotal());
 
     }
 
@@ -97,15 +97,14 @@ public class UserInterface {
     public void viewException(Exception e) {
 
         System.out.printf("""
-                
-                ╔══════════[ FINANCIAMENTO INVÁLIDO ]══════════╗
-                ║                                              ║
-                ║  >> %-40s ║
-                ╚══════════════════════════════════════════════╝
-                
-                """, e.getMessage());
+        
+        ╔══════════[ FINANCIAMENTO INVÁLIDO ]══════════╗
+        ║                                              ║
+        ║  >> %-40s ║
+        ╚══════════════════════════════════════════════╝
+        """, e.getMessage());
 
-        this.waitEnterToContinue();
+        this.pressEnterToContinue();
     }
 
     /**
@@ -114,14 +113,13 @@ public class UserInterface {
     public void viewTotals(double totalProperty, double totalLoan) {
 
         System.out.printf("""
-                
-                ╔═════════════════[ TOTAIS ]═══════════════════╗
-                ║ Total imóveis: R$%-26.2f  ║
-                ║ Total financiamentos: R$%-19.2f  ║
-                ╚══════════════════════════════════════════════╝
-                
-                """, totalProperty, totalLoan);
-    }
+        
+        ╔═════════════════[ TOTAIS ]═══════════════════╗
+        ║ Total imóveis: R$%-26.2f  ║
+        ║ Total financiamentos: R$%-19.2f  ║
+        ╚══════════════════════════════════════════════╝
+        """, totalProperty, totalLoan);
+}
 
     /**
      * Exibe mensagem abertura
@@ -129,13 +127,13 @@ public class UserInterface {
     public void viewOpening() {
 
         System.out.println("""
-                \033[32m
-                ╔══════════════════════════════════════════════╗
-                ║       SISTEMA DE FINANCIAMENTO POO v4        ║
-                ║      by: HANDERSON GLEBER (Gr4v4t1nh4)       ║
-                ╚══════════════════════════════════════════════╝
-                \033[0m""");
-        this.waitEnterToContinue();
+        
+        ╔══════════════════════════════════════════════╗
+        ║       SISTEMA DE FINANCIAMENTO POO v4        ║
+        ║      by: HANDERSON GLEBER (Gr4v4t1nh4)       ║
+        ╚══════════════════════════════════════════════╝
+        """);
+        this.pressEnterToContinue();
     }
 
     /**
@@ -144,19 +142,18 @@ public class UserInterface {
     public void viewClosure() {
 
         System.out.println("""
-                \033[32m
-                ╔═══════════[ Dúvidas e sugestões? ]═══════════╗
-                ║  Email: handerson.gleber@gmail.com           ║
-                ║  Instagram: @handersongleber                 ║
-                ╚══════════════════════════════════════════════╝
-                \033[0m
-                """);
-        this.waitEnterToContinue();
+        
+        ╔═══════════[ Dúvidas e sugestões? ]═══════════╗
+        ║  Email: handerson.gleber@gmail.com           ║
+        ║  Instagram: @handersongleber                 ║
+        ╚══════════════════════════════════════════════╝
+        """);
+        this.pressEnterToContinue();
     }
 
-    public void waitEnterToContinue() {
+    public void pressEnterToContinue() {
 
-        this.getInput().waitEnterToContinue();
+        this.Input().pressEnterToContinue();
     }
 
 }

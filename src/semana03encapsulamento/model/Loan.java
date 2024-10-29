@@ -88,7 +88,7 @@ public class Loan {
 
     /**
      * Setter de atributo
-     * taxa de juros por ano
+     * taxa de juros por ano.
      */
     public void setFee(double fee) {
 

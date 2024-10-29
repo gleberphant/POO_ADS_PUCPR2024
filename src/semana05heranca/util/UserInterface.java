@@ -65,14 +65,14 @@ public class UserInterface {
      * @return a resposta em boolean
      */
     public boolean promptExit() {
-        return this.getInput().promptExit();
+        return this.Input().promptExit();
     }
 
 
     /**
      * @return controlador de entradas do usuário
      */
-    public InputController getInput() {
+    public InputController Input() {
 
         return inputInstance;
     }
@@ -158,7 +158,7 @@ public class UserInterface {
 
     public void waitEnterToContinue() {
 
-        this.getInput().waitEnterToContinue();
+        this.Input().waitEnterToContinue();
     }
 
 }

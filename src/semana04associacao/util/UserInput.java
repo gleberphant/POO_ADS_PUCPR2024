@@ -23,15 +23,15 @@ import java.util.Scanner;
  * Realiza validação quanto ao tipo de dado apenas.
  * @author HANDERSON GLEBER
  */
-public class InputController {
+public class UserInput {
 
-    private static InputController instance;
+    private static UserInput instance;
     private Scanner inputScanner;
 
     /**
      * Construtor encapsulado como private para atender padrão singleton.
      */
-    private InputController() {
+    private UserInput() {
     }
 
 
@@ -39,10 +39,10 @@ public class InputController {
      * Inicializa a instância única da classe.
      * @return InputController
      */
-    protected static InputController getInstance() {
+    protected static UserInput getInstance() {
 
         if (instance == null) {
-            instance = new InputController();
+            instance = new UserInput();
         }
         return instance;
     }
@@ -51,7 +51,7 @@ public class InputController {
      * inicializa a instancia do objeto Scanner.
      * @return InputController
      */
-    public InputController initialize() {
+    public UserInput initialize() {
 
         if (this.inputScanner == null)
             this.inputScanner = new Scanner(System.in);
@@ -65,7 +65,7 @@ public class InputController {
      */
     public double price() {
 
-        System.out.print(" < Digite o VALOR do financiamento >>  ");
+        System.out.print(" < Digite o VALOR do financiamento >  ");
 
         if (this.inputScanner.hasNextDouble()) {
 
@@ -83,7 +83,7 @@ public class InputController {
      */
     public int term() {
 
-        System.out.print(" < Digite o PRAZO do financiamento >> ");
+        System.out.print(" < Digite o PRAZO do financiamento > ");
 
         if (this.inputScanner.hasNextInt()) {
 
@@ -101,7 +101,7 @@ public class InputController {
      */
     public double fee() {
 
-        System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL >> ");
+        System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL > ");
 
         if (this.inputScanner.hasNextDouble()) {
 
@@ -123,7 +123,8 @@ public class InputController {
 
         do {
 
-            System.out.println("Deseja realizar um novo financiamento? ( [S] para continuar ou [N] para sair) ");
+            System.out.println("Deseja realizar um novo financiamento?");
+            System.out.println("Pressione [S] para continuar ou [N] para sair ");
 
             choice = this.inputScanner.next().trim().toUpperCase();
 
@@ -139,7 +140,7 @@ public class InputController {
     /**
      * Aguardar usuário pressionar tecla Enter.
      */
-    public void waitEnterToContinue() {
+    public void pressEnterToContinue() {
 
         System.out.println("[ Pressione <ENTER> para continuar... ]");
         this.inputScanner.nextLine();

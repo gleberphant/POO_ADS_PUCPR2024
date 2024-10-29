@@ -120,6 +120,26 @@ public class InputController {
     }
 
     /**
+     * Solicita ao usuário a taxa de juros anual do financiamento.
+     *
+     * @return Taxa de juros anual.
+     */
+    public int type() {
+
+        System.out.println(" < Qual tipo de financiamento ? > ");
+        System.out.println(" >> [1] Casa  [2] Apartamento [3] Terreno");
+
+        if (this.inputScanner.hasNextInt()) {
+
+            return this.inputScanner.nextInt();
+        } else {
+
+            this.inputScanner.next();
+            throw new InputMismatchException("Opção Inválida. Digite uma opção válida.");
+        }
+    }
+
+    /**
      * Pergunta ao usuário se ele quer fechar a aplicação.
      *
      * @return boolean

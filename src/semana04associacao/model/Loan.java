@@ -21,22 +21,16 @@ package semana04associacao.model;
  */
 public class Loan {
 
-    /**
-     * atributos
-     */
-    private double price;
+    // atributos do objeto
+    private String id;
+    private double price, fee;
     private int term;
-    private double fee;
-    private int id;
 
-    /**
-     * Constantes para validação dos atributos. Evita uso de magic numbers.
-     */
-    private final float MIN_PRICE;
-    private final int MAX_TERM;
-    private final int MIN_TERM;
-    private final float MAX_FEE;
-    private final float MIN_FEE;
+
+    // Constantes para validação dos atributos sem o uso de 'magic numbers'.
+    protected final String ID_PATTERN;
+    protected final float MIN_PRICE, MAX_FEE, MIN_FEE;
+    protected final int MAX_TERM, MIN_TERM;
 
     /**
      * Construtor
@@ -46,16 +40,24 @@ public class Loan {
      * @param fee   A taxa de juros do financiamento.
      * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
      */
-    protected Loan(final int id, final double price, final int term, final double fee) throws IllegalArgumentException {
+    public Loan( String id,  double price,  int term,  double fee) {
 
-        //INICIALIZA AS CONSTANTES DE VALIDAÇÃO PARA EVITAR O USO DE MAGIC NUMBERS
+        ID_PATTERN = "^[0-9]\\d*$";
         MIN_PRICE = 0f;
-        MAX_TERM = 1000;
-        MIN_TERM = 1;
         MAX_FEE = 200f;
         MIN_FEE = 0f;
+        MAX_TERM = 600;
+        MIN_TERM = 1;
 
-        //SETA OS ATRIBUTOS
+        this.setLoan(id, price, term, fee);
+
+    }
+    /**
+     * Setter do objeto
+     * facilita o overload do construtor
+     */
+    public void setLoan( String id,  double price,  int term,  double fee) throws IllegalArgumentException{
+        // SETA OS ATRIBUTOS
         this.setId(id);
         this.setPrice(price);
         this.setTerm(term);
@@ -66,10 +68,10 @@ public class Loan {
      * Setter de atributo
      * id do financiamento
      */
-    public void setId(int id) {
+    public void setId(String id) {
 
-        if (id < 0) {
-            throw new IllegalArgumentException("ID não pode ser negativo");
+        if (!id.matches(ID_PATTERN)) {
+            throw new IllegalArgumentException("ID deve ser um número inteiro maior que zero" );
         }
 
         this.id = id;
@@ -126,7 +128,7 @@ public class Loan {
      * Getter de atributo
      * @return id
      */
-    public int getId() {
+    public String getId() {
 
         return this.id;
     }

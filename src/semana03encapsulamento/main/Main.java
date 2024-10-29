@@ -61,14 +61,12 @@ public class Main {
         double loanFee ;
         boolean running = true;
 
-        ArrayList<Loan> listLoans = new ArrayList<>();
-
         appInterface.viewMenu();
 
         // Loop principal da aplicação. termina somente quando usuário pede para sair
         do {
 
-
+            Loan my_loan = null;
 
             // leitura dos dados do financiamento
             try {
@@ -85,20 +83,18 @@ public class Main {
 
             // criar objeto financiamento e mostra seus dados
             try {
-                listLoans.add( new LoanBuilder()
+                my_loan = new LoanBuilder()
                         .Price(propertyPrice)
                         .Term(loanTerm)
                         .Fee(loanFee)
-                        .build());
+                        .build();
+
+                appInterface.viewLoan(my_loan);
 
             } catch (IllegalArgumentException e) {
                 appInterface.viewException(e);
             }
 
-            for(Loan item : listLoans) {
-                appInterface.viewLoan(item);
-            }
-            
             running = appInterface.getInput().closeApp();
 
         }while(running);

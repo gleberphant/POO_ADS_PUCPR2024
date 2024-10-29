@@ -12,8 +12,10 @@
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
  */
 
-package semana04associacao.model;
+package semana04associacao.util;
 
+
+import semana04associacao.model.Loan;
 
 /**
  * Classe 'Builder'. Responsável pela construção dos financiamentos.
@@ -21,19 +23,20 @@ package semana04associacao.model;
  * @author HANDERSON GLEBER
  */
 public class LoanBuilder {
-    private int term, id;
-    private double price;
-    private double fee;
+    // atributos
+    private int term, count;
+    private double price, fee;
+    private String id;
 
     /**
-     * "Método_Construtor" de atributo
-     *
-     * @return LoanBuilder
+     * Construtor
      */
-    public LoanBuilder Id(int id) {
-
-        this.id = id;
-        return this;
+    public LoanBuilder() {
+        id = "1";
+        term = 0;
+        count = 0;
+        price = 0.0f;
+        fee = 0.0f;
     }
 
     /**
@@ -72,6 +75,17 @@ public class LoanBuilder {
      */
     public Loan build() throws IllegalArgumentException {
 
-        return new Loan(this.id, this.price, this.term, this.fee);
+        // define o id do novo objeto
+        this.id = String.valueOf(this.count + 1);
+
+        // Cria o novo objeto
+        Loan newLoan = new Loan(this.id, this.price, this.term, this.fee);
+
+        // incrementar o contador de criação
+        this.count++;
+
+        // Retorna objeto criado
+        return newLoan;
     }
+
 }

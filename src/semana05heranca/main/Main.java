@@ -11,28 +11,60 @@
  *
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
  * @version af_semana_003
- * <br>
- * REQUISITOS
- * <br>
- * 1. Todos os requisitos das semanas anteriores.
- * <br>
- * 2. No main(), adicione quatro financiamentos em um ArrayList. Cada financiamento será um objeto instanciado da classe financiamento.
- * <br>
- * 3. Após adicionar todos os financiamentos, mostre na tela o valor total de todos os imóveis e o valor total de todos os financiamentos.
- * a. Exemplo:
- * i. Financiamento 1 – valor do imóvel: R$ 200000, valor do financiamento: R$ 220000.
- * ii. Financiamento 2 – valor do imóvel: R$ 300000, valor do financiamento: R$ 380000.
- * iii. Financiamento 3 – valor do imóvel: R$ 150000, valor do financiamento: R$ 155000.
- * iv. Financiamento 4 – valor do imóvel: R$ 250000, valor do financiamento: R$ 275000.
- * Total de todos os imóveis: R$ 900000, total de todos os financiamentos: R$ 1030000.
+
+Um banco geralmente faz tipos diferentes de financiamento. Casas, apartamentos e terrenos possuem características diferentes e, naturalmente, regras diferentes. Agora será a hora de colocar tais regras em nosso projeto.
+
+O que devo desenvolver?
+
+1. Todos os requisitos das semanas anteriores.
+
+2. Crie três subclasses para Financiamento:
+
+a. Casa:
+
+i. O banco inclui um valor do seguro obrigatório do financiamento para cada casa financiada. Portanto, inclua um valor adicional de R$ 80 para cada parcela.
+
+ii. Este valor de R$ 80 deve ser adicionado depois de ter calculado o valor de cada parcela com os juros. Ou seja: este valor adicional não substitui os juros, mas é uma taxa extra.
+
+b. Apartamento:
+
+i. De acordo com as regras do banco, todos os financiamentos de apartamentos deverão usar um sistema de amortização chamado PRICE. Este sistema já é usado por vários bancos.
+
+ii. Por isso, substitua a equação do cálculo do pagamento mensal para apartamentos. A nova fórmula deverá ser:
+
+1. Vamos calcular primeiro a taxa mensal. Ela é:
+
+
+
+2. Vamos calcular o valor em meses do financiamento. Ela é:
+
+3. A nova fórmula será:
+
+
+
+c. Terreno:
+
+i. Financiar terrenos possui um risco de inadimplência maior por parte dos compradores.
+
+ii. Por isso, cada parcela precisa ter um acréscimo de 2% sobre o seu valor com os juros já incluídos previamente.
+
+3. No mé_todo main() substitua os quatro financiamentos de financiamento por dois financiamentos de casa, dois financiamentos de apartamento e um de terreno.
+
+a. Todos os financiamentos deverão permanecer em um único ArrayList.
+
+b. Digitar todas as informações a cada teste é chato. Somente peça os dados do usuário para um financiamento.
+
+c. Para os demais financiamentos você poderá informar os dados diretamente no código dentro do seu método main().
+
+d. Mantenha ainda o texto que mostra a soma dos valores dos imóveis e a soma dos valores dos financiamentos.
  */
 
 package semana05heranca.main;
 
 
 import semana05heranca.model.Loan;
-import semana05heranca.model.LoanBuilder;
 import semana05heranca.util.UserInterface;
+import semana05heranca.util.LoanBuilder;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -70,18 +102,7 @@ public class Main {
             // leitura dos dados do financiamento
             try {
 
-                propertyPrice = appInterface.getInput().price();
-                loanTerm = appInterface.getInput().term();
-                loanFee = appInterface.getInput().fee();
-
-                // criar objeto financiamento e mostra seus dados
-
-                listLoans.add(new LoanBuilder()
-                        .Id(countLoan)
-                        .Price(propertyPrice)
-                        .Term(loanTerm)
-                        .Fee(loanFee)
-                        .build());
+                input_and_create_loan(appInterface, listLoans, countLoan);
 
                 countLoan++;
 
@@ -111,6 +132,33 @@ public class Main {
         appInterface.viewClosure();
 
     }
+
+    public static void input_and_create_loan(UserInterface appInterface, List<Loan> loanList, int id)
+    {
+        loanList.add(new LoanBuilder()
+                .Type((char) ('0' + appInterface.Input().type()))
+                .Id(id)
+                .Price(appInterface.Input().price())
+                .Term(appInterface.Input().term())
+                .Fee(appInterface.Input().fee())
+                .build() );
+
+    }
+
+//    public void testLoanBuilder2(List<Loan> list, int count )
+//    {
+////        switch (count){
+////            case 1:
+////                list.add(new LoanBuilder2()
+////                        .Type('h')
+////                        .Id(count)
+////                        .Price(2.0)
+////                        .Term(2)
+////                        .Fee(1.0)
+////                        .build() );
+////        }
+//
+//    }
 }
 
 
