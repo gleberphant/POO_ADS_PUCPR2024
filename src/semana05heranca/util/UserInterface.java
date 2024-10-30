@@ -17,6 +17,7 @@ package semana05heranca.util;
 
 import semana05heranca.model.Loan;
 
+
 /**
  * Classe responsável pela interface do usuário. Gerencia a entrada e saída de dados do sistema.
  * Segue padrão singleton para evitar múltiplas instâncias.
@@ -26,7 +27,7 @@ import semana05heranca.model.Loan;
 public class UserInterface {
 
     private static UserInterface instance;
-    private InputController inputInstance;
+    private UserInput inputInstance;
 
     /**
      * Construtor private para atender o padrão singleton e evitar duas interfaces simultaneamente.
@@ -36,7 +37,6 @@ public class UserInterface {
 
     /**
      * Criação da instância única da classe e do controlador de entrada.
-     *
      * @return UserInterface
      */
     public static UserInterface getInstance() {
@@ -49,30 +49,28 @@ public class UserInterface {
 
     /**
      * Inicializa a interface da aplicação.
-     *
      * @return inputInstance
      */
     public UserInterface initialize() {
 
-        inputInstance = InputController.getInstance().initialize();
+        inputInstance = UserInput.getInstance().initialize();
 
         return this;
     }
 
     /**
      * Pergunta se é para encerrar aplicação.
-     *
      * @return a resposta em boolean
      */
     public boolean promptExit() {
+
         return this.Input().promptExit();
     }
-
 
     /**
      * @return controlador de entradas do usuário
      */
-    public InputController Input() {
+    public UserInput Input() {
 
         return inputInstance;
     }
@@ -84,12 +82,12 @@ public class UserInterface {
 
         System.out.printf("""
                 ┌──────────────────────────────────────────────┐
-                │              FINANCIAMENTO nº%04d            │
+                │  Tipo: %17s nº%4s              │
                 │  Prazo: %-5d      Tx Juros: %5.2f /ano      │
                 │  Valor do Imóvel: R$%-23.2f  │
                 │  Valor do Financiamento: R$%-16.2f  │
                 └──────────────────────────────────────────────┘
-                """, targetLoan.getId(), targetLoan.getTerm(), targetLoan.getFee(), targetLoan.getPrice(), targetLoan.getPaymentValueTotal());
+                """, targetLoan.getType(), targetLoan.getId(), targetLoan.getTerm(), targetLoan.getFee(), targetLoan.getPrice(), targetLoan.getPaymentValueTotal());
 
     }
 
@@ -104,10 +102,9 @@ public class UserInterface {
                 ║                                              ║
                 ║  >> %-40s ║
                 ╚══════════════════════════════════════════════╝
-                
                 """, e.getMessage());
 
-        this.waitEnterToContinue();
+        this.pressEnterToContinue();
     }
 
     /**
@@ -121,7 +118,6 @@ public class UserInterface {
                 ║ Total imóveis: R$%-26.2f  ║
                 ║ Total financiamentos: R$%-19.2f  ║
                 ╚══════════════════════════════════════════════╝
-                
                 """, totalProperty, totalLoan);
     }
 
@@ -131,13 +127,13 @@ public class UserInterface {
     public void viewOpening() {
 
         System.out.println("""
-                \033[32m
+                
                 ╔══════════════════════════════════════════════╗
-                ║       SISTEMA DE FINANCIAMENTO POO v4        ║
+                ║       SISTEMA DE FINANCIAMENTO POO v5        ║
                 ║      by: HANDERSON GLEBER (Gr4v4t1nh4)       ║
                 ╚══════════════════════════════════════════════╝
-                \033[0m""");
-        this.waitEnterToContinue();
+                """);
+        this.pressEnterToContinue();
     }
 
     /**
@@ -146,19 +142,18 @@ public class UserInterface {
     public void viewClosure() {
 
         System.out.println("""
-                \033[32m
+                
                 ╔═══════════[ Dúvidas e sugestões? ]═══════════╗
                 ║  Email: handerson.gleber@gmail.com           ║
                 ║  Instagram: @handersongleber                 ║
                 ╚══════════════════════════════════════════════╝
-                \033[0m
                 """);
-        this.waitEnterToContinue();
+        this.pressEnterToContinue();
     }
 
-    public void waitEnterToContinue() {
+    public void pressEnterToContinue() {
 
-        this.Input().waitEnterToContinue();
+        this.Input().pressEnterToContinue();
     }
 
 }

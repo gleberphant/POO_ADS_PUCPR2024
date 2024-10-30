@@ -23,24 +23,37 @@ import semana05heranca.model.LoanLand;
 /**
  * Classe 'Builder'. Responsável pela construção dos financiamentos.
  *
- * @version 2
- *  Nessa versão o builder retorna um financiamento de acordo com o tipo
  * @author HANDERSON GLEBER
+ * @version 2.0
  */
 public class LoanBuilder {
-    private int term, id;
-    private double price;
-    private double fee;
+    final public char HOUSE = '1';
+    final public char APART = '2';
+    final public char LAND = '3';
     private char type;
+    // atributos
+    private int term, count;
+    private double price, fee;
+    private String id;
+
+    /**
+     * Construtor
+     */
+    public LoanBuilder() {
+        id = "1";
+        term = 0;
+        count = 0;
+        price = 0.0f;
+        fee = 0.0f;
+    }
 
     /**
      * "Método_Construtor" de atributo
-     *
      * @return LoanBuilder
      */
-    public LoanBuilder Id(int id) {
+    public LoanBuilder Term(int term) {
 
-        this.id = id;
+        this.term = term;
         return this;
     }
 
@@ -56,18 +69,6 @@ public class LoanBuilder {
 
     /**
      * "Método_Construtor" de atributo
-     *
-     * @return LoanBuilder
-     */
-    public LoanBuilder Term(int term) {
-
-        this.term = term;
-        return this;
-    }
-
-    /**
-     * "Método_Construtor" de atributo
-     *
      * @return LoanBuilder
      */
     public LoanBuilder Price(double price) {
@@ -78,7 +79,6 @@ public class LoanBuilder {
 
     /**
      * "Método_Construtor" de atributo
-     *
      * @return LoanBuilder
      */
     public LoanBuilder Fee(double fee) {
@@ -89,16 +89,26 @@ public class LoanBuilder {
 
     /**
      * Instancia o objeto Loan
-     *
      * @return Loan
      */
     public Loan build() throws IllegalArgumentException {
 
-        return switch (this.type) {
-            case '1' -> new LoanHouse(this.id, this.price, this.term, this.fee);
-            case '2' -> new LoanApart(this.id, this.price, this.term, this.fee);
-            case '3' -> new LoanLand(this.id, this.price, this.term, this.fee);
-            default -> throw new IllegalArgumentException("Tipo de  financiamento inexistente");
+        // define o id do novo objeto
+        this.id = String.valueOf(this.count + 1);
+
+        // Cria o novo objeto
+        Loan newLoan = switch (type) {
+            case HOUSE -> new LoanHouse(this.id, this.price, this.term, this.fee);
+            case APART -> new LoanApart(this.id, this.price, this.term, this.fee);
+            case LAND -> new LoanLand(this.id, this.price, this.term, this.fee);
+            default -> new Loan(this.id, this.price, this.term, this.fee);
         };
+
+        // incrementar o contador de criação
+        this.count++;
+
+        // Retorna objeto criado
+        return newLoan;
     }
+
 }

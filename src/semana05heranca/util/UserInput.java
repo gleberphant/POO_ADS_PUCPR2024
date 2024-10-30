@@ -24,15 +24,15 @@ import java.util.Scanner;
  *
  * @author HANDERSON GLEBER
  */
-public class InputController {
+public class UserInput {
 
-    private static InputController instance;
+    private static UserInput instance;
     private Scanner inputScanner;
 
     /**
      * Construtor encapsulado como private para atender padrão singleton.
      */
-    private InputController() {
+    private UserInput() {
     }
 
 
@@ -41,10 +41,10 @@ public class InputController {
      *
      * @return InputController
      */
-    protected static InputController getInstance() {
+    protected static UserInput getInstance() {
 
         if (instance == null) {
-            instance = new InputController();
+            instance = new UserInput();
         }
         return instance;
     }
@@ -54,7 +54,7 @@ public class InputController {
      *
      * @return InputController
      */
-    public InputController initialize() {
+    public UserInput initialize() {
 
         if (this.inputScanner == null)
             this.inputScanner = new Scanner(System.in);
@@ -69,7 +69,7 @@ public class InputController {
      */
     public double price() {
 
-        System.out.print(" < Digite o VALOR do financiamento >>  ");
+        System.out.print(" < Digite o VALOR do financiamento >  ");
 
         if (this.inputScanner.hasNextDouble()) {
 
@@ -88,7 +88,7 @@ public class InputController {
      */
     public int term() {
 
-        System.out.print(" < Digite o PRAZO do financiamento >> ");
+        System.out.print(" < Digite o PRAZO do financiamento > ");
 
         if (this.inputScanner.hasNextInt()) {
 
@@ -107,7 +107,7 @@ public class InputController {
      */
     public double fee() {
 
-        System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL >> ");
+        System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL > ");
 
         if (this.inputScanner.hasNextDouble()) {
 
@@ -116,26 +116,6 @@ public class InputController {
 
             this.inputScanner.next();
             throw new InputMismatchException("Taxa inválida. Digite um número decimal.");
-        }
-    }
-
-    /**
-     * Solicita ao usuário a taxa de juros anual do financiamento.
-     *
-     * @return Taxa de juros anual.
-     */
-    public int type() {
-
-        System.out.println(" < Qual tipo de financiamento ? > ");
-        System.out.println(" >> [1] Casa  [2] Apartamento [3] Terreno");
-
-        if (this.inputScanner.hasNextInt()) {
-
-            return this.inputScanner.nextInt();
-        } else {
-
-            this.inputScanner.next();
-            throw new InputMismatchException("Opção Inválida. Digite uma opção válida.");
         }
     }
 
@@ -150,7 +130,8 @@ public class InputController {
 
         do {
 
-            System.out.println("Deseja realizar um novo financiamento? ( [S] para continuar ou [N] para sair) ");
+            System.out.println("Deseja realizar um novo financiamento?");
+            System.out.println("Pressione [S] para continuar ou [N] para sair ");
 
             choice = this.inputScanner.next().trim().toUpperCase();
 
@@ -166,10 +147,25 @@ public class InputController {
     /**
      * Aguardar usuário pressionar tecla Enter.
      */
-    public void waitEnterToContinue() {
+    public void pressEnterToContinue() {
 
         System.out.println("[ Pressione <ENTER> para continuar... ]");
         this.inputScanner.nextLine();
 
+    }
+
+    public char type() {
+
+        System.out.println(" < Selecione o TIPO de financiamento > ");
+        System.out.println(" [1]Casa [2]Apartamento [3]Terreno ");
+
+        if (this.inputScanner.hasNextInt()) {
+
+            return (char) ('0' + this.inputScanner.nextInt());
+        } else {
+
+            this.inputScanner.next();
+            throw new InputMismatchException("Tipo de financiamento inválido");
+        }
     }
 }

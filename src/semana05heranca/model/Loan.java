@@ -17,26 +17,19 @@ package semana05heranca.model;
 /**
  * Classe que representa o objeto financiamento(model).
  * Contêm a validação dos seus atributos.
- *
  * @author HANDERSON GLEBER
  */
 public class Loan {
 
-    /**
-     * Constantes para validação dos atributos. Evita uso de magic numbers.
-     */
-    private final float MIN_PRICE;
-    private final int MAX_TERM;
-    private final int MIN_TERM;
-    private final float MAX_FEE;
-    private final float MIN_FEE;
-    /**
-     * atributos
-     */
-    private double price;
+    final protected String type = "FINANCIAMENTO";
+    // Constantes para validação dos atributos sem o uso de 'magic numbers'.
+    protected final String ID_PATTERN;
     private int term;
-    private double fee;
-    private int id;
+    protected final float MIN_PRICE, MAX_FEE, MIN_FEE;
+    protected final int MAX_TERM, MIN_TERM;
+    // atributos do objeto
+    private String id;
+    private double price, fee;
 
     /**
      * Construtor
@@ -46,59 +39,38 @@ public class Loan {
      * @param fee   A taxa de juros do financiamento.
      * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public Loan(int id, double price,  int term, final double fee) throws IllegalArgumentException {
-        //INICIALIZA AS CONSTANTES DE VALIDAÇÃO PARA EVITAR O USO DE MAGIC NUMBERS
+    public Loan(String id, double price, int term, double fee) {
+
+        ID_PATTERN = "^[0-9]\\d*$";
         MIN_PRICE = 0f;
-        MAX_TERM = 1000;
-        MIN_TERM = 1;
         MAX_FEE = 200f;
         MIN_FEE = 0f;
+        MAX_TERM = 600;
+        MIN_TERM = 1;
 
-        setLoan(id,  price, term, fee);
+        this.setLoan(id, price, term, fee);
+
     }
-
     /**
-     * init loan
+     * Setter do objeto
+     * facilita o overload do construtor
      */
-    public void setLoan(int id, double price, int term, double fee) throws IllegalArgumentException{
-
-        //SETA OS ATRIBUTOS
+    public void setLoan(String id, double price, int term, double fee) throws IllegalArgumentException {
+        // SETA OS ATRIBUTOS
         this.setId(id);
         this.setPrice(price);
         this.setTerm(term);
         this.setFee(fee);
     }
+
     /**
      * Getter de atributo
      *
      * @return id
      */
-    public int getId() {
+    public String getId() {
 
         return this.id;
-    }
-
-    /**
-     * Setter de atributo
-     * id do financiamento
-     */
-    public void setId(int id) {
-
-        if (id < 0) {
-            throw new IllegalArgumentException("ID não pode ser negativo");
-        }
-
-        this.id = id;
-    }
-
-    /**
-     * Getter de atributo
-     *
-     * @return preço da propriedade
-     */
-    public double getPrice() {
-
-        return this.price;
     }
 
     /**
@@ -112,16 +84,6 @@ public class Loan {
         }
 
         this.price = price;
-    }
-
-    /**
-     * Getter de atributo
-     *
-     * @return quantidade de parcelas
-     */
-    public int getTerm() {
-
-        return this.term;
     }
 
     /**
@@ -142,16 +104,6 @@ public class Loan {
     }
 
     /**
-     * Getter de atributo
-     *
-     * @return taxa de juros
-     */
-    public double getFee() {
-
-        return this.fee;
-    }
-
-    /**
      * Setter de atributo
      * taxa de juros por ano.
      */
@@ -169,8 +121,50 @@ public class Loan {
     }
 
     /**
-     * Calcula pagamento mensal
+     * Setter de atributo
+     * id do financiamento
+     */
+    public void setId(String id) {
+
+        if (!id.matches(ID_PATTERN)) {
+            throw new IllegalArgumentException("ID deve ser um número inteiro maior que zero");
+        }
+
+        this.id = id;
+    }
+
+    /**
+     * Getter de atributo
      *
+     * @return preço da propriedade
+     */
+    public double getPrice() {
+
+        return this.price;
+    }
+
+    /**
+     * Getter de atributo
+     *
+     * @return quantidade de parcelas
+     */
+    public int getTerm() {
+
+        return this.term;
+    }
+
+    /**
+     * Getter de atributo
+     *
+     * @return taxa de juros
+     */
+    public double getFee() {
+
+        return this.fee;
+    }
+
+    /**
+     * Calcula pagamento mensal
      * @return Valor da parcela mensal.
      */
     public double getPaymentValueMonthly() {
@@ -180,7 +174,6 @@ public class Loan {
 
     /**
      * Calcula pagamento total
-     *
      * @return Valor total do pagamento.
      */
     public double getPaymentValueTotal() {
@@ -188,5 +181,8 @@ public class Loan {
         return this.getPaymentValueMonthly() * this.getTerm();
     }
 
+    public String getType() {
+        return this.type;
+    }
 }
 
