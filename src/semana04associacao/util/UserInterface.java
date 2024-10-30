@@ -129,8 +129,11 @@ public class UserInterface {
         System.out.println("""
         
         ╔══════════════════════════════════════════════╗
-        ║       SISTEMA DE FINANCIAMENTO POO v4        ║
-        ║      by: HANDERSON GLEBER (Gr4v4t1nh4)       ║
+                ║  PUCPR - PROGRAMAÇÃO ORIENTADA A OBJETOS     ║
+                ╠══════════════════════════════════════════════╣
+                ║  SISTEMA SIMULAÇÃO DE FINANCIAMENTO          ║
+                ║  VERSÃO 4.0                                  ║
+                ║  by: HANDERSON GLEBER (Gr4v4t1nh4)           ║
         ╚══════════════════════════════════════════════╝
         """);
         this.pressEnterToContinue();

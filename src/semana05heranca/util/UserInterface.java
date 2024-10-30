@@ -82,7 +82,8 @@ public class UserInterface {
 
         System.out.printf("""
                 ┌──────────────────────────────────────────────┐
-                │  Tipo: %17s nº%4s              │
+                │  FINANCIAMENTO nº%3s  - %20s                 │
+                ├──────────────────────────────────────────────┤
                 │  Prazo: %-5d      Tx Juros: %5.2f /ano      │
                 │  Valor do Imóvel: R$%-23.2f  │
                 │  Valor do Financiamento: R$%-16.2f  │
@@ -129,8 +130,11 @@ public class UserInterface {
         System.out.println("""
                 
                 ╔══════════════════════════════════════════════╗
-                ║       SISTEMA DE FINANCIAMENTO POO v5        ║
-                ║      by: HANDERSON GLEBER (Gr4v4t1nh4)       ║
+                ║  PUCPR - PROGRAMAÇÃO ORIENTADA A OBJETOS     ║
+                ╠══════════════════════════════════════════════╣
+                ║  SISTEMA SIMULAÇÃO DE FINANCIAMENTO          ║
+                ║  VERSÃO 5.0                                  ║
+                ║  by: HANDERSON GLEBER (Gr4v4t1nh4)           ║
                 ╚══════════════════════════════════════════════╝
                 """);
         this.pressEnterToContinue();

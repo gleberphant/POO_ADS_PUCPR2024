@@ -10,14 +10,11 @@
  * └────────────────────────────────────────────────────────────────────────┘
  *
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
- * @version af_semana_003
- *
+ * @version atividade_somativa_1 - semana_004
  * REQUISITOS
  * 1. Todos os requisitos das semanas anteriores.
  * 2. No main(), adicione quatro financiamentos em um ArrayList. Cada financiamento será um objeto instanciado da classe financiamento.
  * 3. Após adicionar todos os financiamentos, mostre na tela o valor total de todos os imóveis e o valor total de todos os financiamentos.
- *
- * Total de todos os imóveis: R$ 900000, total de todos os financiamentos: R$ 1030000.
  */
 
 package semana04associacao.main;

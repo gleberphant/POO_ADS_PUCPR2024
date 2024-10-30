@@ -122,7 +122,7 @@ public class UserInput {
         String choice;
 
         do {
-
+            System.out.println(" ");
             System.out.println("Deseja realizar um novo financiamento?");
             System.out.println("Pressione [S] para continuar ou [N] para sair ");
 
