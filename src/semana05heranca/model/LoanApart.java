@@ -9,7 +9,7 @@ package semana05heranca.model;
 import static java.lang.Math.pow;
 
 public class LoanApart extends Loan {
-    public final String type = "APARTAMENTO";
+
 
     /**
      * Construtor
@@ -21,8 +21,9 @@ public class LoanApart extends Loan {
      * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
      */
     public LoanApart(String id, double price, int term, double fee) throws IllegalArgumentException {
-        super(id, price, term, fee);
 
+        super(id, price, term, fee);
+        type = "APARTAMENTO";
     }
 
     @Override

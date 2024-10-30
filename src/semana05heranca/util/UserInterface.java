@@ -64,13 +64,13 @@ public class UserInterface {
      */
     public boolean promptExit() {
 
-        return this.Input().promptExit();
+        return this.in().promptExit();
     }
 
     /**
      * @return controlador de entradas do usuário
      */
-    public UserInput Input() {
+    public UserInput in() {
 
         return inputInstance;
     }
@@ -153,7 +153,7 @@ public class UserInterface {
 
     public void pressEnterToContinue() {
 
-        this.Input().pressEnterToContinue();
+        this.in().pressEnterToContinue();
     }
 
 }

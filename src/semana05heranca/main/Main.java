@@ -49,9 +49,6 @@ import java.util.List;
  */
 public class Main {
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
         // Declaração e inicialização das variáveis.
         char loanType;
@@ -78,10 +75,10 @@ public class Main {
             // Bloco try para captar exceções de tipo entrada inválida ou de valor inválido.
             try {
                 // Leitura dos dados do financiamento.
-                loanType = appInterface.Input().type();
-                propertyPrice = appInterface.Input().price();
-                loanTerm = appInterface.Input().term();
-                loanFee = appInterface.Input().fee();
+                loanType = (char) ('0' + appInterface.in().promptType());
+                propertyPrice = appInterface.in().promptPrice();
+                loanTerm = appInterface.in().promptTerm();
+                loanFee = appInterface.in().promptFee();
 
                 // Cria objeto financiamento e adiciona a lista.
                 listLoans.add(
@@ -92,7 +89,7 @@ public class Main {
                                 .Fee(loanFee)
                                 .build()
                 );
-            } catch (InputMismatchException | IllegalArgumentException e) {
+            } catch (InputMismatchException | IllegalArgumentException | IllegalStateException e) {
                 appInterface.viewException(e);  // Exibe Exception.
                 continue;  // Reinicia o loop.
             }

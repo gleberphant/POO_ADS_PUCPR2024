@@ -7,7 +7,6 @@
 package semana05heranca.model;
 
 public class LoanLand extends Loan {
-    public final String type = "TERRENO";
     /**
      * Construtor
      *
@@ -18,8 +17,9 @@ public class LoanLand extends Loan {
      * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
      */
     public LoanLand(String id, double price, int term, double fee) throws IllegalArgumentException {
-        super(id, price, term, fee);
 
+        super(id, price, term, fee);
+        type = "TERRENO";
     }
 
     @Override

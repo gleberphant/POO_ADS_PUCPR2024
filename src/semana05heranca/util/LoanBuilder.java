@@ -27,10 +27,14 @@ import semana05heranca.model.LoanLand;
  * @version 2.0
  */
 public class LoanBuilder {
-    final public char HOUSE = '1';
-    final public char APART = '2';
-    final public char LAND = '3';
+
+    // CONSTANTES COM OS TIPOS DE FINANCIAMENTO.
+    final public char LOAN = '0';  // TIPO DE FINANCIAMENTO GENÉRICO
+    final public char HOUSE = '1';  // TIPO DE FINANCIAMENTO CASA
+    final public char APART = '2';  // TIPO DE FINANCIAMENTO APARTAMENTO
+    final public char LAND = '3';  // TIPO DE FINANCIAMENTO TERRENO
     private char type;
+
     // atributos
     private int term, count;
     private double price, fee;
@@ -63,7 +67,19 @@ public class LoanBuilder {
      * @return LoanBuilder
      */
     public LoanBuilder Type(char type) {
-        this.type = type;
+        switch (type) {
+            case '1':
+                this.type = HOUSE;
+                break;
+            case '2':
+                this.type = APART;
+                break;
+            case '3':
+                this.type = LAND;
+                break;
+            default:
+                this.type = LOAN;
+        }
         return this;
     }
 

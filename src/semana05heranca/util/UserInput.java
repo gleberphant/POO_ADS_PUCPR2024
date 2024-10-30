@@ -63,11 +63,31 @@ public class UserInput {
     }
 
     /**
+     * Solicita ao usuário o tipo de financiamento.
+     *
+     * @return Valor do imóvel.
+     */
+    public char promptType() {
+
+        System.out.println(" < Selecione o TIPO de financiamento > ");
+        System.out.println(" [1]Casa [2]Apartamento [3]Terreno ");
+
+        if (this.inputScanner.hasNextInt()) {
+
+            return (char) this.inputScanner.nextInt();
+        } else {
+
+            this.inputScanner.next();
+            throw new InputMismatchException("Tipo de financiamento inválido");
+        }
+    }
+
+    /**
      * Solicita ao usuário o valor do imóvel a ser financiado.
      *
      * @return Valor do imóvel.
      */
-    public double price() {
+    public double promptPrice() {
 
         System.out.print(" < Digite o VALOR do financiamento >  ");
 
@@ -86,7 +106,7 @@ public class UserInput {
      *
      * @return Prazo do financiamento em meses.
      */
-    public int term() {
+    public int promptTerm() {
 
         System.out.print(" < Digite o PRAZO do financiamento > ");
 
@@ -105,7 +125,7 @@ public class UserInput {
      *
      * @return Taxa de juros anual.
      */
-    public double fee() {
+    public double promptFee() {
 
         System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL > ");
 
@@ -118,6 +138,7 @@ public class UserInput {
             throw new InputMismatchException("Taxa inválida. Digite um número decimal.");
         }
     }
+
 
     /**
      * Pergunta ao usuário se ele quer fechar a aplicação.
@@ -152,20 +173,5 @@ public class UserInput {
         System.out.println("[ Pressione <ENTER> para continuar... ]");
         this.inputScanner.nextLine();
 
-    }
-
-    public char type() {
-
-        System.out.println(" < Selecione o TIPO de financiamento > ");
-        System.out.println(" [1]Casa [2]Apartamento [3]Terreno ");
-
-        if (this.inputScanner.hasNextInt()) {
-
-            return (char) ('0' + this.inputScanner.nextInt());
-        } else {
-
-            this.inputScanner.next();
-            throw new InputMismatchException("Tipo de financiamento inválido");
-        }
     }
 }

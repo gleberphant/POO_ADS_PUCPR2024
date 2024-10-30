@@ -21,13 +21,15 @@ package semana05heranca.model;
  */
 public class Loan {
 
-    final protected String type = "FINANCIAMENTO";
+
     // Constantes para validação dos atributos sem o uso de 'magic numbers'.
     protected final String ID_PATTERN;
     private int term;
     protected final float MIN_PRICE, MAX_FEE, MIN_FEE;
     protected final int MAX_TERM, MIN_TERM;
+
     // atributos do objeto
+    protected String type;
     private String id;
     private double price, fee;
 
@@ -48,6 +50,7 @@ public class Loan {
         MAX_TERM = 600;
         MIN_TERM = 1;
 
+        type = "FINANCIAMENTO";
         this.setLoan(id, price, term, fee);
 
     }
