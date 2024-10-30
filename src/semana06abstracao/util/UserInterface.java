@@ -12,11 +12,10 @@
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
  */
 
-package semana05heranca.util;
+package semana06abstracao.util;
 
 
-import semana05heranca.model.Loan;
-
+import semana06abstracao.model.Loan;
 
 /**
  * Classe responsável pela interface do usuário. Gerencia a entrada e saída de dados do sistema.
@@ -37,6 +36,7 @@ public class UserInterface {
 
     /**
      * Criação da instância única da classe e do controlador de entrada.
+     *
      * @return UserInterface
      */
     public static UserInterface getInstance() {
@@ -49,6 +49,7 @@ public class UserInterface {
 
     /**
      * Inicializa a interface da aplicação.
+     *
      * @return inputInstance
      */
     public UserInterface initialize() {
@@ -60,6 +61,7 @@ public class UserInterface {
 
     /**
      * Pergunta se é para encerrar aplicação.
+     *
      * @return a resposta em boolean
      */
     public boolean promptExit() {
