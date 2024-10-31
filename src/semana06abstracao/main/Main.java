@@ -10,7 +10,7 @@
  * └────────────────────────────────────────────────────────────────────────┘
  *
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
- * @version af_semana_005
+ * @version af_semana_006
  * <p>
  * REQUISITOS
  * O que devo desenvolver?
@@ -80,7 +80,7 @@ public class Main {
 
                 // Cria objeto financiamento e adiciona a lista.
                 listLoans.add(
-                        new LoanBuilder()
+                        loanBuilder
                                 .Type(loanType)
                                 .Price(propertyPrice)
                                 .Term(loanTerm)
