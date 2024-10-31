@@ -13,7 +13,7 @@ package semana06abstracao.model;
 import static java.lang.Math.pow;
 
 public class LoanApart extends Loan {
-    private int floorNumber, garagesCount;
+    private final int floorNumber, garagesCount;
 
     /**
      * Construtor
@@ -24,10 +24,12 @@ public class LoanApart extends Loan {
      * @param fee   A taxa de juros do financiamento.
      * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public LoanApart(String id, double price, int term, double fee) throws IllegalArgumentException {
+    public LoanApart(String id, double price, int term, double fee, int floorNumber, int garagesCount ) throws IllegalArgumentException {
 
         super(id, price, term, fee);
-        type = "APARTAMENTO";
+        this.floorNumber = floorNumber;
+        this.garagesCount = garagesCount;
+        typeString = "APARTAMENTO";
     }
 
     @Override
@@ -41,15 +43,9 @@ public class LoanApart extends Loan {
         return floorNumber;
     }
 
-    public void setFloorNumber(int floorNumber) {
-        this.floorNumber = floorNumber;
-    }
-
     public int getGaragesCount() {
         return garagesCount;
     }
 
-    public void setGaragesCount(int garagesCount) {
-        this.garagesCount = garagesCount;
-    }
+
 }

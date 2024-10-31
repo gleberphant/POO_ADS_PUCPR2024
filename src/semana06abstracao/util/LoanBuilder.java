@@ -16,9 +16,7 @@ package semana06abstracao.util;
 
 
 import semana06abstracao.model.Loan;
-import semana06abstracao.model.LoanApart;
-import semana06abstracao.model.LoanHouse;
-import semana06abstracao.model.LoanLand;
+
 
 /**
  * Classe 'Builder'. Responsável pela construção dos financiamentos.
@@ -26,25 +24,19 @@ import semana06abstracao.model.LoanLand;
  * @author HANDERSON GLEBER
  * @version 2.0
  */
-public class LoanBuilder {
+public abstract class LoanBuilder {
 
     // atributos
     private static int count;
-    // CONSTANTES COM OS TIPOS DE FINANCIAMENTO.
-    final public char LOAN = '0';  // TIPO DE FINANCIAMENTO GENÉRICO
-    final public char HOUSE = '1';  // TIPO DE FINANCIAMENTO CASA
-    final public char APART = '2';  // TIPO DE FINANCIAMENTO APARTAMENTO
-    final public char LAND = '3';  // TIPO DE FINANCIAMENTO TERRENO
-    private char type;
+
     private int term;
     private double price, fee;
-    private String id;
+
 
     /**
      * Construtor
      */
     public LoanBuilder() {
-        id = "1";
         term = 0;
         count = 0;
         price = 0.0f;
@@ -67,28 +59,6 @@ public class LoanBuilder {
      *
      * @return LoanBuilder
      */
-    public LoanBuilder Type(char type) {
-        switch (type) {
-            case '1':
-                this.type = HOUSE;
-                break;
-            case '2':
-                this.type = APART;
-                break;
-            case '3':
-                this.type = LAND;
-                break;
-            default:
-                throw new IllegalArgumentException("Tipo de financiamento inválido");
-        }
-        return this;
-    }
-
-    /**
-     * "Método_Construtor" de atributo
-     *
-     * @return LoanBuilder
-     */
     public LoanBuilder Price(double price) {
 
         this.price = price;
@@ -101,34 +71,44 @@ public class LoanBuilder {
      * @return LoanBuilder
      */
     public LoanBuilder Fee(double fee) {
-
         this.fee = fee;
         return this;
     }
 
     /**
-     * Instancia o objeto Loan
+     * Função abstrata que deve ser implementada pelas subclasses.
      *
      * @return Loan
      */
-    public Loan build() throws IllegalArgumentException {
+    public abstract Loan build();
 
-        // define o id do novo objeto
-        this.id = String.valueOf(this.count + 1);
-
-        // Cria o novo objeto
-        Loan newLoan = switch (type) {
-            case HOUSE -> new LoanHouse(this.id, this.price, this.term, this.fee);
-            case APART -> new LoanApart(this.id, this.price, this.term, this.fee);
-            case LAND -> new LoanLand(this.id, this.price, this.term, this.fee);
-            default -> throw new IllegalArgumentException("Tipo de financiamento inválido");
-        };
-
-        // incrementar o contador de criação
-        this.count++;
-
-        // Retorna objeto criado
-        return newLoan;
+    /**
+     * méthod para criar o id do objeto a ser criado conforme o contador interno.
+     *
+     * @return Loan
+     */
+    public String getId() {
+        return (String.valueOf(count));
     }
 
+    /**
+     * getters para as subclasses
+     *
+     * @return Loan
+     */
+    public int getTerm() {
+        return term;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getFee() {
+        return fee;
+    }
+
+    public static void nextCount() {
+        count++;
+    }
 }

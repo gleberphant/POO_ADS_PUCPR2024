@@ -28,7 +28,7 @@ public abstract class Loan {
     protected final float MIN_PRICE, MAX_FEE, MIN_FEE;
     protected final int MAX_TERM, MIN_TERM;
     // atributos do objeto
-    protected String type;
+    protected String typeString;
     private int term;
     private String id;
     private double price, fee;
@@ -50,7 +50,7 @@ public abstract class Loan {
         MAX_TERM = 600;
         MIN_TERM = 1;
 
-        type = "FINANCIAMENTO";
+        typeString = "FINANCIAMENTO";
         this.setLoan(id, price, term, fee);
 
     }
@@ -187,8 +187,8 @@ public abstract class Loan {
         return this.getPaymentValueMonthly() * this.getTerm();
     }
 
-    public String getType() {
-        return this.type;
+    public String getTypeString() {
+        return this.typeString;
     }
 }
 

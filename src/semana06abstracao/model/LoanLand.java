@@ -10,7 +10,7 @@ package semana06abstracao.model;
 
 public class LoanLand extends Loan {
 
-    private String zoneType;
+    private final String zone;
 
     /**
      * Construtor
@@ -21,10 +21,11 @@ public class LoanLand extends Loan {
      * @param fee   A taxa de juros do financiamento.
      * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public LoanLand(String id, double price, int term, double fee) throws IllegalArgumentException {
+    public LoanLand(String id, double price, int term, double fee, String zone) throws IllegalArgumentException {
 
         super(id, price, term, fee);
-        type = "TERRENO";
+        this.zone = zone;
+        typeString = "TERRENO";
     }
 
     @Override
@@ -32,11 +33,7 @@ public class LoanLand extends Loan {
         return super.getPaymentValueMonthly() * 1.02;
     }
 
-    public String getZoneType() {
-        return zoneType;
-    }
-
-    public void setZoneType(String zoneType) {
-        this.zoneType = zoneType;
+    public String getZone() {
+        return zone;
     }
 }

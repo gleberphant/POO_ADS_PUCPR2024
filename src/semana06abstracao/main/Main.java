@@ -32,8 +32,7 @@ package semana06abstracao.main;
 
 
 import semana06abstracao.model.Loan;
-import semana06abstracao.util.LoanBuilder;
-import semana06abstracao.util.UserInterface;
+import semana06abstracao.util.*;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -62,7 +61,7 @@ public class Main {
         // Declaração e inicialização da interface
         UserInterface appInterface = UserInterface.getInstance().initialize();
 
-        LoanBuilder loanBuilder = new LoanBuilder();
+        LoanBuilder loanBuilder;
 
         // Mensagem de abertura
         appInterface.viewOpening();
@@ -74,19 +73,36 @@ public class Main {
             try {
                 // Leitura dos dados do financiamento.
                 loanType = (char) ('0' + appInterface.in().promptType());
+
+                // define o item de financiamento
+                loanBuilder = switch (loanType) {
+
+                    case '1' -> new HouseBuilder()
+                            .LandArea(appInterface.in().promptLandArea())
+                            .BuildArea(appInterface.in().promptBuildArea());
+
+                    case '2' -> new ApartBuilder()
+                            .FloorNumber(appInterface.in().promptFloor())
+                            .GaragesCount(appInterface.in().promptGarages());
+
+                    case '3' -> new LandBuilder()
+                            .Zone(appInterface.in().promptZone());
+
+                    default -> throw new InputMismatchException("Valor inválido. Digite um número decimal.");
+
+                };
+
+                // Conclui a criação do financiamento e adiciona na lista.
                 propertyPrice = appInterface.in().promptPrice();
                 loanTerm = appInterface.in().promptTerm();
                 loanFee = appInterface.in().promptFee();
 
-                // Cria objeto financiamento e adiciona a lista.
-                listLoans.add(
-                        loanBuilder
-                                .Type(loanType)
-                                .Price(propertyPrice)
-                                .Term(loanTerm)
-                                .Fee(loanFee)
-                                .build()
-                );
+                listLoans.add(loanBuilder
+                        .Price(propertyPrice)
+                        .Term(loanTerm)
+                        .Fee(loanFee)
+                        .build());
+
             } catch (InputMismatchException | IllegalArgumentException | IllegalStateException e) {
                 appInterface.viewException(e);  // Exibe Exception.
                 continue;  // Reinicia o loop.

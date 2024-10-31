@@ -90,7 +90,7 @@ public class UserInterface {
                 │  Valor do Imóvel: R$%-23.2f  │
                 │  Valor do Financiamento: R$%-16.2f  │
                 └──────────────────────────────────────────────┘
-                """, targetLoan.getId(), targetLoan.getType(), targetLoan.getTerm(), targetLoan.getFee(), targetLoan.getPrice(), targetLoan.getPaymentValueTotal());
+                """, targetLoan.getId(), targetLoan.getTypeString(), targetLoan.getTerm(), targetLoan.getFee(), targetLoan.getPrice(), targetLoan.getPaymentValueTotal());
 
     }
 

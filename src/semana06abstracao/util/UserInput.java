@@ -89,16 +89,18 @@ public class UserInput {
      */
     public double promptPrice() {
 
-        System.out.print(" < Digite o VALOR do financiamento >  ");
+        do {
+            System.out.print(" < Digite o VALOR do financiamento >  ");
 
-        if (this.inputScanner.hasNextDouble()) {
+            if (this.inputScanner.hasNextDouble()) {
 
-            return this.inputScanner.nextDouble();
-        } else {
+                return this.inputScanner.nextDouble();
+            } else {
 
-            this.inputScanner.next();
-            throw new InputMismatchException("Preço inválido. Digite um número decimal.");
-        }
+                this.inputScanner.next();
+                throw new InputMismatchException("Preço inválido. Digite um número decimal.");
+            }
+        } while(true);
     }
 
     /**
@@ -127,16 +129,18 @@ public class UserInput {
      */
     public double promptFee() {
 
-        System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL > ");
+        do {
+            System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL > ");
 
-        if (this.inputScanner.hasNextDouble()) {
+            if (this.inputScanner.hasNextDouble()) {
 
-            return this.inputScanner.nextDouble();
-        } else {
+                return this.inputScanner.nextDouble();
+            } else {
 
-            this.inputScanner.next();
-            throw new InputMismatchException("Taxa inválida. Digite um número decimal.");
-        }
+                this.inputScanner.next();
+                throw new InputMismatchException("Taxa inválida. Digite um número decimal.");
+            }
+        }while(true);
     }
 
 
@@ -173,5 +177,82 @@ public class UserInput {
         System.out.println("[ Pressione <ENTER> para continuar... ]");
         this.inputScanner.nextLine();
 
+    }
+
+    public double promptLandArea() {
+        System.out.print(" < Digite o tamanho do TERRENO > ");
+
+        if (this.inputScanner.hasNextDouble()) {
+
+            return this.inputScanner.nextDouble();
+        } else {
+
+            this.inputScanner.next();
+            throw new InputMismatchException("Valor inválido. Digite um número decimal.");
+        }
+    }
+
+    public double promptBuildArea() {
+        System.out.print(" < Digite o tamanho da AREA CONSTRUÍDA > ");
+
+        if (this.inputScanner.hasNextDouble()) {
+
+            return this.inputScanner.nextDouble();
+        } else {
+
+            this.inputScanner.next();
+            throw new InputMismatchException("Valor inválido. Digite um número decimal.");
+        }
+    }
+
+
+    public int promptFloor() {
+        System.out.print(" < Digite o ANDAR do apartamento  > ");
+
+        if (this.inputScanner.hasNextInt()) {
+
+            return this.inputScanner.nextInt();
+        } else {
+
+            this.inputScanner.next();
+            throw new InputMismatchException("VALOR INVÁLIDO. Digite um número inteiro.");
+        }
+    }
+
+    public int promptGarages() {
+        System.out.print(" < Digite a quantidade de GARAGENS no imóvel > ");
+
+        if (this.inputScanner.hasNextInt()) {
+
+            return this.inputScanner.nextInt();
+        } else {
+
+            this.inputScanner.next();
+            throw new InputMismatchException("VALOR INVÁLIDO. Digite um número inteiro.");
+        }
+    }
+
+    public String promptZone() {
+
+        do {
+            System.out.print(" < Digite o tipo de zona [1] comercial ou [2] residencial  > ");
+            int temp;
+
+            if (this.inputScanner.hasNextInt()) {
+
+                temp = this.inputScanner.nextInt();
+
+                if (temp == 1)
+                    return "comercial";
+                else if (temp == 2)
+                    return "residencial";
+                else
+                    throw new InputMismatchException("Valor inválido. Digite o número correto de zona.");
+            } else {
+
+                this.inputScanner.next();
+                throw new InputMismatchException("Valor inválido. Digite o tipo de zona.");
+            }
+        } while (true);
     }
 }
