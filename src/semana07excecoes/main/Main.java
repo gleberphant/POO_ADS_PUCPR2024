@@ -28,11 +28,11 @@
  * 4. Modificar o main() para que você consiga cadastrar os diferentes financiamentos considerando esses novos atributos.
  */
 
-package semana06abstracao.main;
+package semana07excecoes.main;
 
 
-import semana06abstracao.model.Loan;
-import semana06abstracao.util.*;
+import semana07excecoes.model.Loan;
+import semana07excecoes.util.*;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -42,6 +42,7 @@ import java.util.List;
 /**
  * Classe PRINCIPAL.
  * Contêm o loop central da aplicação.
+ *
  * @author HANDERSON GLEBER
  */
 public class Main {

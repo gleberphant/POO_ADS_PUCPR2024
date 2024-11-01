@@ -12,7 +12,7 @@
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
  */
 
-package semana06abstracao.util;
+package semana07excecoes.util;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -89,17 +89,16 @@ public class UserInput {
      */
     public double promptPrice() {
 
+        System.out.print(" < Digite o VALOR do financiamento >  ");
 
-            System.out.print(" < Digite o VALOR do financiamento >  ");
+        if (this.inputScanner.hasNextDouble()) {
 
-            if (this.inputScanner.hasNextDouble()) {
+            return this.inputScanner.nextDouble();
+        } else {
 
-                return this.inputScanner.nextDouble();
-            } else {
-
-                this.inputScanner.next();
-                throw new InputMismatchException("Preço inválido. Digite um número decimal.");
-            }
+            this.inputScanner.next();
+            throw new InputMismatchException("Preço inválido. Digite um número decimal.");
+        }
 
     }
 
@@ -130,16 +129,16 @@ public class UserInput {
     public double promptFee() {
 
 
-            System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL > ");
+        System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL > ");
 
-            if (this.inputScanner.hasNextDouble()) {
+        if (this.inputScanner.hasNextDouble()) {
 
-                return this.inputScanner.nextDouble();
-            } else {
+            return this.inputScanner.nextDouble();
+        } else {
 
-                this.inputScanner.next();
-                throw new InputMismatchException("Taxa inválida. Digite um número decimal.");
-            }
+            this.inputScanner.next();
+            throw new InputMismatchException("Taxa inválida. Digite um número decimal.");
+        }
 
     }
 
@@ -156,7 +155,7 @@ public class UserInput {
         do {
 
             System.out.println("Deseja realizar um novo financiamento?");
-            System.out.println("Pressione [S] para continuar ou [N] para sair ");
+            System.out.println("Pressione [S] CONTINUAR ou [N] SAIR ");
 
             choice = this.inputScanner.next().trim().toUpperCase();
 
@@ -234,24 +233,19 @@ public class UserInput {
 
     public String promptZone() {
 
-
         System.out.print(" < Digite o tipo de zona [1] comercial ou [2] residencial  > ");
-        int temp;
 
         if (this.inputScanner.hasNextInt()) {
 
-            temp = this.inputScanner.nextInt();
-
-            if (temp == 1)
-                return "comercial";
-            else if (temp == 2)
-                return "residencial";
-            else
-                throw new InputMismatchException("Valor inválido. Digite o número correto de zona.");
+            return switch (this.inputScanner.nextInt()) {
+                case 1 -> "comercial";
+                case 2 -> "residencial";
+                default -> throw new InputMismatchException("Opção inexistente.");
+            };
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("Valor inválido. Digite o tipo de zona.");
+            throw new InputMismatchException("Valor inválido. Digite o número correspondente a zona.");
         }
 
     }
