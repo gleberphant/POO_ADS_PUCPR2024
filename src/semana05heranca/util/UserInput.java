@@ -74,7 +74,7 @@ public class UserInput {
 
         if (this.inputScanner.hasNextInt()) {
 
-            return (char) this.inputScanner.nextInt();
+            return (char) (this.inputScanner.nextInt() + '0');
         } else {
 
             this.inputScanner.next();

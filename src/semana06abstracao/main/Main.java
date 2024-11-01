@@ -93,14 +93,11 @@ public class Main {
                 };
 
                 // Conclui a criação do financiamento e adiciona na lista.
-                propertyPrice = appInterface.in().promptPrice();
-                loanTerm = appInterface.in().promptTerm();
-                loanFee = appInterface.in().promptFee();
 
                 listLoans.add(loanBuilder
-                        .Price(propertyPrice)
-                        .Term(loanTerm)
-                        .Fee(loanFee)
+                        .Price(appInterface.in().promptPrice())
+                        .Term(appInterface.in().promptTerm())
+                        .Fee(appInterface.in().promptFee())
                         .build());
 
             } catch (InputMismatchException | IllegalArgumentException | IllegalStateException e) {

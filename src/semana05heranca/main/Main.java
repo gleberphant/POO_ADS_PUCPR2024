@@ -52,11 +52,8 @@ public class Main {
     public static void main(String[] args) {
         // Declaração e inicialização das variáveis.
         char loanType;
-        double propertyPrice;
-        int loanTerm;
-        double loanFee;
         boolean running = true;
-        double totalPriceProperty = 0f, totalPriceLoan = 0f;
+        double totalPriceProperty, totalPriceLoan;
 
         // Declaração e inicialização de array de financiamentos
         List<Loan> listLoans = new ArrayList<>();
@@ -72,21 +69,19 @@ public class Main {
         // Loop principal da aplicação. termina somente quando usuário pedir para sair
         do {
 
+
             // Bloco try para captar exceções de tipo entrada inválida ou de valor inválido.
             try {
                 // Leitura dos dados do financiamento.
-                loanType = (char) ('0' + appInterface.in().promptType());
-                propertyPrice = appInterface.in().promptPrice();
-                loanTerm = appInterface.in().promptTerm();
-                loanFee = appInterface.in().promptFee();
+                loanType = appInterface.in().promptType();
 
-                // Cria objeto financiamento e adiciona a lista.
+                // Cria objeto financiamento e adiciona na lista.
                 listLoans.add(
                         loanBuilder
                                 .Type(loanType)
-                                .Price(propertyPrice)
-                                .Term(loanTerm)
-                                .Fee(loanFee)
+                                .Price(appInterface.in().promptPrice())
+                                .Term(appInterface.in().promptTerm())
+                                .Fee(appInterface.in().promptFee())
                                 .build()
                 );
             } catch (InputMismatchException | IllegalArgumentException | IllegalStateException e) {
@@ -95,6 +90,9 @@ public class Main {
             }
 
             // Percorre a lista com todos os financiamentos
+            totalPriceProperty = 0f;
+            totalPriceLoan = 0f;
+
             for (Loan item : listLoans) {
                 // Exibe o financiamento
                 appInterface.viewLoan(item);
