@@ -15,6 +15,10 @@
 Desenvolvido por Handerson Gleber( gr4v4t1nh4) 
 </div>
 
+<p align="center">Gostou do projeto? Por favor considere <a href="http://link.mercadopago.com.br/handersongleber">fazer uma doação</a> para ajudar a melhorá-lo!</p>
+
+</div>
+
 
 
 ## 🐙 Descrição
@@ -50,29 +54,26 @@ javac 'nome do arquivo'.java
 java 'nome do arquivo'.class
 ```
 
-## 📫 Contribuindo com o projeto
-
-Para contribuir com o projeto:
-
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
-5. Crie a solicitação de pull.
-
-Consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
-
 ## 😄 Autor
 
 HANDERSON GLEBER DE LIMA CAVALCANTI (GRAVATINHA)
-
-
-## 🤝 Colaboradores
-
 E- mail:  handerson.gleber@gmail.com
 
 https://www.instagram.com/handersongleber/
 
 ## 📝 Licença
 
-Esse projeto está sob licença livre. 
+Esse projeto está sob licença livre.
+
+## 🤝 Apoie o autor
+
+Se você estiver satisfeito com esse projeto ou quiser me encorajar a continuar criando coisas legais, considere me
+apoiar:
+
+- Dando os devidos créditos caso utilize meu código
+- Dando uma estrela (Starring) e compartilhando o projeto 🚀
+- Me Pagando um
+  café [![Static Badge](https://img.shields.io/badge/Mercado_Livre-blue)]("http://link.mercadopago.com.br/handersongleber")
+  ou  [![paypal](https://img.shields.io/badge/Pay_Pal-blue)]("https://www.paypal.com/donate/?business=GZCPGEVTCZ8VW&no_recurring=0&currency_code=USD")
+
+
