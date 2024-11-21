@@ -14,24 +14,32 @@
 
 package semana07excecoes.model;
 
+import semana07excecoes.exceptions.LoanExceptions;
+import semana07excecoes.typedef.loanTypes;
+
 /**
- * Classe que representa o objeto financiamento(model).
+ * Classe que representa o objeto financiamento (model).
+ * Os diferentes tipos de financiamento herdam dessa classe.
  * Contêm a validação dos seus atributos.
  *
  * @author HANDERSON GLEBER
  */
+
 public abstract class Loan {
 
-
-    // Constantes para validação dos atributos sem o uso de 'magic numbers'.
+    // Constantes para validação dos atributos. Evita 'magic numbers'.
     protected final String ID_PATTERN;
     protected final float MIN_PRICE, MAX_FEE, MIN_FEE;
     protected final int MAX_TERM, MIN_TERM;
+
     // atributos do objeto
-    protected String typeString;
+
     private int term;
     private String id;
     private double price, fee;
+
+    // atributo para definir o tipo de financiamento
+    protected final loanTypes type;
 
     /**
      * Construtor
@@ -39,9 +47,9 @@ public abstract class Loan {
      * @param price O preço do bem a ser financiado.
      * @param term  O prazo do financiamento em meses.
      * @param fee   A taxa de juros do financiamento.
-     * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
+     * @throws LoanExceptions Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public Loan(String id, double price, int term, double fee) {
+    public Loan(String id, double price, int term, double fee) throws LoanExceptions{
 
         ID_PATTERN = "^[0-9]\\d*$";
         MIN_PRICE = 0f;
@@ -50,21 +58,20 @@ public abstract class Loan {
         MAX_TERM = 600;
         MIN_TERM = 1;
 
-        typeString = "FINANCIAMENTO";
-        this.setLoan(id, price, term, fee);
+        type = type();
+        setLoan(id, price, term, fee);
 
     }
 
     /**
-     * Setter do objeto
-     * facilita o overload do construtor
+     * Setter de todos atributos
+     * Para facilitar eventual overload do construtor
      */
-    public void setLoan(String id, double price, int term, double fee) throws IllegalArgumentException {
-        // SETA OS ATRIBUTOS
-        this.setId(id);
-        this.setPrice(price);
-        this.setTerm(term);
-        this.setFee(fee);
+    public void setLoan(String id, double price, int term, double fee) throws LoanExceptions {
+        setId(id);
+        setPrice(price);
+        setTerm(term);
+        setFee(fee);
     }
 
     /**
@@ -73,7 +80,6 @@ public abstract class Loan {
      * @return id
      */
     public String getId() {
-
         return this.id;
     }
 
@@ -82,9 +88,8 @@ public abstract class Loan {
      * id do financiamento
      */
     public void setId(String id) {
-
         if (!id.matches(ID_PATTERN)) {
-            throw new IllegalArgumentException("ID deve ser um número inteiro maior que zero");
+            throw new LoanExceptions("ID deve ser um número inteiro maior que zero");
         }
 
         this.id = id;
@@ -96,7 +101,6 @@ public abstract class Loan {
      * @return preço da propriedade
      */
     public double getPrice() {
-
         return this.price;
     }
 
@@ -105,9 +109,8 @@ public abstract class Loan {
      * Preço do imóvel do financiamento
      */
     public void setPrice(double price) {
-
         if (price < MIN_PRICE) {
-            throw new IllegalArgumentException("Preço não pode ser inferior a R$" + MIN_PRICE);
+            throw new LoanExceptions("Preço não pode ser inferior a R$" + MIN_PRICE);
         }
 
         this.price = price;
@@ -119,7 +122,6 @@ public abstract class Loan {
      * @return quantidade de parcelas
      */
     public int getTerm() {
-
         return this.term;
     }
 
@@ -128,13 +130,12 @@ public abstract class Loan {
      * prazo do financiamento em meses
      */
     public void setTerm(int term) {
-
         if (term > MAX_TERM) {
-            throw new IllegalArgumentException("Prazo não pode ser superior a " + MAX_TERM + "mêses.");
+            throw new LoanExceptions("Prazo não pode ser superior a " + MAX_TERM + "mêses.");
         }
 
         if (term < MIN_TERM) {
-            throw new IllegalArgumentException("Prazo não pode ser inferior a " + MIN_TERM + " mês.");
+            throw new LoanExceptions("Prazo não pode ser inferior a " + MIN_TERM + " mês.");
         }
 
         this.term = term;
@@ -146,7 +147,6 @@ public abstract class Loan {
      * @return taxa de juros
      */
     public double getFee() {
-
         return this.fee;
     }
 
@@ -155,13 +155,12 @@ public abstract class Loan {
      * taxa de juros por ano.
      */
     public void setFee(double fee) {
-
         if (fee > MAX_FEE) {
-            throw new IllegalArgumentException("Taxa não pode ser superior a " + MAX_FEE + "%");
+            throw new LoanExceptions("Taxa não pode ser superior a " + MAX_FEE + "%");
         }
 
         if (fee <= MIN_FEE) {
-            throw new IllegalArgumentException("Taxa não pode ser inferior a " + MIN_FEE + "%");
+            throw new LoanExceptions("Taxa não pode ser inferior a " + MIN_FEE + "%");
         }
 
         this.fee = fee;
@@ -173,7 +172,6 @@ public abstract class Loan {
      * @return Valor da parcela mensal.
      */
     public double getPaymentValueMonthly() {
-
         return (this.getPrice() / this.getTerm()) * (1 + (this.getFee() / 12));
     }
 
@@ -183,12 +181,15 @@ public abstract class Loan {
      * @return Valor total do pagamento.
      */
     public double getPaymentValueTotal() {
-
         return this.getPaymentValueMonthly() * this.getTerm();
     }
 
     public String getTypeString() {
-        return this.typeString;
+        return this.type.toString();
+    }
+
+    protected loanTypes type(){
+        return loanTypes.LOAN;
     }
 }
 

@@ -12,7 +12,7 @@
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
  */
 
-package semana07excecoes.util;
+package semana07excecoes.builders;
 
 
 import semana07excecoes.model.Loan;
@@ -42,12 +42,8 @@ public abstract class LoanBuilder {
         fee = 0.0f;
     }
 
-    public static void nextCount() {
-        count++;
-    }
-
     /**
-     * "Método_Construtor" de atributo
+     * "Método_Builder" de atributo
      *
      * @return LoanBuilder
      */
@@ -58,7 +54,7 @@ public abstract class LoanBuilder {
     }
 
     /**
-     * "Método_Construtor" de atributo
+     * "Método_Builder" de atributo
      *
      * @return LoanBuilder
      */
@@ -69,7 +65,7 @@ public abstract class LoanBuilder {
     }
 
     /**
-     * "Método_Construtor" de atributo
+     * "Método_Builder" de atributo
      *
      * @return LoanBuilder
      */
@@ -85,13 +81,13 @@ public abstract class LoanBuilder {
      */
     public abstract Loan build();
 
+
     /**
-     * méthod para criar o id do objeto a ser criado conforme o contador interno.
+     * contador interno
      *
-     * @return Loan
      */
-    public String getId() {
-        return (String.valueOf(count));
+    public static void nextCount() {
+        count++;
     }
 
     /**
@@ -99,6 +95,11 @@ public abstract class LoanBuilder {
      *
      * @return Loan
      */
+    public String getId() {
+        return (String.valueOf(count));
+    }
+
+
     public int getTerm() {
         return term;
     }

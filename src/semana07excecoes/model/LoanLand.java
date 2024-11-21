@@ -8,9 +8,13 @@
 
 package semana07excecoes.model;
 
+import semana07excecoes.exceptions.LoanExceptions;
+import semana07excecoes.typedef.loanTypes;
+import semana07excecoes.typedef.zoneTypes;
+
 public class LoanLand extends Loan {
 
-    private final String zone;
+    private zoneTypes zone;
 
     /**
      * Construtor
@@ -19,13 +23,18 @@ public class LoanLand extends Loan {
      * @param price O preço do bem a ser financiado.
      * @param term  O prazo do financiamento em meses.
      * @param fee   A taxa de juros do financiamento.
-     * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
+     * @throws LoanExceptions Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public LoanLand(String id, double price, int term, double fee, String zone) throws IllegalArgumentException {
+    public LoanLand(String id, double price, int term, double fee, String zone) throws LoanExceptions {
 
         super(id, price, term, fee);
-        this.zone = zone;
-        typeString = "TERRENO";
+        setZone(zone);
+
+    }
+
+    @Override
+    protected loanTypes type(){
+        return loanTypes.LAND;
     }
 
     @Override
@@ -34,6 +43,10 @@ public class LoanLand extends Loan {
     }
 
     public String getZone() {
-        return zone;
+        return this.zone.toString();
+    }
+
+    public void setZone(String value){
+        this.zone = zoneTypes.valueOf(value);
     }
 }

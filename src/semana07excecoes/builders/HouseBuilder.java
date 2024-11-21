@@ -1,5 +1,6 @@
-package semana07excecoes.util;
+package semana07excecoes.builders;
 
+import semana07excecoes.exceptions.LoanExceptions;
 import semana07excecoes.model.Loan;
 import semana07excecoes.model.LoanHouse;
 
@@ -18,7 +19,7 @@ public class HouseBuilder extends LoanBuilder {
     }
 
     @Override
-    public Loan build() throws IllegalArgumentException {
+    public Loan build() throws LoanExceptions {
 
         // Cria o novo objeto
         Loan newLoan = new LoanHouse(getId(), getPrice(), getTerm(), getFee(), this.buildArea, this.landArea);

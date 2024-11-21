@@ -7,11 +7,14 @@
  */
 package semana07excecoes.model;
 
+import semana07excecoes.exceptions.LoanExceptions;
+import semana07excecoes.typedef.loanTypes;
+
 public class LoanHouse extends Loan {
 
-    private final double insuranceVALUE;
-    private final double buildArea;
-    private final double landArea;
+    private double insurance;
+    private double buildArea;
+    private double landArea;
 
     /**
      * Construtor
@@ -20,27 +23,41 @@ public class LoanHouse extends Loan {
      * @param price O preço do bem a ser financiado.
      * @param term  O prazo do financiamento em meses.
      * @param fee   A taxa de juros do financiamento.
-     * @throws IllegalArgumentException Se o preço, o prazo ou a taxa forem inválidos.
+     * @throws LoanExceptions Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public LoanHouse(String id, double price, int term, double fee, double buildArea, double landArea) throws IllegalArgumentException {
+    public LoanHouse(String id, double price, int term, double fee, double buildArea, double landArea) throws LoanExceptions {
 
         super(id, price, term, fee);
-        this.buildArea = buildArea;
-        this.landArea = landArea;
-        this.insuranceVALUE = 80;
-        typeString = "CASA";
+        setBuildArea(buildArea);
+        setInsurance(80);
+        setLandArea(landArea);
+    }
 
-
+    @Override
+    protected loanTypes type(){
+        return loanTypes.HOUSE;
     }
 
     @Override
     public double getPaymentValueMonthly() {
 
-        return super.getPaymentValueMonthly() + insuranceVALUE;
+        return super.getPaymentValueMonthly() + insurance;
     }
 
-    public double getInsuranceVALUE() {
-        return insuranceVALUE;
+    public void setInsurance(double insuranceVALUE) {
+        this.insurance = insuranceVALUE;
+    }
+
+    public void setBuildArea(double buildArea) {
+        this.buildArea = buildArea;
+    }
+
+    public void setLandArea(double landArea) {
+        this.landArea = landArea;
+    }
+
+    public double getInsurance() {
+        return insurance;
     }
 
     public double getBuildArea() {

@@ -238,8 +238,8 @@ public class UserInput {
         if (this.inputScanner.hasNextInt()) {
 
             return switch (this.inputScanner.nextInt()) {
-                case 1 -> "comercial";
-                case 2 -> "residencial";
+                case 1 -> "COMERCIAL";
+                case 2 -> "RESIDENCIAL";
                 default -> throw new InputMismatchException("Opção inexistente.");
             };
         } else {

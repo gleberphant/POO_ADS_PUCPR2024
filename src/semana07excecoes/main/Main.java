@@ -13,29 +13,28 @@
  * @version af_semana_006
  * <p>
  * REQUISITOS
- * O que devo desenvolver?
- * 1. Todos os requisitos das semanas anteriores.
- * 2. Converter a classe financiamento para uma classe abstrata.
- * a. Mover todos os métodos comuns para essa classe.
- * b. Fazer com que as subclasses concretas (casa, apartamento e terreno) implementem os métodos definidos por essa classe.
- * 3. Para as três subclasses de financiamento incluir novos atributos específicos a cada uma das subclasses:
- * a. Casa:
- * i. Incluir um atributo para o tamanho da área construída, e outro atributo para o tamanho do terreno.
- * b. Apartamento:
- * i. Incluir um atributo para o número de vagas da garagem, e outro atributo para o número do andar.
- * c. Terreno:
- * i. Incluir um atributo para o tipo de zona (exemplo: residencial ou comercial).
- * 4. Modificar o main() para que você consiga cadastrar os diferentes financiamentos considerando esses novos atributos.
+O que devo desenvolver?
+
+1. Todos os requisitos das semanas anteriores.
+
+2. Na classe InterfaceUsuario, modifique os métodos que criou para que tenham tratamento de exceções para lidar com situações como, por exemplo, entrada de dados inválidos.
+
+a. Isso significa que os seus métodos deverão ter try/catch, ou try/catch/finally.
+
+3. Na classe Casa, crie uma exceção do tipo AumentoMaiorDoQueJurosException quando o valor do acréscimo de R$ 80 for maior do que o valor dos juros da mensalidade.
+
+a. Isso significa que esta classe deverá usar o throw. Também, você terá de criar o AumentoMaiorDoQueJurosException, segundo os exemplos da semana.
  */
 
 package semana07excecoes.main;
 
 
+import semana07excecoes.builders.*;
 import semana07excecoes.model.Loan;
 import semana07excecoes.util.*;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -54,7 +53,7 @@ public class Main {
         double totalPriceProperty, totalPriceLoan;
 
         // Declaração e inicialização de array de financiamentos
-        List<Loan> listLoans = new ArrayList<>();
+        List<Loan> listLoans = new LinkedList<Loan>();
 
         // Declaração e inicialização da interface
         UserInterface appInterface = UserInterface.getInstance().initialize();
