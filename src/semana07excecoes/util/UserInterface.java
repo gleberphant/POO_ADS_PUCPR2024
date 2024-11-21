@@ -135,7 +135,7 @@ public class UserInterface {
                 ║  PUCPR - PROGRAMAÇÃO ORIENTADA A OBJETOS     ║
                 ╠══════════════════════════════════════════════╣
                 ║  SISTEMA SIMULAÇÃO DE FINANCIAMENTO          ║
-                ║  VERSÃO 5.0                                  ║
+                ║  VERSÃO 7.0 - Exceptions                     ║
                 ║  by: HANDERSON GLEBER (Gr4v4t1nh4)           ║
                 ╚══════════════════════════════════════════════╝
                 """);
