@@ -1,8 +1,7 @@
 package semana07excecoes.builders;
 
 import semana07excecoes.exceptions.LoanExceptions;
-import semana07excecoes.model.Loan;
-import semana07excecoes.model.LoanHouse;
+import semana07excecoes.model.HouseLoan;
 
 
 public class HouseBuilder extends LoanBuilder {
@@ -19,10 +18,10 @@ public class HouseBuilder extends LoanBuilder {
     }
 
     @Override
-    public Loan build() throws LoanExceptions {
+    public HouseLoan build() throws LoanExceptions {
 
         // Cria o novo objeto
-        Loan newLoan = new LoanHouse(getId(), getPrice(), getTerm(), getFee(), this.buildArea, this.landArea);
+        HouseLoan newLoan = new HouseLoan(getId(), getPrice(), getTerm(), getFee(), this.buildArea, this.landArea);
 
         // incrementar o contador de criação
         nextCount();

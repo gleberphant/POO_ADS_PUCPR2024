@@ -15,7 +15,7 @@ import semana07excecoes.typedef.loanTypes;
 
 import static java.lang.Math.pow;
 
-public class LoanApart extends Loan {
+public class ApartLoan extends Loan {
 
 
     // atributos exclusivos da classe filha
@@ -30,7 +30,7 @@ public class LoanApart extends Loan {
      * @param fee   A taxa de juros do financiamento.
      * @throws LoanExceptions Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public LoanApart(String id, double price, int term, double fee, int floorNumber, int garagesCount) throws LoanExceptions {
+    public ApartLoan(String id, double price, int term, double fee, int floorNumber, int garagesCount) throws LoanExceptions {
         super(id, price, term, fee);
         setFloorNumber(floorNumber);
         setGaragesCount(garagesCount);

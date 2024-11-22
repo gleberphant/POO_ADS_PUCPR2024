@@ -17,6 +17,9 @@ package semana07excecoes.model;
 import semana07excecoes.exceptions.LoanExceptions;
 import semana07excecoes.typedef.loanTypes;
 
+record StructLoan(double price, int term, double fee) {
+}
+
 
 /**
  * Classe que representa o objeto financiamento (model).
@@ -28,9 +31,11 @@ import semana07excecoes.typedef.loanTypes;
 public abstract class Loan {
 
     // atributos do objeto
-    private int term;
     private String id;
-    private double price, fee;
+    protected StructLoan loan;
+    private double price;
+    private int term;
+    private double fee;
 
     // atributo para definir o tipo de financiamento
     protected final loanTypes type;

@@ -10,7 +10,7 @@ package semana07excecoes.model;
 import semana07excecoes.exceptions.LoanExceptions;
 import semana07excecoes.typedef.loanTypes;
 
-public class LoanHouse extends Loan {
+public class HouseLoan extends Loan {
 
     private double insurance;
     private double buildArea;
@@ -25,7 +25,7 @@ public class LoanHouse extends Loan {
      * @param fee   A taxa de juros do financiamento.
      * @throws LoanExceptions Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public LoanHouse(String id, double price, int term, double fee, double buildArea, double landArea) throws LoanExceptions {
+    public HouseLoan(String id, double price, int term, double fee, double buildArea, double landArea) throws LoanExceptions {
 
         super(id, price, term, fee);
         setBuildArea(buildArea);

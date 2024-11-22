@@ -3,7 +3,7 @@ package semana07excecoes.model;
 /**
  * Constantes para validação de dados de financiamento.
  */
-record LoanConstants() {
+abstract class LoanConstants {
     /**
      * Expressão regular para validar IDs.
      */

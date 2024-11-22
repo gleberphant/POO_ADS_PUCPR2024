@@ -27,46 +27,40 @@ public abstract class LoanBuilder {
 
     // atributos
     private static int count;
-
     private int term;
     private double price, fee;
 
-
     /**
-     * Construtor
+     * Construtor - reset todos atributos internos
      */
     public LoanBuilder() {
-        term = 0;
-        count = 0;
         price = 0.0f;
+        term = 0;
         fee = 0.0f;
+        count = 0;
     }
 
     /**
-     * "Método_Builder" de atributo
-     *
-     * @return LoanBuilder
-     */
-    public LoanBuilder Term(int term) {
-
-        this.term = term;
-        return this;
-    }
-
-    /**
-     * "Método_Builder" de atributo
-     *
+     * "Método_Builder" - Step price
      * @return LoanBuilder
      */
     public LoanBuilder Price(double price) {
-
         this.price = price;
         return this;
     }
 
     /**
-     * "Método_Builder" de atributo
+     * "Método_Builder" - Step term
      *
+     * @return LoanBuilder
+     */
+    public LoanBuilder Term(int term) {
+        this.term = term;
+        return this;
+    }
+
+    /**
+     * "Método_Builder" - Step Fee
      * @return LoanBuilder
      */
     public LoanBuilder Fee(double fee) {
@@ -81,34 +75,45 @@ public abstract class LoanBuilder {
      */
     public abstract Loan build();
 
-
     /**
      * contador interno
-     *
      */
-    public static void nextCount() {
+    protected void nextCount() {
         count++;
     }
 
     /**
      * getters para as subclasses
-     *
      * @return Loan
      */
-    public String getId() {
+    protected String getId() {
         return (String.valueOf(count));
     }
 
-
-    public int getTerm() {
+    /**
+     * getter para as subclasses
+     *
+     * @return term
+     */
+    protected int getTerm() {
         return term;
     }
 
-    public double getPrice() {
+    /**
+     * getter para as subclasses
+     *
+     * @return price
+     */
+    protected double getPrice() {
         return price;
     }
 
-    public double getFee() {
+    /**
+     * getter para as subclasses
+     *
+     * @return fee
+     */
+    protected double getFee() {
         return fee;
     }
 }

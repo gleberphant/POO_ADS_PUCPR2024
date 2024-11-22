@@ -12,7 +12,7 @@ import semana07excecoes.exceptions.LoanExceptions;
 import semana07excecoes.typedef.loanTypes;
 import semana07excecoes.typedef.zoneTypes;
 
-public class LoanLand extends Loan {
+public class LandLoan extends Loan {
 
     private zoneTypes zone;
 
@@ -25,7 +25,7 @@ public class LoanLand extends Loan {
      * @param fee   A taxa de juros do financiamento.
      * @throws LoanExceptions Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public LoanLand(String id, double price, int term, double fee, String zone) throws LoanExceptions {
+    public LandLoan(String id, double price, int term, double fee, String zone) throws LoanExceptions {
 
         super(id, price, term, fee);
         setZone(zone);
