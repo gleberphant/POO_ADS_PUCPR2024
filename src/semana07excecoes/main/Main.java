@@ -17,7 +17,7 @@ O que devo desenvolver?
 
 1. Todos os requisitos das semanas anteriores.
 
-2. Na classe InterfaceUsuario, modifique os métodos que criou para que tenham tratamento de exceções para lidar com situações como, por exemplo, entrada de dados inválidos.
+2. Na classe InterfaceUsuário, modifique os métodos que criou para que tenham tratamento de exceções para lidar com situações como, por exemplo, entrada de dados inválidos.
 
 a. Isso significa que os seus métodos deverão ter try/catch, ou try/catch/finally.
 
@@ -53,7 +53,7 @@ public class Main {
         double totalPriceProperty, totalPriceLoan;
 
         // Declaração e inicialização de array de financiamentos
-        List<Loan> listLoans = new LinkedList<Loan>();
+        List<Loan> listLoans = new LinkedList<>();
 
         // Declaração e inicialização da interface
         UserInterface appInterface = UserInterface.getInstance().initialize();
