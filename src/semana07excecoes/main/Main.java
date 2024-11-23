@@ -30,8 +30,10 @@ package semana07excecoes.main;
 
 
 import semana07excecoes.builders.*;
+import semana07excecoes.exceptions.InterfaceException;
+import semana07excecoes.exceptions.LoanException;
 import semana07excecoes.model.Loan;
-import semana07excecoes.util.*;
+import semana07excecoes.ui.*;
 
 import java.util.InputMismatchException;
 import java.util.LinkedList;
@@ -85,7 +87,7 @@ public class Main {
                     case '3' -> new LandBuilder()
                             .Zone(appInterface.in().promptZone());
 
-                    default -> throw new InputMismatchException("Valor inválido. Digite um número decimal.");
+                    default -> throw new InterfaceException("Valor inválido. Digite um número decimal.");
 
                 };
 
@@ -96,7 +98,7 @@ public class Main {
                         .Fee(appInterface.in().promptFee())
                         .build());
 
-            } catch (InputMismatchException | IllegalArgumentException | IllegalStateException e) {
+            } catch (LoanException | InterfaceException | InputMismatchException | IllegalArgumentException e) {
                 appInterface.viewException(e);  // Exibe Exception.
                 continue;  // Reinicia o loop.
             }

@@ -15,6 +15,7 @@
 package semana07excecoes.builders;
 
 
+import semana07excecoes.exceptions.LoanException;
 import semana07excecoes.model.Loan;
 
 /**
@@ -73,7 +74,7 @@ public abstract class LoanBuilder {
      *
      * @return Loan
      */
-    public abstract Loan build();
+    public abstract Loan build() throws LoanException;
 
     /**
      * contador interno

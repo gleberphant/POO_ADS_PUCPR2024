@@ -22,7 +22,7 @@
  *     i. Todos os atributos devem ser privados.
  *     ii. Todos os métodos devem ser públicos.
  *     iii. Inclua um getter para cada um dos atributos privados.
- * 3 Classe InterfaceUsuário (no pacote util):
+ * 3 Classe InterfaceUsuário (no pacote ui):
  *     i. Ajuste os métodos de entrada de dados (valor do imóvel, prazo de financiamento e taxa de juros) para usarem estruturas condicionais (como if/else ou switch) dentro dos seus métodos para verificar se as entradas fornecidas pelo usuário são válidas.
  *     ii. Aceite somente valores positivos para o valor do imóvel, prazo do financiamento e taxa de juros anual.
  *     iii. Use estruturas de repetição (como do, do-while ou for). Se algum dos valores for inválido, o programa deve informar ao usuário sobre o erro e solicitar que ele insira novamente os dados.

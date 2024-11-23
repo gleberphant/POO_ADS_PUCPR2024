@@ -1,6 +1,6 @@
 package semana07excecoes.builders;
 
-import semana07excecoes.exceptions.LoanExceptions;
+import semana07excecoes.exceptions.LoanException;
 
 import semana07excecoes.model.LandLoan;
 
@@ -13,7 +13,7 @@ public class LandBuilder extends LoanBuilder {
     }
 
     @Override
-    public LandLoan build() throws LoanExceptions {
+    public LandLoan build() throws LoanException {
 
         // Cria o novo objeto
         LandLoan newLoan = new LandLoan(getId(), getPrice(), getTerm(), getFee(), this.zone);

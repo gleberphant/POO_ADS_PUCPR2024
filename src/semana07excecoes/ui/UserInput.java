@@ -12,7 +12,7 @@
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
  */
 
-package semana07excecoes.util;
+package semana07excecoes.ui;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

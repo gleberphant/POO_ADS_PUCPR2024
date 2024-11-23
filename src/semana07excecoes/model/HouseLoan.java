@@ -7,8 +7,8 @@
  */
 package semana07excecoes.model;
 
-import semana07excecoes.exceptions.LoanExceptions;
-import semana07excecoes.typedef.loanTypes;
+import semana07excecoes.exceptions.LoanException;
+import semana07excecoes.typedef.TypeLoans;
 
 public class HouseLoan extends Loan {
 
@@ -23,9 +23,9 @@ public class HouseLoan extends Loan {
      * @param price O preço do bem a ser financiado.
      * @param term  O prazo do financiamento em meses.
      * @param fee   A taxa de juros do financiamento.
-     * @throws LoanExceptions Se o preço, o prazo ou a taxa forem inválidos.
+     * @throws LoanException Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public HouseLoan(String id, double price, int term, double fee, double buildArea, double landArea) throws LoanExceptions {
+    public HouseLoan(String id, double price, int term, double fee, double buildArea, double landArea) throws LoanException {
 
         super(id, price, term, fee);
         setBuildArea(buildArea);
@@ -34,28 +34,35 @@ public class HouseLoan extends Loan {
     }
 
     @Override
-    protected loanTypes type(){
-        return loanTypes.HOUSE;
+    protected TypeLoans type() {
+        return TypeLoans.HOUSE;
+    }
+
+    public void setInsurance(double insuranceVALUE) throws LoanException {
+        if (insuranceVALUE < 0.0f) {
+            throw new LoanException("Insurance não pode ser um número negativo. ");
+        }
+        this.insurance = insuranceVALUE;
+    }
+
+    public void setBuildArea(double buildArea) throws LoanException {
+        if (buildArea < 0.0f) {
+            throw new LoanException("Área construída não pode se um valor negativo.");
+        }
+        this.buildArea = buildArea;
+    }
+
+    public void setLandArea(double landArea) throws LoanException {
+        if (landArea < 0.0f) {
+            throw new LoanException("Área do terreno não pode ser um valor negativo.");
+        }
+        this.landArea = landArea;
     }
 
     @Override
     public double getPaymentValueMonthly() {
-
         return super.getPaymentValueMonthly() + insurance;
     }
-
-    public void setInsurance(double insuranceVALUE) {
-        this.insurance = insuranceVALUE;
-    }
-
-    public void setBuildArea(double buildArea) {
-        this.buildArea = buildArea;
-    }
-
-    public void setLandArea(double landArea) {
-        this.landArea = landArea;
-    }
-
     public double getInsurance() {
         return insurance;
     }

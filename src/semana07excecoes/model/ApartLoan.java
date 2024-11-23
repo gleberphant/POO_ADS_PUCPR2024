@@ -10,8 +10,8 @@
 
 package semana07excecoes.model;
 
-import semana07excecoes.exceptions.LoanExceptions;
-import semana07excecoes.typedef.loanTypes;
+import semana07excecoes.exceptions.LoanException;
+import semana07excecoes.typedef.TypeLoans;
 
 import static java.lang.Math.pow;
 
@@ -28,17 +28,17 @@ public class ApartLoan extends Loan {
      * @param price O preço do bem a ser financiado.
      * @param term  O prazo do financiamento em meses.
      * @param fee   A taxa de juros do financiamento.
-     * @throws LoanExceptions Se o preço, o prazo ou a taxa forem inválidos.
+     * @throws LoanException Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public ApartLoan(String id, double price, int term, double fee, int floorNumber, int garagesCount) throws LoanExceptions {
+    public ApartLoan(String id, double price, int term, double fee, int floorNumber, int garagesCount) throws LoanException {
         super(id, price, term, fee);
         setFloorNumber(floorNumber);
         setGaragesCount(garagesCount);
     }
 
     @Override
-    protected loanTypes type(){
-        return loanTypes.APARTMENT;
+    protected TypeLoans type() {
+        return TypeLoans.APARTMENT;
     }
 
     @Override
@@ -48,11 +48,19 @@ public class ApartLoan extends Loan {
         return (this.getPrice() * pow(1 + mensalFee, this.getTerm())) / pow(1 + mensalFee, this.getTerm() - 1);
     }
 
-    public void setGaragesCount(int garagesCount) {
+    public void setGaragesCount(int garagesCount) throws LoanException {
+        if (garagesCount < 0) {
+            throw new LoanException("Garagem precisa ser um número positivo válido.");
+        }
+
         this.garagesCount = garagesCount;
     }
 
-    public void setFloorNumber(int floorNumber) {
+    public void setFloorNumber(int floorNumber) throws LoanException {
+        if (floorNumber < 0) {
+            throw new LoanException("Numero do andar precisa ser um número inteiro positivo.");
+        }
+
         this.floorNumber = floorNumber;
     }
 

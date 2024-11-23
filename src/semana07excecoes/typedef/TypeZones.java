@@ -4,6 +4,6 @@
 
 package semana07excecoes.typedef;
 
-public enum loanTypes {
-    APARTMENT, HOUSE, LAND, LOAN
+public enum TypeZones {
+    COMERCIAL, RESIDENCIAL
 }

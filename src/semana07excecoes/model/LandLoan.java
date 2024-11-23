@@ -8,13 +8,13 @@
 
 package semana07excecoes.model;
 
-import semana07excecoes.exceptions.LoanExceptions;
-import semana07excecoes.typedef.loanTypes;
-import semana07excecoes.typedef.zoneTypes;
+import semana07excecoes.exceptions.LoanException;
+import semana07excecoes.typedef.TypeLoans;
+import semana07excecoes.typedef.TypeZones;
 
 public class LandLoan extends Loan {
 
-    private zoneTypes zone;
+    private TypeZones zone;
 
     /**
      * Construtor
@@ -23,18 +23,20 @@ public class LandLoan extends Loan {
      * @param price O preço do bem a ser financiado.
      * @param term  O prazo do financiamento em meses.
      * @param fee   A taxa de juros do financiamento.
-     * @throws LoanExceptions Se o preço, o prazo ou a taxa forem inválidos.
+     * @throws LoanException Se o preço, o prazo ou a taxa forem inválidos.
      */
-    public LandLoan(String id, double price, int term, double fee, String zone) throws LoanExceptions {
+    public LandLoan(String id, double price, int term, double fee, String zone) throws LoanException {
 
         super(id, price, term, fee);
         setZone(zone);
 
     }
 
-    @Override
-    protected loanTypes type(){
-        return loanTypes.LAND;
+    public void setZone(String value) throws LoanException {
+        if (value.isEmpty()) {
+            throw new LoanException("Tipo de zona precisa ser definido em COMERCIAL ou RESIDENCIAL");
+        }
+        this.zone = TypeZones.valueOf(value);
     }
 
     @Override
@@ -46,7 +48,9 @@ public class LandLoan extends Loan {
         return this.zone.toString();
     }
 
-    public void setZone(String value){
-        this.zone = zoneTypes.valueOf(value);
+    @Override
+    protected TypeLoans type() {
+        return TypeLoans.LAND;
     }
+
 }
