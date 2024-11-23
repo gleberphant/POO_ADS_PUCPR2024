@@ -8,9 +8,11 @@
 
 package semana07excecoes.model;
 
-import semana07excecoes.exceptions.LoanException;
-import semana07excecoes.typedef.TypeLoans;
-import semana07excecoes.typedef.TypeZones;
+import semana07excecoes.utils.exceptions.LoanException;
+import semana07excecoes.utils.typedef.TypeLoans;
+import semana07excecoes.utils.typedef.TypeZones;
+
+import static semana07excecoes.utils.constants.LoanConstants.*;
 
 public class LandLoan extends Loan {
 
@@ -33,7 +35,7 @@ public class LandLoan extends Loan {
     }
 
     public void setZone(String value) throws LoanException {
-        if (value.isEmpty()) {
+        if (value.isEmpty() || !zone.has(value)) {
             throw new LoanException("Tipo de zona precisa ser definido em COMERCIAL ou RESIDENCIAL");
         }
         this.zone = TypeZones.valueOf(value);
@@ -41,7 +43,7 @@ public class LandLoan extends Loan {
 
     @Override
     public double getPaymentValueMonthly() {
-        return super.getPaymentValueMonthly() * 1.02;
+        return super.getPaymentValueMonthly() * LAND_RISK_INCRISE;
     }
 
     public String getZone() {

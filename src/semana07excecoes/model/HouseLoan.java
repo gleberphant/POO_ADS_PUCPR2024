@@ -7,8 +7,10 @@
  */
 package semana07excecoes.model;
 
-import semana07excecoes.exceptions.LoanException;
-import semana07excecoes.typedef.TypeLoans;
+import semana07excecoes.utils.exceptions.LoanException;
+import semana07excecoes.utils.typedef.TypeLoans;
+
+import static semana07excecoes.utils.constants.LoanConstants.*;
 
 public class HouseLoan extends Loan {
 
@@ -39,21 +41,27 @@ public class HouseLoan extends Loan {
     }
 
     public void setInsurance(double insuranceVALUE) throws LoanException {
-        if (insuranceVALUE < 0.0f) {
+        if (insuranceVALUE < MIN_INSURANCE) {
             throw new LoanException("Insurance não pode ser um número negativo. ");
         }
         this.insurance = insuranceVALUE;
     }
 
     public void setBuildArea(double buildArea) throws LoanException {
-        if (buildArea < 0.0f) {
+
+        if (buildArea < MIN_BUILD_AREA) {
             throw new LoanException("Área construída não pode se um valor negativo.");
         }
+
+        if (buildArea < this.landArea) {
+            throw new LoanException("Área construída não pode se maior que o tamanho do terreno.");
+        }
+
         this.buildArea = buildArea;
     }
 
     public void setLandArea(double landArea) throws LoanException {
-        if (landArea < 0.0f) {
+        if (landArea < MIN_LAND_AREA) {
             throw new LoanException("Área do terreno não pode ser um valor negativo.");
         }
         this.landArea = landArea;
@@ -63,6 +71,7 @@ public class HouseLoan extends Loan {
     public double getPaymentValueMonthly() {
         return super.getPaymentValueMonthly() + insurance;
     }
+
     public double getInsurance() {
         return insurance;
     }

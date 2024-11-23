@@ -14,10 +14,10 @@
 
 package semana07excecoes.model;
 
-import semana07excecoes.exceptions.LoanException;
-import semana07excecoes.typedef.LoanConstants;
-import semana07excecoes.typedef.TypeLoans;
+import semana07excecoes.utils.exceptions.*;
+import semana07excecoes.utils.typedef.TypeLoans;
 
+import static semana07excecoes.utils.constants.LoanConstants.*;
 
 /**
  * Classe que representa o objeto financiamento (model).
@@ -32,7 +32,6 @@ public abstract class Loan {
     private String id;
 
     // protected StructLoan loan;
-
     private double price;
     private int term;
     private double fee;
@@ -54,8 +53,8 @@ public abstract class Loan {
     }
 
     /**
-     * Setter de todos atributos
-     * Para facilitar eventual overload do construtor
+     * Setter de todos atributos. Facilita o overload do construtor
+     * @throws LoanException caso algum atributo esteja inválido
      */
     public void setLoan(String id, double price, int term, double fee) throws LoanException {
         setId(id);
@@ -65,40 +64,66 @@ public abstract class Loan {
     }
 
     /**
-     * Setter do prazo do financiamento em meses
+     * Setter id do financiamento
      *
-     * @throws LoanException Se valor não estiver entre MAX_TERM e MIN_TERM
+     * @throws LoanException ID não for número inteiro maior que zero
      */
-    public void setTerm(int term) throws LoanException {
-        if (term > LoanConstants.MAX_TERM) {
-            throw new LoanException("Prazo não pode ser superior a " + LoanConstants.MAX_TERM + "mêses.");
+    public void setId(String id) throws LoanException {
+        if (!id.matches(ID_PATTERN)) {
+            throw new LoanException("ID deve ser um número inteiro maior que zero");
         }
 
-        if (term < LoanConstants.MIN_TERM) {
-            throw new LoanException("Prazo não pode ser inferior a " + LoanConstants.MIN_TERM + " mês.");
+        this.id = id;
+    }
+
+    /**
+     * Setter Preço do imóvel do financiamento
+     *
+     * @throws InvalidPriceException Se valor menor que MIN_PRICE
+     */
+    public void setPrice(double price) throws InvalidPriceException {
+        if (price < MIN_PRICE) {
+            throw new InvalidPriceException("Preço não pode ser inferior a R$" + MIN_PRICE);
+        }
+        this.price = price;
+    }
+
+    /**
+     * Setter prazo do financiamento em meses
+     *
+     * @throws InvalidTermException Se valor não estiver entre MAX_TERM e MIN_TERM
+     */
+    public void setTerm(int term) throws InvalidTermException {
+        if (term > MAX_TERM) {
+            throw new InvalidTermException("Prazo não pode ser superior a " + MAX_TERM + "mêses.");
+        }
+
+        if (term < MIN_TERM) {
+            throw new InvalidTermException("Prazo não pode ser inferior a " + MIN_TERM + " mês.");
         }
 
         this.term = term;
     }
 
     /**
-     * Setter da taxa de juros por ano.
+     * Setter  taxa de juros por ano.
      *
-     * @throws LoanException Se valor não estiver entre MAX_FEE e MIN_FEE
+     * @throws InvalidFeeException Se valor não estiver entre MAX_FEE e MIN_FEE
      */
-    public void setFee(double fee) throws LoanException {
+    public void setFee(double fee) throws InvalidFeeException {
 
-        if (fee > LoanConstants.MAX_FEE) {
-            throw new LoanException("Taxa não pode ser superior a " + LoanConstants.MAX_FEE + "%");
+        if (fee > MAX_FEE) {
+            throw new InvalidFeeException("Taxa não pode ser superior a " + MAX_FEE + "%");
         }
 
-        if (fee <= LoanConstants.MIN_FEE) {
-            throw new LoanException("Taxa não pode ser inferior a " + LoanConstants.MIN_FEE + "%");
+        if (fee <= MIN_FEE) {
+            throw new InvalidFeeException("Taxa não pode ser inferior a " + MIN_FEE + "%");
         }
 
         this.fee = fee;
     }
 
+    // GETTERS
     /**
      * Getter de atributo
      * @return (String) id
@@ -108,21 +133,7 @@ public abstract class Loan {
     }
 
     /**
-     * Setter do id do financiamento
-     *
-     * @throws LoanException ID não for número inteiro maior que zero
-     */
-    public void setId(String id) throws LoanException {
-        if (!id.matches(LoanConstants.ID_PATTERN)) {
-            throw new LoanException("ID deve ser um número inteiro maior que zero");
-        }
-
-        this.id = id;
-    }
-
-    /**
      * Getter de atributo
-     *
      * @return preço da propriedade
      */
     public double getPrice() {
@@ -131,20 +142,7 @@ public abstract class Loan {
     }
 
     /**
-     * Setter do Preço do imóvel do financiamento
-     *
-     * @throws LoanException Se valor menor que MIN_PRICE
-     */
-    public void setPrice(double price) throws LoanException {
-        if (price < LoanConstants.MIN_PRICE) {
-            throw new LoanException("Preço não pode ser inferior a R$" + LoanConstants.MIN_PRICE);
-        }
-        this.price = price;
-    }
-
-    /**
      * Getter de atributo
-     *
      * @return quantidade de parcelas
      */
     public int getTerm() {
@@ -159,7 +157,6 @@ public abstract class Loan {
     public double getFee() {
         return this.fee;
     }
-
 
     /**
      * Calcula pagamento mensal

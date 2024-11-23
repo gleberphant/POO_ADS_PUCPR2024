@@ -1,4 +1,4 @@
-package semana07excecoes.exceptions;
+package semana07excecoes.utils.exceptions;
 
 public class LoanException extends Exception {
     public LoanException(String message) {

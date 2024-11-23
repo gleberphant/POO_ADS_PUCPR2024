@@ -1,6 +1,6 @@
 package semana07excecoes.builders;
 
-import semana07excecoes.exceptions.LoanException;
+import semana07excecoes.utils.exceptions.LoanException;
 import semana07excecoes.model.ApartLoan;
 
 public class ApartBuilder extends LoanBuilder {

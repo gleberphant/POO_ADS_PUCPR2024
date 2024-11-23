@@ -30,14 +30,13 @@ package semana07excecoes.main;
 
 
 import semana07excecoes.builders.*;
-import semana07excecoes.exceptions.InterfaceException;
-import semana07excecoes.exceptions.LoanException;
+import semana07excecoes.utils.exceptions.InterfaceException;
+import semana07excecoes.utils.exceptions.LoanException;
 import semana07excecoes.model.Loan;
 import semana07excecoes.ui.*;
 
 import java.util.InputMismatchException;
 import java.util.LinkedList;
-import java.util.List;
 
 
 /**
@@ -55,7 +54,7 @@ public class Main {
         double totalPriceProperty, totalPriceLoan;
 
         // Declaração e inicialização de array de financiamentos
-        List<Loan> listLoans = new LinkedList<>();
+        LinkedList<Loan> listLoans = new LinkedList<>();
 
         // Declaração e inicialização da interface
         UserInterface appInterface = UserInterface.getInstance().initialize();

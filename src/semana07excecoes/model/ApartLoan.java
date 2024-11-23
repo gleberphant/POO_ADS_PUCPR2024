@@ -10,8 +10,10 @@
 
 package semana07excecoes.model;
 
-import semana07excecoes.exceptions.LoanException;
-import semana07excecoes.typedef.TypeLoans;
+import semana07excecoes.utils.exceptions.LoanException;
+import semana07excecoes.utils.typedef.TypeLoans;
+
+import static semana07excecoes.utils.constants.LoanConstants.*;
 
 import static java.lang.Math.pow;
 
@@ -49,7 +51,7 @@ public class ApartLoan extends Loan {
     }
 
     public void setGaragesCount(int garagesCount) throws LoanException {
-        if (garagesCount < 0) {
+        if (garagesCount < MIN_GARAGES) {
             throw new LoanException("Garagem precisa ser um número positivo válido.");
         }
 
@@ -57,7 +59,7 @@ public class ApartLoan extends Loan {
     }
 
     public void setFloorNumber(int floorNumber) throws LoanException {
-        if (floorNumber < 0) {
+        if (floorNumber < MIN_FLOOR) {
             throw new LoanException("Numero do andar precisa ser um número inteiro positivo.");
         }
 
@@ -71,6 +73,5 @@ public class ApartLoan extends Loan {
     public int getGaragesCount() {
         return garagesCount;
     }
-
 
 }
