@@ -1,5 +1,14 @@
+/.gradle/
 /.idea/
-/ATIVIDADES PUC.iml
-/etc/DIAGRAMA_DE_CLASSES.dia
+/build/
+/semana08/out/
+/semana07/out/
+/semana06/out/
+/semana05/out/
+/semana04/out/
+/semana03/out/
+/semana02/out/
+/semana01/out/
 /out/
 /etc/
+/ATIVIDADES PUC.iml
