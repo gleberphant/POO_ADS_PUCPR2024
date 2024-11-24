@@ -8,6 +8,7 @@
 
 package semana07excecoes.model;
 
+import semana07excecoes.utils.exceptions.InvalidZoneException;
 import semana07excecoes.utils.exceptions.LoanException;
 import semana07excecoes.utils.typedef.TypeLoans;
 import semana07excecoes.utils.typedef.TypeZones;
@@ -36,7 +37,7 @@ public class LandLoan extends Loan {
 
     public void setZone(String value) throws LoanException {
         if (value.isEmpty() || !zone.has(value)) {
-            throw new LoanException("Tipo de zona precisa ser definido em COMERCIAL ou RESIDENCIAL");
+            throw new InvalidZoneException("Tipo de zona precisa ser definido em COMERCIAL ou RESIDENCIAL");
         }
         this.zone = TypeZones.valueOf(value);
     }

@@ -7,6 +7,9 @@
  */
 package semana07excecoes.model;
 
+import semana07excecoes.utils.exceptions.InsuranceGreaterThanMonthlyFee;
+import semana07excecoes.utils.exceptions.InvalidAreaException;
+import semana07excecoes.utils.exceptions.InvalidInsuranceException;
 import semana07excecoes.utils.exceptions.LoanException;
 import semana07excecoes.utils.typedef.TypeLoans;
 
@@ -42,7 +45,11 @@ public class HouseLoan extends Loan {
 
     public void setInsurance(double insuranceVALUE) throws LoanException {
         if (insuranceVALUE < MIN_INSURANCE) {
-            throw new LoanException("Insurance não pode ser um número negativo. ");
+            throw new InvalidInsuranceException("Seguro não pode ser um número negativo. ");
+        }
+
+        if (insuranceVALUE > (this.getPrice() / this.getTerm()) * ((this.getFee() / 12))) {
+            throw new InsuranceGreaterThanMonthlyFee("O valor do Seguro não pode ser maior que o valor mensal dos juros . ");
         }
         this.insurance = insuranceVALUE;
     }
@@ -50,11 +57,11 @@ public class HouseLoan extends Loan {
     public void setBuildArea(double buildArea) throws LoanException {
 
         if (buildArea < MIN_BUILD_AREA) {
-            throw new LoanException("Área construída não pode se um valor negativo.");
+            throw new InvalidAreaException("Área construída não pode se um valor negativo.");
         }
 
         if (buildArea < this.landArea) {
-            throw new LoanException("Área construída não pode se maior que o tamanho do terreno.");
+            throw new InvalidAreaException("Área construída não pode se maior que o tamanho do terreno.");
         }
 
         this.buildArea = buildArea;
@@ -62,7 +69,7 @@ public class HouseLoan extends Loan {
 
     public void setLandArea(double landArea) throws LoanException {
         if (landArea < MIN_LAND_AREA) {
-            throw new LoanException("Área do terreno não pode ser um valor negativo.");
+            throw new InvalidAreaException("Área do terreno não pode ser um valor negativo.");
         }
         this.landArea = landArea;
     }

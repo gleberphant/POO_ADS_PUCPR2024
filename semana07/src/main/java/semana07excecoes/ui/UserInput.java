@@ -14,6 +14,8 @@
 
 package semana07excecoes.ui;
 
+import semana07excecoes.utils.exceptions.InvalidInputException;
+
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -79,7 +81,7 @@ public class UserInput {
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("Tipo de financiamento inválido");
+            throw new InvalidInputException("Tipo de financiamento inválido");
         }
     }
 
@@ -98,7 +100,7 @@ public class UserInput {
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("Preço inválido. Digite um número decimal.");
+            throw new InvalidInputException("Preço inválido. Digite um número decimal.");
         }
 
     }
@@ -118,7 +120,7 @@ public class UserInput {
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("Prazo inválido. Digite um número inteiro.");
+            throw new InvalidInputException("Prazo inválido. Digite um número inteiro.");
         }
     }
 
@@ -138,7 +140,7 @@ public class UserInput {
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("Taxa inválida. Digite um número decimal.");
+            throw new InvalidInputException("Taxa inválida. Digite um número decimal.");
         }
 
     }
@@ -174,13 +176,12 @@ public class UserInput {
      */
     public void pressEnterToContinue() {
 
-        try {
-            System.out.println("[ Pressione <ENTER> para continuar... ]");
 
-            this.inputScanner.nextLine();
-        } catch (NoSuchElementException e) {
-            this.inputScanner.nextLine();
-        }
+        System.out.println("[ Pressione <ENTER> para continuar... ]");
+        this.inputScanner.nextLine();
+
+
+
     }
 
     public double promptLandArea() {
@@ -192,7 +193,7 @@ public class UserInput {
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("Valor inválido. Digite um número decimal.");
+            throw new InvalidInputException("Valor inválido. Digite um número decimal.");
         }
     }
 
@@ -205,7 +206,7 @@ public class UserInput {
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("Valor inválido. Digite um número decimal.");
+            throw new InvalidInputException("Valor inválido. Digite um número decimal.");
         }
     }
 
@@ -219,7 +220,7 @@ public class UserInput {
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("VALOR INVÁLIDO. Digite um número inteiro.");
+            throw new InvalidInputException("VALOR INVÁLIDO. Digite um número inteiro.");
         }
     }
 
@@ -232,7 +233,7 @@ public class UserInput {
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("VALOR INVÁLIDO. Digite um número inteiro.");
+            throw new InvalidInputException("VALOR INVÁLIDO. Digite um número inteiro.");
         }
     }
 
@@ -245,12 +246,12 @@ public class UserInput {
             return switch (this.inputScanner.nextInt()) {
                 case 1 -> "COMERCIAL";
                 case 2 -> "RESIDENCIAL";
-                default -> throw new InputMismatchException("Opção inexistente.");
+                default -> throw new InvalidInputException("Opção inexistente.");
             };
         } else {
 
             this.inputScanner.next();
-            throw new InputMismatchException("Valor inválido. Digite o número correspondente a zona.");
+            throw new InvalidInputException("Valor inválido. Digite o número correspondente a zona.");
         }
 
     }
