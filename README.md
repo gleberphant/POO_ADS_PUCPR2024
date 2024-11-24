@@ -34,14 +34,14 @@ Atividades da Disciplina de Programação Orientada a Objetos do curso de Análi
 
 ## ➡️ Instruções de uso
 
-Execute o arquivo main correspondente a atividade/semana
+Execute o arquivo main correspondente a atividade/semana utilizando o arquivo build.gradle correspondente.
 
 <br>
 
 ## 💻 Pré-requisitos
 
--  `openjdk-23.0.1_windows-x64_bin`
--  `IntelliJ IDEA 2024.2.3 (Community Edition)`
+- `openjdk-23.0.1_windows-x64`
+- `gradle 8.11`
 
 <br>
 
@@ -55,7 +55,10 @@ git clone https://github.com/gleberphant/POO_ADS_PUCPR2024.git
 
 ## 💾 Para compilar e executar o projeto
 
-` utilize o IntelliJ IDEA 2024.2.3 (Community Edition)` ou `Compile o package refente a atividade selecionada`
+utilize o gradle 8.11 para compilar e executar o package refente a atividade selecionada
+<br>
+
+ATENÇÃO! É necessários utilizar gradle versão  `8.11` para ser compatível com a `JDK 23`
 
 <br>
 
