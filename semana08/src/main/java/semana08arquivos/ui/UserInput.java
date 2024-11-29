@@ -12,9 +12,9 @@
  * @author HANDERSON GLEBER DE LIMA CAVALCANTI (1112024201103)
  */
 
-package semana07excecoes.ui;
+package semana08arquivos.ui;
 
-import semana07excecoes.utils.exceptions.InvalidInputException;
+import semana08arquivos.utils.exceptions.InvalidInputException;
 
 import java.util.Scanner;
 
@@ -174,11 +174,7 @@ public class UserInput {
      */
     public void pressEnterToContinue() {
 
-
-        System.out.println("[ Pressione <ENTER> para continuar... ]");
         this.inputScanner.nextLine();
-
-
 
     }
 
