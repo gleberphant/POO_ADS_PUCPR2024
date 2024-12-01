@@ -70,16 +70,13 @@ public class UserInput {
      */
     public char promptType() {
 
-        System.out.println(" < Selecione o TIPO de financiamento > ");
-        System.out.println("[ (1)Casa (2)Apartamento (3)Terreno  -  (4) Exibir log do Sistema ]");
-
         if (this.inputScanner.hasNextInt()) {
 
             return (char) (this.inputScanner.nextInt() + '0');
         } else {
 
             this.inputScanner.next();
-            throw new InvalidInputException("Tipo de financiamento inválido");
+            throw new InvalidInputException("Opção Inválida");
         }
     }
 
@@ -179,7 +176,6 @@ public class UserInput {
     }
 
     public double promptLandArea() {
-        System.out.print(" < Digite o tamanho do TERRENO > ");
 
         if (this.inputScanner.hasNextDouble()) {
 
@@ -192,7 +188,6 @@ public class UserInput {
     }
 
     public double promptBuildArea() {
-        System.out.print(" < Digite o tamanho da AREA CONSTRUÍDA > ");
 
         if (this.inputScanner.hasNextDouble()) {
 
@@ -206,7 +201,7 @@ public class UserInput {
 
 
     public int promptFloor() {
-        System.out.print(" < Digite o ANDAR do apartamento  > ");
+
 
         if (this.inputScanner.hasNextInt()) {
 
@@ -219,7 +214,6 @@ public class UserInput {
     }
 
     public int promptGarages() {
-        System.out.print(" < Digite a quantidade de GARAGENS no imóvel > ");
 
         if (this.inputScanner.hasNextInt()) {
 
@@ -232,8 +226,6 @@ public class UserInput {
     }
 
     public String promptZone() {
-
-        System.out.print(" < Digite o tipo de zona [1] comercial ou [2] residencial  > ");
 
         if (this.inputScanner.hasNextInt()) {
 

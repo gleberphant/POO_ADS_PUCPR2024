@@ -39,13 +39,15 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 
-import static java.nio.file.Files.newBufferedReader;
+
+
 
 /**
  * Classe PRINCIPAL.
@@ -54,114 +56,188 @@ import static java.nio.file.Files.newBufferedReader;
  * @author HANDERSON GLEBER
  */
 public class Main {
+    // Declaração e inicialização das variáveis.
+    Path pathLogFile;
+    Path pathDatafile;
 
-    public static void main(String[] args) {
-        // Declaração e inicialização das variáveis.
-        char loanType;
-        boolean running = true;
-        double totalPriceProperty, totalPriceLoan;
+    char loanType;
+    boolean running = true;
+    double totalPriceProperty, totalPriceLoan;
+    LoanBuilder builderLoan;
+    UserInterface appInterface;
+    LinkedList<Loan> listLoans;
 
+    /**
+     * INICIALIZA AS VARIÁVEIS DA APLICAÇÃO
+     * */
+    void init(){
+
+       System.out.println("Iniciando variáveis. ");
         // Declaração e inicialização de array de financiamentos
-        LinkedList<Loan> listLoans = new LinkedList<>();
+        listLoans = new LinkedList<>();
 
         // Declaração e inicialização da interface
-        UserInterface appInterface = UserInterface.getInstance().initialize();
-
-        LoanBuilder builderLoan;
+        appInterface = UserInterface.getInstance().initialize();
 
         // Mensagem de abertura
         appInterface.viewOpening();
 
-        // carregando arquivo
-        Path pathDatafile = Paths.get("loanDatabase.dat");
-        Path pathLogFile = Paths.get("logFile.txt");
+        // Path do banco de dados
+        pathDatafile = Paths.get("loanDatabase.dat");
 
+        // Path do log do sistema
+        pathLogFile = Paths.get("logFile.txt");
 
-        // String logLine;
-        StringBuilder logBuilder = new StringBuilder();
-        String logString ;
+        writeLog("Iniciando aplicação. ");
+    }
 
-        logBuilder.append( String.format("\n [ %s ] Aplicação iniciada   \n" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("d-M-yy H:m"))));
+    /**
+     * Exibe os financiamentos
+     * */
+    void showLoans(){
+        // Exibir a lista de todos financiamentos
+        totalPriceProperty = 0f;
+        totalPriceLoan = 0f;
+        System.out.println("exibindo financiamentos ");
+        for (Loan item : listLoans) {
+            // Exibe o financiamento
+            appInterface.viewLoan(item);
 
-        try (ObjectInputStream inputFile = new ObjectInputStream(
-                Files.newInputStream(pathDatafile) ) )
+            //  Soma os valores totais do financiamento.
+            totalPriceLoan += item.getPaymentValueTotal();
+            totalPriceProperty += item.getPrice();
+        }
+        System.out.println(" ------- ");
+    }
+
+    /**
+     * carrega a database
+     * */
+    void loadDatabase(){
+
+        System.out.printf("\n Carregando Banco de Dados %s ...   ", pathDatafile);
+
+        // Verifica se o arquivo de banco de dados existe.
+        if(!Files.exists(pathDatafile)){
+            System.out.print(" Arquivo inexistente \n ");
+            writeLog(String.format("Arquivo não encontrado > %s",pathDatafile.getFileName()));
+
+            try {
+                // Cria o arquivo de banco de dados.
+                Files.createFile(pathDatafile);
+                System.out.printf("\n Arquivo criado %s ...   ", pathDatafile);
+                writeLog(String.format("Arquivo de database criado com sucesso > %s",pathDatafile.getFileName()));
+
+            } catch (IOException e) {
+                // exibe mensagem de erro para o usuário.
+                appInterface.viewException("Falha catastrófico ao criar arquivo de Bando de dados.");
+
+                // registra o evento no log.
+                writeLog(String.format("Error criação do arquivo DB > %s",e.getMessage()));
+
+                // encerramento da aplicação
+                appInterface.viewClosure();
+            }
+        }
+        // abrir a base de dados serializada
+        try (ObjectInputStream inputFile = new ObjectInputStream( Files.newInputStream(pathDatafile) ) )
         {
-
-            System.out.printf("\n abrindo ARQUIVO > %s \n ", pathDatafile.toUri());
-
             listLoans = (LinkedList<Loan>) inputFile.readObject();
+            System.out.print(" [ ok ] \n");
 
-            System.out.println("\n Arquivo aberto com sucesso \n");
+        }catch(EOFException e){
+            // exibe mensagem de erro para o usuário.
+            appInterface.viewException("Banco de dados vazio.");
 
-            logBuilder.append( String.format("\n [ %s ]base de dados carregada com sucesso  \n" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("d-M-yy H:m"))));
+            listLoans = new LinkedList<>();
+            // registra o evento no log.
+            writeLog("Banco dados vazio ");
 
         }catch(IOException | ClassNotFoundException e){
+            // exibe mensagem de erro para o usuário.
+            appInterface.viewException("Falha catastrófico ao abrir Bando de dados.");
 
-            System.out.printf("Falha ao salvar o arquivo > %s", e.getMessage() );
-            logBuilder.append( String.format("\n [ %s ]fala ao abrir arquivo de base de dados  \n" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("d-M-yy H:m"))));
+            // registra o evento no log.
+            writeLog(String.format("Error na abertura do arquivo DB > %s",e.getMessage()));
+
+            // encerramento da aplicação
+            appInterface.viewClosure();
+        }
+    }
+
+    /**
+     * salva a database
+     * */
+    void saveDatabase(){
+
+        // Abrir arquivo de database.
+        try (ObjectOutputStream outputFile = new ObjectOutputStream(Files.newOutputStream(pathDatafile) ) ) {
+
+            // serializa e escreve o objeto o financiamento.
+            System.out.print("\n SALVANDO DADOS EM ARQUIVO > ");
+            outputFile.writeObject(listLoans);
+            System.out.print("[ok] \n");
+
+            this.writeLog("Arquivo de base de dados salvo com sucesso .");
+
+        }catch(IOException e){
+
+            // exibe mensagem de erro para o usuário.
+            appInterface.viewException(e.getMessage());  // Exibe Exception.
+
+            // registra o evento no log.
+            this.writeLog(String.format("Falha > %s",e.getMessage()));
+
+            // encerramento da aplicação
+            this.appInterface.viewClosure();
 
         }
+    }
 
+    /**
+     * Loop principal do programa
+     * */
+    void run() {
 
         // Loop principal da aplicação. termina somente quando usuário pedir para sair
         do {
-
-            // Percorre a lista com todos os financiamentos
-            totalPriceProperty = 0f;
-            totalPriceLoan = 0f;
-
-            for (Loan item : listLoans) {
-                // Exibe o financiamento
-                appInterface.viewLoan(item);
-
-                //  Soma os valores totais do financiamento.
-                totalPriceLoan += item.getPaymentValueTotal();
-                totalPriceProperty += item.getPrice();
-            }
+            // exibir todos os financiamentos
+            showLoans();
 
             // Bloco try para captar exceções de tipo entrada inválida ou de valor inválido.
             try {
                 // Leitura dos dados do financiamento.
-                loanType = appInterface.in().promptType();
+                loanType = appInterface.promptType();
 
                 // define o item de financiamento
                 switch (loanType) {
-
                     case '1':
                         builderLoan = new HouseBuilder()
                                 .LandArea(appInterface.promptLandArea())
                                 .BuildArea(appInterface.in().promptBuildArea());
                         break;
+
                     case '2':
                         builderLoan = new ApartBuilder()
                                 .FloorNumber(appInterface.in().promptFloor())
                                 .GaragesCount(appInterface.in().promptGarages());
                         break;
+
                     case '3':
                         builderLoan = new LandBuilder()
                                 .Zone(appInterface.promptZone());
                         break;
+
                     case '4':
-                        // ler e exibir arquivo log
-
-                        try (BufferedReader log = newBufferedReader(pathLogFile)) {
-
-                            for (logString = ""; logString != null; logString = log.readLine()) {
-                                System.out.printf("\n PG>>> %s", logString);
-                            }
-
-                        } catch (IOException e) {
-                            System.out.println("erro ao exibir log");
-                        }
-
-                        appInterface.pressEnterToContinue();
-
+                        showLog();
                         continue;
-                        // carregar arquivo de log
+
                     case '5':
-                        running = appInterface.promptExit();
+                        running = false;
+                        return;
+
                     default:
-                        throw new InterfaceException("Valor inválido. Digite uma das opções informadas.");
+                        throw new InterfaceException("OPÇÃO INVÁLIDA ");
                 }
 
                 // Conclui a criação do financiamento e adiciona na lista.
@@ -171,38 +247,24 @@ public class Main {
                         .Fee(appInterface.in().promptFee())
                         .build());
 
-                logBuilder.append( String.format("\n [ %s ] Novo LOAN criado com sucesso   \n" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("d-M-yy H:m"))));
+                // registra o evento no log.
+                writeLog("Novo Financiamento criado com sucesso.");
 
             } catch (LoanException | InterfaceException | InputMismatchException | IllegalArgumentException e) {
-                appInterface.viewException(e);  // Exibe Exception.
-                continue;  // Reinicia o loop.
+
+                // exibe a exception para o usuário.
+                appInterface.viewException(e.getMessage());
+
+                // registra o evento no log.
+                writeLog(String.format(" > %s",e.getMessage()));
+
+                // aguarda usuário pressionar enter
+                appInterface.pressEnterToContinue();
+
+                // reinicia o loop
+                continue;
             }
 
-            // Salvar em arquivo
-            try (ObjectOutputStream outputFile = new ObjectOutputStream(Files.newOutputStream(pathDatafile) ) ) {
-
-                System.out.printf("\n SALVANDO DADOS EM ARQUIVO > %s \n ", pathDatafile);
-
-                outputFile.writeObject(listLoans);
-
-                System.out.println("\n Arquivo salvo com sucesso");
-
-                logBuilder.append( String.format("\n [ %s ] Arquivo de base de dados salvo com sucesso " , LocalDateTime.now().format(DateTimeFormatter.ofPattern("d-M-yy H:m"))));
-
-            }catch(IOException e){
-
-                System.out.printf("\n Falha ao salvar o arquivo > %s \n", e.getMessage() );
-
-            }
-
-            // Salvar log
-            try(PrintWriter logFile = new PrintWriter(Files.newOutputStream(pathLogFile))){
-                logFile.print(logBuilder);
-
-            } catch (IOException e) {
-
-                System.out.printf("\n erro no arquivo de log [%s] \n", e.getMessage()) ;
-            }
             // Exibe o total de todos financiamentos
             appInterface.viewTotals(totalPriceProperty, totalPriceLoan);
 
@@ -210,11 +272,87 @@ public class Main {
             running = appInterface.promptExit();
 
         } while (running);
+    }
 
-        // encerramento da aplicação
-        appInterface.viewClosure();
+    /**
+     * Exibir o arquivo de LOG do sistema.
+     * */
+    void showLog(){
+
+        // abre o  arquivo de  log
+        try (BufferedReader log = Files.newBufferedReader(pathLogFile)) {
+
+            // exibe todos os registros do log.
+            for (String logString = ""; logString != null; logString = log.readLine()) {
+                System.out.printf("\n PG>>> %s", logString);
+            }
+
+        } catch (IOException e) {
+            // exibe mensagem de erro para o usuário.
+            appInterface.viewException(e.getMessage());  // Exibe Exception.
+
+            // registra o evento no log.
+            this.writeLog(String.format("Falha > %s",e.getMessage()));
+
+            // encerramento da aplicação
+            this.appInterface.viewClosure();
+        }
+
+        appInterface.pressEnterToContinue();
 
     }
+
+    /**
+     * Registrar LOG do sistema.
+     * */
+    void writeLog(String textParam){
+        System.out.println("Registrando evento em LOG: "+ textParam);
+
+        try {
+            Files.writeString(
+                    pathLogFile,
+                    String.format("\n [ %s ] %s \n", LocalDateTime.now().format(DateTimeFormatter.ofPattern("d-M-yy H:m")), textParam ),
+                    StandardOpenOption.APPEND
+            );
+        }
+        catch (IOException e) {
+
+            // exibe mensagem de erro para o usuário.
+            appInterface.viewException(e.getMessage());  // Exibe Exception.
+
+            // registra o evento no log.
+            writeLog(String.format("Falha catastrófica > %s",e.getMessage()));
+
+            // encerramento da aplicação
+            appInterface.viewClosure();
+            System.exit(1);
+        }
+    }
+
+    /**
+     * Main da aplicação
+     * */
+    public static void main(String[] args){
+
+        Main app = new Main();
+
+        // inicializa as variáveis do sistema.
+        app.init();
+
+        // carrega a base de dados salva em arquivo.
+        app.loadDatabase();
+
+        // loop principal da aplicação.
+        app.run();
+
+        // salvar os financiamentos em arquivo.
+        app.saveDatabase();
+
+        // encerramento da aplicação
+        app.appInterface.viewClosure();
+
+    }
+
 }
 
 

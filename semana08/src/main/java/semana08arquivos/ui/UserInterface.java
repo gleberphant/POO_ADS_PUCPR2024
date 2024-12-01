@@ -16,6 +16,7 @@ package semana08arquivos.ui;
 
 
 import semana08arquivos.model.Loan;
+import semana08arquivos.utils.exceptions.InvalidInputException;
 
 /**
  * Classe responsável pela interface do usuário. Gerencia a entrada e saída de dados do sistema.
@@ -66,9 +67,29 @@ public class UserInterface {
      */
     public boolean promptExit() {
 
-        return this.in().promptExit();
+        return inputInstance.promptExit();
     }
 
+    /**
+     * Pergunta pela opção do menu.
+     *
+     * @return a resposta em boolean
+     */
+    public char promptType(){
+        System.out.println("""                
+                ╔══════════════════════════════════════════════╗
+                ║              MENU DE OPÇÕES                  ║
+                ║                                              ║
+                ║  (1) Financiamento DE CASA                   ║
+                ║  (2) Financiamento DE APARTAMENTO            ║
+                ║  (3) Financiamento  DE TERRENO               ║
+                ║  (4) Exibir Histórico do Sistema             ║
+                ║  (5) SAIR                                    ║
+                ╚══════════════════════════════════════════════╝
+                """);
+
+        return this.inputInstance.promptType();
+    }
     /**
      * @return controlador de entradas do usuário
      */
@@ -97,15 +118,16 @@ public class UserInterface {
     /**
      * Exibe um erro.
      */
-    public void viewException(Exception e) {
+    public void viewException(String error) {
 
-        System.out.printf("""
+        System.out.printf("""    
                 
-                ╔══════════[ FINANCIAMENTO INVÁLIDO ]══════════╗
-                ║                                              ║
-                ║  >> %-40s ║
-                ╚══════════════════════════════════════════════╝
-                """, e.getMessage());
+                ╔══════════[ FALHA  ]════════════════════════════════════════════════════╗
+                ║                                                                        ║
+                ║ %-70s ║
+                ║                                                                        ║
+                ╚════════════════════════════════════════════════════════════════════════╝
+                """, error);
 
         this.pressEnterToContinue();
     }
@@ -154,7 +176,7 @@ public class UserInterface {
                 ║  Instagram: @handersongleber                 ║
                 ╚══════════════════════════════════════════════╝
                 """);
-        this.pressEnterToContinue();
+        System.exit(1);
     }
 
     public void pressEnterToContinue() {
@@ -163,13 +185,31 @@ public class UserInterface {
         this.inputInstance.pressEnterToContinue();
     }
 
-    public String promptZone(){
-        return this.inputInstance.promptZone();
-    }
-
     public double promptLandArea() {
         System.out.print(" < Digite o tamanho do TERRENO > ");
         return this.inputInstance.promptLandArea();
+    }
+
+    public double promptBuildArea() {
+        System.out.print(" < Digite o tamanho da AREA CONSTRUÍDA > ");
+        return this.inputInstance.promptBuildArea();
+    }
+
+    public int promptFloor() {
+        System.out.print(" < Digite o ANDAR do apartamento  > ");
+        return this.inputInstance.promptFloor();
+    }
+
+    public int promptGarages() {
+        System.out.print(" < Digite a quantidade de GARAGENS no imóvel > ");
+        return this.inputInstance.promptGarages();
+    }
+
+    public String promptZone() throws InvalidInputException {
+
+        System.out.print(" < Digite o tipo de zona [1] comercial ou [2] residencial  > ");
+        return this.inputInstance.promptZone();
+
     }
 }
 
