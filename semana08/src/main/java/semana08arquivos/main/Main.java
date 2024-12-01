@@ -79,7 +79,7 @@ public class Main {
 
         // String logLine;
         StringBuilder logBuilder = new StringBuilder();
-        String logString;
+        String logString ;
 
         logBuilder.append( String.format("\n [ %s ] Aplicação iniciada   \n" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("d-M-yy H:m"))));
 
@@ -125,34 +125,44 @@ public class Main {
                 loanType = appInterface.in().promptType();
 
                 // define o item de financiamento
-                builderLoan = switch (loanType) {
+                switch (loanType) {
 
-                    case '1' -> new HouseBuilder()
-                            .LandArea(appInterface.promptLandArea())
-                            .BuildArea(appInterface.in().promptBuildArea());
-
-                    case '2' -> new ApartBuilder()
-                            .FloorNumber(appInterface.in().promptFloor())
-                            .GaragesCount(appInterface.in().promptGarages());
-
-                    case '3' -> new LandBuilder()
-                            .Zone(appInterface.promptZone());
-
-                    case '4' -> {
+                    case '1':
+                        builderLoan = new HouseBuilder()
+                                .LandArea(appInterface.promptLandArea())
+                                .BuildArea(appInterface.in().promptBuildArea());
+                        break;
+                    case '2':
+                        builderLoan = new ApartBuilder()
+                                .FloorNumber(appInterface.in().promptFloor())
+                                .GaragesCount(appInterface.in().promptGarages());
+                        break;
+                    case '3':
+                        builderLoan = new LandBuilder()
+                                .Zone(appInterface.promptZone());
+                        break;
+                    case '4':
                         // ler e exibir arquivo log
-                        try ( Reader log = newBufferedReader(pathLogFile) ){
 
-                            logString = log.read(logString);
-                            System.out.printf("\n PG>>> %s", logString);
+                        try (BufferedReader log = newBufferedReader(pathLogFile)) {
 
-                        }catch (IOException e){
+                            for (logString = ""; logString != null; logString = log.readLine()) {
+                                System.out.printf("\n PG>>> %s", logString);
+                            }
+
+                        } catch (IOException e) {
                             System.out.println("erro ao exibir log");
                         }
-                    } // carregar arquivo de log
 
-                    default -> throw new InterfaceException("Valor inválido. Digite uma das opções informadas.");
+                        appInterface.pressEnterToContinue();
 
-                };
+                        continue;
+                        // carregar arquivo de log
+                    case '5':
+                        running = appInterface.promptExit();
+                    default:
+                        throw new InterfaceException("Valor inválido. Digite uma das opções informadas.");
+                }
 
                 // Conclui a criação do financiamento e adiciona na lista.
                 listLoans.add(builderLoan
@@ -187,7 +197,7 @@ public class Main {
 
             // Salvar log
             try(PrintWriter logFile = new PrintWriter(Files.newOutputStream(pathLogFile))){
-                logFile.print(logBuilder.toString());
+                logFile.print(logBuilder);
 
             } catch (IOException e) {
 

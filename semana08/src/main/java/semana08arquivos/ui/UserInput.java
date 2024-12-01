@@ -71,7 +71,7 @@ public class UserInput {
     public char promptType() {
 
         System.out.println(" < Selecione o TIPO de financiamento > ");
-        System.out.println(" [1]Casa [2]Apartamento [3]Terreno ");
+        System.out.println("[ (1)Casa (2)Apartamento (3)Terreno  -  (4) Exibir log do Sistema ]");
 
         if (this.inputScanner.hasNextInt()) {
 
