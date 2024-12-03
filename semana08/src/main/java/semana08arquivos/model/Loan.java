@@ -125,7 +125,6 @@ public abstract class Loan implements Serializable {
         this.fee = fee;
     }
 
-    // GETTERS
     /**
      * Getter de atributo
      * @return (String) id
@@ -139,7 +138,6 @@ public abstract class Loan implements Serializable {
      * @return preço da propriedade
      */
     public double getPrice() {
-
         return this.price;
     }
 

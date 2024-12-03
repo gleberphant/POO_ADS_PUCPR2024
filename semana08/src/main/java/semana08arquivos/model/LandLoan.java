@@ -8,6 +8,7 @@
 
 package semana08arquivos.model;
 
+import semana08arquivos.utils.exceptions.InvalidInsuranceException;
 import semana08arquivos.utils.exceptions.InvalidZoneException;
 import semana08arquivos.utils.exceptions.LoanException;
 import semana08arquivos.utils.typedef.TypeLoans;
@@ -35,6 +36,11 @@ public class LandLoan extends Loan {
 
     }
 
+    /**
+     * Setter atributo
+     *
+     * @throws InvalidZoneException se inferior à quantidade mínima.
+     */
     public void setZone(String value) throws LoanException {
         if (value.isEmpty() || !TypeZones.isValid(value)) {
             throw new InvalidZoneException("Tipo de zona precisa ser definido em COMERCIAL ou RESIDENCIAL");
@@ -42,15 +48,24 @@ public class LandLoan extends Loan {
         this.zone = TypeZones.valueOf(value);
     }
 
+    /**
+     * Getter atributo
+     */
     @Override
     public double getPaymentValueMonthly() {
         return super.getPaymentValueMonthly() * LAND_RISK_INCRISE;
     }
 
+    /**
+     * Getter atributo
+     */
     public String getZone() {
         return this.zone.toString();
     }
 
+    /**
+     * Define o tipo interno
+     */
     @Override
     protected TypeLoans type() {
         return TypeLoans.LAND;

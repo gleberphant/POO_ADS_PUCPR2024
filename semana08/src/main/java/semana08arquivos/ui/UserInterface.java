@@ -14,7 +14,6 @@
 
 package semana08arquivos.ui;
 
-
 import semana08arquivos.model.Loan;
 import semana08arquivos.utils.exceptions.InvalidInputException;
 
@@ -61,6 +60,45 @@ public class UserInterface {
     }
 
     /**
+     * Solicita ao usuário o valor do imóvel a ser financiado.
+     *
+     * @return Valor do imóvel.
+     */
+    public double promptPrice() {
+
+        System.out.print(" < Digite o VALOR do financiamento >  ");
+
+        return inputInstance.promptPrice();
+
+    }
+
+    /**
+     * Solicita ao usuário o prazo do financiamento em meses.
+     *
+     * @return Prazo do financiamento em meses.
+     */
+    public int promptTerm() {
+
+        System.out.print(" < Digite o PRAZO do financiamento > ");
+
+        return inputInstance.promptTerm();
+    }
+
+    /**
+     * Solicita ao usuário a taxa de juros anual do financiamento.
+     *
+     * @return Taxa de juros anual.
+     */
+    public double promptFee() {
+
+
+        System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL > ");
+
+        return inputInstance.promptFee();
+
+    }
+
+    /**
      * Pergunta se é para encerrar aplicação.
      *
      * @return a resposta em boolean
@@ -75,27 +113,35 @@ public class UserInterface {
      *
      * @return a resposta em boolean
      */
-    public char promptType(){
+    public char promptMenu(){
         System.out.println("""                
                 ╔══════════════════════════════════════════════╗
                 ║              MENU DE OPÇÕES                  ║
                 ║                                              ║
-                ║  (1) Financiamento DE CASA                   ║
-                ║  (2) Financiamento DE APARTAMENTO            ║
-                ║  (3) Financiamento  DE TERRENO               ║
-                ║  (4) Exibir Histórico do Sistema             ║
-                ║  (5) SAIR                                    ║
+                ║  (1) NOVO FINANCIAMENTO                      ║
+                ║  (2) LISTAR TODOS FINANCIAMENTOS             ║
+                ║  (3) SAIR                                    ║
+                ║                                              ║
+                ║  (4) Log do Sistema                          ║
                 ╚══════════════════════════════════════════════╝
                 """);
 
-        return this.inputInstance.promptType();
+        return this.inputInstance.promptMenu();
     }
-    /**
-     * @return controlador de entradas do usuário
-     */
-    public UserInput in() {
 
-        return inputInstance;
+
+    /**
+     * Pergunta pelo tipo de financiamento.
+     * @return a resposta em char
+     */
+    public char promptType(){
+        System.out.println("""                
+                
+                INFORME O TIPO DE FINANCIAMENTO: (1) CASA (2)APARTAMENTO (3) TERRENO      ║
+                
+                """);
+
+        return this.inputInstance.promptType();
     }
 
     /**
@@ -121,12 +167,9 @@ public class UserInterface {
     public void viewException(String error) {
 
         System.out.printf("""    
-                
-                ╔══════════[ FALHA  ]════════════════════════════════════════════════════╗
-                ║                                                                        ║
-                ║ %-70s ║
-                ║                                                                        ║
-                ╚════════════════════════════════════════════════════════════════════════╝
+                ╔══════════════════[ FALHA ]═════════════════════════╗
+                ║ %-50s ║
+                ╚════════════════════════════════════════════════════╝
                 """, error);
 
         this.pressEnterToContinue();
@@ -167,7 +210,7 @@ public class UserInterface {
     /**
      * Encerra a interface da aplicação.
      */
-    public void viewClosure() {
+    public void viewCloseMsg() {
 
         System.out.println("""
                 
@@ -176,35 +219,52 @@ public class UserInterface {
                 ║  Instagram: @handersongleber                 ║
                 ╚══════════════════════════════════════════════╝
                 """);
-        System.exit(1);
-    }
 
+    }
+    /**
+     * aguarda tecla enter
+     */
     public void pressEnterToContinue() {
 
         System.out.println("[ Pressione <ENTER> para continuar... ]");
         this.inputInstance.pressEnterToContinue();
     }
 
+    /**
+     * Pede dado ao usuário
+     */
     public double promptLandArea() {
         System.out.print(" < Digite o tamanho do TERRENO > ");
         return this.inputInstance.promptLandArea();
     }
 
+    /**
+     * Pede dado ao usuário
+     */
     public double promptBuildArea() {
         System.out.print(" < Digite o tamanho da AREA CONSTRUÍDA > ");
         return this.inputInstance.promptBuildArea();
     }
 
+    /**
+     * Pede dado ao usuário
+     */
     public int promptFloor() {
         System.out.print(" < Digite o ANDAR do apartamento  > ");
         return this.inputInstance.promptFloor();
     }
 
+    /**
+     * Pede dado ao usuário
+     */
     public int promptGarages() {
         System.out.print(" < Digite a quantidade de GARAGENS no imóvel > ");
         return this.inputInstance.promptGarages();
     }
 
+    /**
+     * Pede dado ao usuário
+     */
     public String promptZone() throws InvalidInputException {
 
         System.out.print(" < Digite o tipo de zona [1] comercial ou [2] residencial  > ");

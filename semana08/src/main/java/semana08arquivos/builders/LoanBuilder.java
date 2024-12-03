@@ -27,7 +27,7 @@ import semana08arquivos.model.Loan;
 public abstract class LoanBuilder {
 
     // atributos
-    private static int count;
+    private int count;
     private int term;
     private double price, fee;
 
@@ -39,6 +39,16 @@ public abstract class LoanBuilder {
         term = 0;
         fee = 0.0f;
         count = 0;
+    }
+
+
+    /**
+     * "Método_Builder" - Step price
+     * @return LoanBuilder
+     */
+    public LoanBuilder Id(int id) {
+        this.count = id;
+        return this;
     }
 
     /**

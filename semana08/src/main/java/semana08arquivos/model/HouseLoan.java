@@ -7,10 +7,7 @@
  */
 package semana08arquivos.model;
 
-import semana08arquivos.utils.exceptions.InsuranceGreaterThanMonthlyFee;
-import semana08arquivos.utils.exceptions.InvalidAreaException;
-import semana08arquivos.utils.exceptions.InvalidInsuranceException;
-import semana08arquivos.utils.exceptions.LoanException;
+import semana08arquivos.utils.exceptions.*;
 import semana08arquivos.utils.typedef.TypeLoans;
 
 import static semana08arquivos.utils.constants.LoanConstants.*;
@@ -38,11 +35,19 @@ public class HouseLoan extends Loan {
         setLandArea(landArea);
     }
 
+    /**
+     * Define o tipo interno
+     */
     @Override
     protected TypeLoans type() {
         return TypeLoans.HOUSE;
     }
 
+    /**
+     * Setter atributo
+     *
+     * @throws InvalidInsuranceException se inferior à quantidade mínima.
+     */
     public void setInsurance(double insuranceVALUE) throws LoanException {
         if (insuranceVALUE < MIN_INSURANCE) {
             throw new InvalidInsuranceException("Seguro não pode ser um número negativo. ");
@@ -53,7 +58,11 @@ public class HouseLoan extends Loan {
         }
         this.insurance = insuranceVALUE;
     }
-
+    /**
+     * Setter atributo
+     *
+     * @throws InvalidAreaException se inferior à quantidade mínima.
+     */
     public void setBuildArea(double buildArea) throws LoanException {
 
         if (buildArea < MIN_BUILD_AREA) {
@@ -67,6 +76,11 @@ public class HouseLoan extends Loan {
         this.buildArea = buildArea;
     }
 
+    /**
+     * Setter atributo
+     *
+     * @throws InvalidAreaException se inferior à quantidade mínima.
+     */
     public void setLandArea(double landArea) throws LoanException {
         if (landArea < MIN_LAND_AREA) {
             throw new InvalidAreaException("Área do terreno não pode ser um valor negativo.");
@@ -74,19 +88,31 @@ public class HouseLoan extends Loan {
         this.landArea = landArea;
     }
 
+    /**
+     * Getter de atributo
+     */
     @Override
     public double getPaymentValueMonthly() {
         return super.getPaymentValueMonthly() + insurance;
     }
 
+    /**
+     * Getter de atributo
+     */
     public double getInsurance() {
         return insurance;
     }
 
+    /**
+     * Getter de atributo
+     */
     public double getBuildArea() {
         return buildArea;
     }
 
+    /**
+     * Getter de atributo
+     */
     public double getLandArea() {
         return landArea;
     }

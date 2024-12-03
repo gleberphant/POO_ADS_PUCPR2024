@@ -64,8 +64,24 @@ public class UserInput {
     }
 
     /**
+     * Controle do menu principal da aplicação.
+     * @throws InvalidInputException se valor inválido
+     * @return opção do menu
+     */
+    public char promptMenu() {
+        if (this.inputScanner.hasNextInt()) {
+
+            return (char) (this.inputScanner.nextInt() + '0');
+        } else {
+
+            this.inputScanner.next();
+            throw new InvalidInputException("Opção Inválida");
+        }
+    }
+
+    /**
      * Solicita ao usuário o tipo de financiamento.
-     *
+     * @throws InvalidInputException se valor inválido
      * @return Valor do imóvel.
      */
     public char promptType() {
@@ -82,12 +98,10 @@ public class UserInput {
 
     /**
      * Solicita ao usuário o valor do imóvel a ser financiado.
-     *
+     * @throws InvalidInputException se valor inválido
      * @return Valor do imóvel.
      */
     public double promptPrice() {
-
-        System.out.print(" < Digite o VALOR do financiamento >  ");
 
         if (this.inputScanner.hasNextDouble()) {
 
@@ -102,12 +116,10 @@ public class UserInput {
 
     /**
      * Solicita ao usuário o prazo do financiamento em meses.
-     *
+     * @throws InvalidInputException se valor inválido
      * @return Prazo do financiamento em meses.
      */
     public int promptTerm() {
-
-        System.out.print(" < Digite o PRAZO do financiamento > ");
 
         if (this.inputScanner.hasNextInt()) {
 
@@ -121,13 +133,10 @@ public class UserInput {
 
     /**
      * Solicita ao usuário a taxa de juros anual do financiamento.
-     *
+     * @throws InvalidInputException se valor inválido
      * @return Taxa de juros anual.
      */
     public double promptFee() {
-
-
-        System.out.print(" < Digite o valor da TAXA DE JUROS ANUAL > ");
 
         if (this.inputScanner.hasNextDouble()) {
 
@@ -175,6 +184,10 @@ public class UserInput {
 
     }
 
+    /**
+     * Prompt de atributo de financiamento.
+     * @throws InvalidInputException se valor inválido
+     */
     public double promptLandArea() {
 
         if (this.inputScanner.hasNextDouble()) {
@@ -187,6 +200,11 @@ public class UserInput {
         }
     }
 
+    /**
+     * Prompt de atributo de financiamento.
+     * @throws InvalidInputException se valor inválido
+     * @return  valor da área construída.
+     */
     public double promptBuildArea() {
 
         if (this.inputScanner.hasNextDouble()) {
@@ -199,7 +217,11 @@ public class UserInput {
         }
     }
 
-
+    /**
+     * Prompt de atributo de financiamento.
+     * @throws InvalidInputException se valor inválido
+     * @return  numero do andar
+     */
     public int promptFloor() {
 
 
@@ -213,6 +235,11 @@ public class UserInput {
         }
     }
 
+    /**
+     * Prompt de atributo de financiamento.
+     * @throws InvalidInputException se valor inválido
+     * @return total de garagens
+     */
     public int promptGarages() {
 
         if (this.inputScanner.hasNextInt()) {
@@ -225,6 +252,11 @@ public class UserInput {
         }
     }
 
+    /**
+     * Prompt de atributo de financiamento.
+     * @throws InvalidInputException se valor inválido
+     * @return  tipo da zona
+     */
     public String promptZone() {
 
         if (this.inputScanner.hasNextInt()) {
@@ -241,4 +273,6 @@ public class UserInput {
         }
 
     }
+
+
 }

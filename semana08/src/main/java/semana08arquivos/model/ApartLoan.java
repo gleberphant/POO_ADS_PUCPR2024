@@ -12,6 +12,7 @@ package semana08arquivos.model;
 
 import semana08arquivos.utils.exceptions.InvalidFloorException;
 import semana08arquivos.utils.exceptions.InvalidGarageException;
+import semana08arquivos.utils.exceptions.InvalidTermException;
 import semana08arquivos.utils.exceptions.LoanException;
 import semana08arquivos.utils.typedef.TypeLoans;
 
@@ -39,19 +40,28 @@ public class ApartLoan extends Loan {
         setFloorNumber(floorNumber);
         setGaragesCount(garagesCount);
     }
-
+    /**
+     * Define o tipo interno
+     */
     @Override
     protected TypeLoans type() {
         return TypeLoans.APARTMENT;
     }
 
+    /**
+     * Getter de atributo
+     */
     @Override
     public double getPaymentValueMonthly() {
         double mensalFee = getFee() / 12;
 
         return (this.getPrice() * pow(1 + mensalFee, this.getTerm())) / pow(1 + mensalFee, this.getTerm() - 1);
     }
-
+    /**
+     * Setter quantidade de garages
+     *
+     * @throws InvalidGarageException se inferior à quantidade mínima.
+     */
     public void setGaragesCount(int garagesCount) throws LoanException {
         if (garagesCount < MIN_GARAGES) {
             throw new InvalidGarageException("Garagem precisa ser um número positivo válido.");
@@ -60,6 +70,11 @@ public class ApartLoan extends Loan {
         this.garagesCount = garagesCount;
     }
 
+    /**
+     * Setter numero do andar
+     *
+     * @throws InvalidFloorException se inferior ao andar mínimo.
+     */
     public void setFloorNumber(int floorNumber) throws LoanException {
         if (floorNumber < MIN_FLOOR) {
             throw new InvalidFloorException("Numero do andar precisa ser um número inteiro positivo.");
@@ -68,10 +83,16 @@ public class ApartLoan extends Loan {
         this.floorNumber = floorNumber;
     }
 
+    /**
+     * Getter de atributo
+     */
     public int getFloorNumber() {
         return floorNumber;
     }
 
+    /**
+     * Getter de atributo
+     */
     public int getGaragesCount() {
         return garagesCount;
     }
